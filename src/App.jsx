@@ -1,13 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Page } from "./pages/page";
+import { Login } from "./components/Login/Login";
 
 function App() {
+  
   return (
     <>
       <Page>
         <Routes>
-          <Route path="/" element={<h1>Elemento de prueba</h1>} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/home" element={<h1>Prueba home</h1>} />
         </Routes>
       </Page>
     </>
