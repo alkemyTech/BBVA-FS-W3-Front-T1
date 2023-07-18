@@ -42,9 +42,9 @@ export const Header = ({ userName }) => {
                 <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
                   <Link
                     style={{ textDecoration: "none", color: "inherit" }}
-                    to={"/transacciones"}
+                    to={"/transferencia"}
                   >
-                    <Typography variant="subtitle1">TRANSACCIONES</Typography>
+                    <Typography variant="subtitle1">TRANSFERENCIA</Typography>
                   </Link>
                 </Grid>
                 <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
