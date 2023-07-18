@@ -2,27 +2,17 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import WalletIcon from "@mui/icons-material/Wallet";
+import { Link } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
 
 export const Header = ({ userName }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#2BA0B5" }}>
         <Toolbar>
-        {userName != "" ? (
-            <>
-              <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <WalletIcon size="large" sx={{ mr: 2 }} />
           <Typography
             variant="h4"
             component="div"
@@ -30,20 +20,70 @@ export const Header = ({ userName }) => {
           >
             AlkyWall
           </Typography>
-          <Typography variant="h6">{userName}</Typography>
-              <AccountCircle sx={{ marginX: "1rem" }} />
+          {userName != "" ? (
+            <>
+              <Grid container>
+                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={"/home"}
+                  >
+                    <Typography variant="subtitle1">HOME</Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={"/deposito"}
+                  >
+                    <Typography variant="subtitle1">DEPOSITO</Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={"/transacciones"}
+                  >
+                    <Typography variant="subtitle1">TRANSACCIONES</Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to={"/plazo-fijo"}
+                  >
+                    <Typography variant="subtitle1">PLAZO FIJO</Typography>
+                  </Link>
+                </Grid>
+
+                <Grid item xs={4}>
+                  <Box
+                    display={"flex"}
+                    justifyContent={"flex-end"}
+                    alignItems={"center"}
+                  >
+                    <Link
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to={"/home"}
+                    >
+                      <Typography variant="h6">{userName}</Typography>
+                    </Link>
+                    <AccountCircle sx={{ marginX: "1rem" }} />
+
+                    <Button
+                      variant="outlined"
+                      color="inherit"
+                      sx={{ fontWeight: "bold" }}
+                      href="/"
+                    >
+                      LogOut
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
             </>
           ) : (
-            <>
-            <WalletIcon size="large" sx={{mr:2}}/>
-            <Typography
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 1, letterSpacing: ".3rem" }}
-          >
-            AlkyWall
-          </Typography>
-            </>
+            <></>
           )}
         </Toolbar>
       </AppBar>
