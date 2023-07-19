@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({setUserName, setJwt}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false)
@@ -29,31 +29,30 @@ export const Login = () => {
           email,
           password,
         });
-        const respuesta = response;
-
         const userName = (response.data.data.user.firstName + " " + response.data.data.user.lastName);
-
         const token = response.data.data.token;
 
-        console.log(respuesta)
+        console.log(response)
         console.log(userName)
         console.log(token)
         
         setValidation(false);
         setMsgError("");
+        setUserName(userName)
+        setJwt(token)
         
         navigate("/home");
 
     } catch (error) {
-        setValidation("");
-        console.error("Error al hacer la solicitud:", error);
-        const errorStatus = error.response.status
-        if(errorStatus === 403){
-            setMsgError("Usuario o contraseña incorrecto")
-            setValidation(true);
-        }else{
-            setMsgError(error.message)
-            setValidation(true)
+      const errorStatus = error.response.status
+        setValidation("");  
+        setMsgError("");
+        setValidation(true)
+        
+        if(errorStatus === 400){
+          setMsgError(error.response.data.message)
+        }else if (errorStatus === 403){
+          setMsgError("Usuario o contraseña incorrecto")
         }
       }
   };
@@ -101,14 +100,15 @@ export const Login = () => {
               backgroundColor: "#1C6875",
               width: "50%",
               minWidth: "10rem",
-              mb:"0.5rem"
+              mb:"0.5rem",
+              "&:hover":{backgroundColor:"#2BA0B5"}
             }}
           >
             Iniciar sesión
           </Button>
-          {validation == true ? (
+          {validation && (
           <Alert severity="error"> {msgError} </Alert>
-        ) : (<></>)
+        )
       }
 
           <Typography variant="subtitle1">No posee cuenta?</Typography>
@@ -118,6 +118,7 @@ export const Login = () => {
               backgroundColor: "#1C6875",
               width: "50%",
               minWidth: "10rem",
+              "&:hover":{backgroundColor:"#2BA0B5"}
             }}
           >
             Registrarse
