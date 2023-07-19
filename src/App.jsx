@@ -7,7 +7,7 @@ function App() {
     <>
       <Page>
         <Routes>
-          <Route path="/" element={<h1>Prueba footer</h1>} />
+          <Route path="/" element={<h1>Elemento de prueba</h1>} />
         </Routes>
       </Page>
     </>
