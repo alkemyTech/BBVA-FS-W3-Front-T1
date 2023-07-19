@@ -41,13 +41,13 @@ export const TransferResume = ({ dataTransfer }) => {
 
                     {!editingAmount ? (
                         <Grid item xs={12} className='contendor'>
-                            <Grid container >
-                                <Grid item xs={10} >
+                            <Grid container display="flex" justifyContent="space-between" alignItems="center">
+                                <Grid item xs={11} >
                                     <Typography className='w100'>Cantidad: </Typography>
                                     <Typography className='w200'>{dataTransfer.amount}$</Typography>
                                 </Grid>
 
-                                <Grid item xs={2} display="flex" direction="column" justifyContent="center" alignItems="flex-end">
+                                <Grid item xs={1} >
                                     <Button className='boton' align='end' variant="contained" endIcon={<BorderColorRoundedIcon />} onClick={handleEditAmount} />
                                 </Grid>
                             </Grid>
@@ -56,8 +56,8 @@ export const TransferResume = ({ dataTransfer }) => {
                     )
                         :
                         (<>
-                            <Grid item xs={12} display="flex" alignItems="flex-end" className='contenedor'>
-                                <Grid container margin="2%">
+                            <Grid item xs={12}  className='contenedor'>
+                                <Grid container margin="2%" display="flex" justifyContent="space-between" alignItems="flex-end">
                                     <Grid item xs={10}>
                                         <TextField
                                             inputProps={{
