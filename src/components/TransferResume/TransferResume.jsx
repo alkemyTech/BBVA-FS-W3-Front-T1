@@ -87,7 +87,7 @@ export const TransferResume = ({ dataTransfer }) => {
                         <Typography className='w100'>CBU: </Typography>
                         <Typography className='w200'>{dataTransfer.cbu}</Typography>
                     </Grid>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} display="flex" direction="column" alignItems="flex-end">
                         <Button variant="contained">
                             Transferir
                         </Button>
