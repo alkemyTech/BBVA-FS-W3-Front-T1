@@ -4,10 +4,21 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import WalletIcon from "@mui/icons-material/Wallet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 
-export const Header = ({ userName }) => {
+export const Header = ({ userName, setUserName, setJwt }) => {
+  const pages = ["home", "deposito", "transferencia", "plazo fijo"];
+
+  const navigate = useNavigate();
+
+  const handleClickLogout = () => {
+    console.log("Hola");
+    setUserName("");
+    setJwt("");
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#2BA0B5" }}>
@@ -20,41 +31,28 @@ export const Header = ({ userName }) => {
           >
             AlkyWall
           </Typography>
-          {userName != "" ? (
+          {userName && (
             <>
               <Grid container>
-                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to={"/home"}
+                {pages.map((page) => (
+                  <Grid
+                    item
+                    xs={2}
+                    textAlign={"center"}
+                    alignSelf={"center"}
+                    paddingLeft={"4rem"}
+                    key={page}
                   >
-                    <Typography variant="subtitle1">HOME</Typography>
-                  </Link>
-                </Grid>
-                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to={"/deposito"}
-                  >
-                    <Typography variant="subtitle1">DEPOSITO</Typography>
-                  </Link>
-                </Grid>
-                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to={"/transferencia"}
-                  >
-                    <Typography variant="subtitle1">TRANSFERENCIA</Typography>
-                  </Link>
-                </Grid>
-                <Grid item xs={2} textAlign={"right"} alignSelf={"center"}>
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to={"/plazo-fijo"}
-                  >
-                    <Typography variant="subtitle1">PLAZO FIJO</Typography>
-                  </Link>
-                </Grid>
+                    <Link
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to={`/${page.replace(/\s+/g, "-")}`}
+                    >
+                      <Typography variant="subtitle1">
+                        {page.toUpperCase()}
+                      </Typography>
+                    </Link>
+                  </Grid>
+                ))}
 
                 <Grid item xs={4}>
                   <Box
@@ -74,7 +72,7 @@ export const Header = ({ userName }) => {
                       variant="outlined"
                       color="inherit"
                       sx={{ fontWeight: "bold" }}
-                      href="/"
+                      onClick={handleClickLogout}
                     >
                       LogOut
                     </Button>
@@ -82,8 +80,6 @@ export const Header = ({ userName }) => {
                 </Grid>
               </Grid>
             </>
-          ) : (
-            <></>
           )}
         </Toolbar>
       </AppBar>

@@ -1,14 +1,12 @@
-import { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import { TaskFixedInterface } from '../TaskFixedInterface/TaskFixedInterface';
-import { Box, Button, Grid, Typography } from '@mui/material';
-import "../TaskFixedInterface/TaskFixedInterface.css"
+import { Button, Grid, Typography } from '@mui/material';
+import "../FixedTermStyles.css"
 
 export const ShowTaskFixed = ({onClickOtro}) => {
     const navigate = useNavigate();
 
     const returnHome = () =>{
-        navigate("/")
+        navigate("/home")
     }
 
 

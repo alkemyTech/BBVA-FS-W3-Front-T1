@@ -1,7 +1,7 @@
 import { Grid, Typography, TextField, Alert, Button, Box } from '@mui/material'
 import React from 'react'
 import { useForm } from "react-hook-form";
-import "./TaskFixedInterface.css"
+import "../FixedTermStyles.css"
 
 export const TaskFixedInterface = ({ onSubmit, tipoCarga }) => {
   const { register, handleSubmit, control, formState: { errors } } = useForm({

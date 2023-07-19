@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { TaskFixedInterface } from '../TaskFixedInterface/TaskFixedInterface';
-import { Box, Button, Grid, Typography } from '@mui/material';
-import "../TaskFixedInterface/TaskFixedInterface.css"
+import { Box} from '@mui/material';
+import "../FixedTermStyles.css"
 import { ShowTaskFixed } from '../ShowTaskFixed/ShowTaskFixed';
 
 
