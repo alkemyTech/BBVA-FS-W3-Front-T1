@@ -1,13 +1,15 @@
 import { TextField, Typography, Button, Grid, Box } from '@mui/material';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
-import "./TransferResume.css";
+import "../LoadTransfer.css";
+import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 
 export const TransferResume = ({ dataTransfer }) => {
     const [editingAmount, setEditingAmount] = useState(false);
     const [newAmount, setNewAmount] = useState(dataTransfer.amount);
-
+    const location = useLocation();
+    const dataAccount = location.state;
 
     const handleEditAmount = () => {
         setEditingAmount(true);
@@ -55,7 +57,7 @@ export const TransferResume = ({ dataTransfer }) => {
                         :
                         (<>
                             <Grid item xs={12} display="flex" alignItems="flex-end" className='contenedor'>
-                                <Grid container >
+                                <Grid container margin="2%">
                                     <Grid item xs={10}>
                                         <TextField
                                             inputProps={{
@@ -87,10 +89,14 @@ export const TransferResume = ({ dataTransfer }) => {
                         <Typography className='w100'>CBU: </Typography>
                         <Typography className='w200'>{dataTransfer.cbu}</Typography>
                     </Grid>
-                    <Grid item xs={12} display="flex" direction="column" alignItems="flex-end">
-                        <Button variant="contained">
-                            Transferir
-                        </Button>
+                    <Grid item xs={12} >
+                        <Grid container display="flex" direction="column" alignItems="flex-end">
+                            <Grid item xs={12}>
+                                <Button variant="contained">
+                                    Transferir
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Box>

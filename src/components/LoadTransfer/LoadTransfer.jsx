@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BuscarCuentaForm } from './BuscarCuentaForm/BuscarCuentaForm';
-import { IngresarImporteForm } from './IngresarImporteForm/IngresarImporteForm';
-import { TransferResume } from '../TransferResume/TransferResume';
+import { TransferResume } from './TransferResume/TransferResume';
 
 const dataAccount = {
   fistName: "Evaristo",
@@ -14,21 +13,23 @@ const dataAccount = {
 export const LoadTransfer = () => {
   const [cuentaEncontrada, setCuentaEncontrada] = useState(false);
 
-  const buscarCuentaSumit = (data) =>{
+  const buscarCuentaSumit = (data) => {
     // TODO: buscar cuenta
-    console.log(data)
-    dataAccount.cbu = data
+    console.log(data);
+    dataAccount.cbu = data.cbu;
+    dataAccount.currency = data.moneda;
+    dataAccount.amount = data.amount;
+
     setCuentaEncontrada(true);
   }
 
   return (
     <>
-      {/* {!cuentaEncontrada ?
-      <BuscarCuentaForm buscarCuentaSumit={buscarCuentaSumit}/>
-      :
-      <IngresarImporteForm/>
-      } */}
-      <TransferResume dataTransfer={dataAccount}/>
+      {!cuentaEncontrada ?
+        <BuscarCuentaForm buscarCuentaSumit={buscarCuentaSumit} />
+        :
+        <TransferResume dataTransfer={dataAccount} />
+      }
     </>
   );
 };
