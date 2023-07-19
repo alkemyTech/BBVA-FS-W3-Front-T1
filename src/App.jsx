@@ -9,7 +9,7 @@ function App() {
       <Page>
         <Routes>
           <Route path="/" element={<h1>Prueba footer</h1>} />
-          <Route path="transferencia" element={<><LoadTransfer /></>}>
+          <Route path="/transferencia" element={<><LoadTransfer /></>}>
           </Route>
         </Routes>
       </Page>
