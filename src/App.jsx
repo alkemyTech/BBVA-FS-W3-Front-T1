@@ -20,7 +20,6 @@ function App() {
             <>
             <Route path="/home" element={<h1>Prueba Home</h1>} />
             <Route path="/deposito" element={<h1>Prueba deposito</h1>} />
-            <Route path="/deposito/datos" element={<h1>Prueba datos del deposito</h1>} />
             <Route path="/transferencia" element={<h1>Prueba transferencia</h1>} />
             <Route path="/plazo-fijo" element={<h1>Prueba plazo fijo</h1>} />
             </>
