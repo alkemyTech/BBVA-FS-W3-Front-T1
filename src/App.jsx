@@ -1,12 +1,12 @@
 import "./App.css";
+import { FormularioDeposito } from "./components/formularioDeposito/formularioDeposito";
 
 
 
 
 function App() {
-  return (
-    <>    
-    </>
+  return (   
+ <><FormularioDeposito/></>
   );
 }
 
