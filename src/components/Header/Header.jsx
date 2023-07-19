@@ -13,7 +13,9 @@ export const Header = ({ userName, setUserName, setJwt }) => {
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
-    console.log("Hola");
+    localStorage.removeItem("token");
+    localStorage.removeItem("nombre");
+    localStorage.removeItem("email");
     setUserName("");
     setJwt("");
     navigate("/");

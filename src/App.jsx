@@ -1,6 +1,6 @@
 import { Route, Routes, Outlet } from "react-router-dom";
 import "./App.css";
-import { Login } from "./components/Login/Login";
+import { Login } from "./components/login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
