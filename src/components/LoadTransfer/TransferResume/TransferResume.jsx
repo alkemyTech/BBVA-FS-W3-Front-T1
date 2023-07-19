@@ -72,7 +72,7 @@ export const TransferResume = ({ dataTransfer }) => {
                                         />
                                     </Grid>
                                     <Grid item xs={2}>
-                                        <Button variant="contained" onClick={handleSaveAmount}>
+                                        <Button className='boton' variant="contained" onClick={handleSaveAmount}>
                                             Guardar
                                         </Button>
                                     </Grid>
@@ -92,7 +92,7 @@ export const TransferResume = ({ dataTransfer }) => {
                     <Grid item xs={12} >
                         <Grid container display="flex" direction="column" alignItems="flex-end">
                             <Grid item xs={12}>
-                                <Button variant="contained">
+                                <Button className='boton' variant="contained">
                                     Transferir
                                 </Button>
                             </Grid>
