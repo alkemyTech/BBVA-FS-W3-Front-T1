@@ -1,0 +1,42 @@
+.contendor{
+    border-bottom: 1px solid #0D2F36;
+    /* border:2px solid #0D2F36; */
+    align-items: center;
+    
+}
+
+*{font-family: "Roboto";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerGrande{
+    
+    display: flex;
+        padding: 1%;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin: 10%;
+        min-height: 70vh;
+}
+.containerResume{
+    display:flex;
+    padding: 5%;
+    justify-content: center;
+}
+
+.w100{
+    font-weight: 100 !important;
+    font-size: 1.5rem !important;
+}
+
+.w200{
+    font-weight: 900 !important;
+    font-size: 1.5em !important;
+}
+.boton{
+    align-self: center;
+}

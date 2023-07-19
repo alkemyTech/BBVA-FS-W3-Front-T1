@@ -1,13 +1,16 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet } from "react-router-dom";
 import "./App.css";
-import { Page } from "./pages/page";
+import { Page } from "./pages/Page";
+import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer"
 
 function App() {
   return (
     <>
       <Page>
         <Routes>
-          <Route path="/" element={<h1>Elemento de prueba</h1>} />
+          <Route path="/" element={<h1>Prueba footer</h1>} />
+          <Route path="transferencia" element={<><LoadTransfer /></>}>
+          </Route>
         </Routes>
       </Page>
     </>
