@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BuscarCuentaForm } from '../components/BuscarCuentaForm/BuscarCuentaForm';
-import { IngresarImporteForm } from '../components/IngresarImporteForm/IngresarImporteForm';
-import { TransferResume } from '../components/TransferResume/TransferResume';
+import { BuscarCuentaForm } from './BuscarCuentaForm/BuscarCuentaForm';
+import { IngresarImporteForm } from './IngresarImporteForm/IngresarImporteForm';
+import { TransferResume } from '../TransferResume/TransferResume';
 
 const dataAccount = {
   fistName: "Evaristo",
@@ -11,7 +11,7 @@ const dataAccount = {
   amount: 10.0
 };
 
-export const Transferencias = () => {
+export const LoadTransfer = () => {
   const [cuentaEncontrada, setCuentaEncontrada] = useState(false);
 
   const buscarCuentaSumit = (data) =>{

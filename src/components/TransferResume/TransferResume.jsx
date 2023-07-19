@@ -1,85 +1,98 @@
-import { Table, TableBody, TableCell, TableRow, Paper, TextField, Typography, Button, Grid, Box } from '@mui/material';
+import { TextField, Typography, Button, Grid, Box } from '@mui/material';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import "./TransferResume.css";
 import { useState } from 'react';
-import { Pattern } from '@mui/icons-material';
+
 
 export const TransferResume = ({ dataTransfer }) => {
     const [editingAmount, setEditingAmount] = useState(false);
     const [newAmount, setNewAmount] = useState(dataTransfer.amount);
-    
+
 
     const handleEditAmount = () => {
         setEditingAmount(true);
     };
 
     const handleSaveAmount = () => {
-        if(/^\d+$/.test(newAmount) && newAmount > 0 ){
+        if (/^\d+$/.test(newAmount) && newAmount > 0) {
             dataTransfer.amount = parseInt(newAmount);
             setEditingAmount(false);
         }
-        
+
     };
 
     const handleAmountChange = (e) => {
         if (/^\d+$/.test(e.target.value)) {
             setNewAmount(e.target.value);
         }
-        
+
     };
 
     return (
         <>
-            <Box justifyContent="center" textAlign="center" width="60vw">
-            <Grid container spacing={4}>
-                <Grid item xs={12} className='contendor'>
-                    <Typography >Nombre: {dataTransfer.fistName}, {dataTransfer.lastName}</Typography>
-                </Grid>
-
-                {!editingAmount ? (
+            <Box className='containerGrande'>
+                <Grid container className='containerResume'>
                     <Grid item xs={12} className='contendor'>
-                        <Grid container display="flex" justifyContent="space-between" textAlign="center" >
-                            <Typography variant='h4'>Cantidad: {dataTransfer.amount}$</Typography>
-                            <Button variant="contained" endIcon={<BorderColorRoundedIcon />} onClick={handleEditAmount} />
-                        </Grid>
+                        <Typography className='w100'>Nombre: </Typography>
+                        <Typography className='w200'>{dataTransfer.fistName}, {dataTransfer.lastName}</Typography>
                     </Grid>
 
-                )
-                    :
-                    (<>
-                        <Grid item xs={10} className='border-bottom'>
-                            <TextField
-                                inputProps={{
-                                    inputMode: "numeric",
-                                    pattern: "[0-9]*"
-                                }}
-                                value={newAmount}
-                                onChange={handleAmountChange}
-                                label="Cantidad"
-                                variant="standard"
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={2} className='border-bottom'>
-                            <Button variant="contained" onClick={handleSaveAmount}>
-                                Guardar
-                            </Button>
-                        </Grid>
-                    </>
-                    )}
+                    {!editingAmount ? (
+                        <Grid item xs={12} className='contendor'>
+                            <Grid container >
+                                <Grid item xs={10} >
+                                    <Typography className='w100'>Cantidad: </Typography>
+                                    <Typography className='w200'>{dataTransfer.amount}$</Typography>
+                                </Grid>
 
-                <Grid item xs={12} className='contendor'>
-                    <Typography >Tipo de moneda: {dataTransfer.currency}</Typography>
+                                <Grid item xs={2} display="flex" direction="column" justifyContent="center" alignItems="flex-end">
+                                    <Button className='boton' align='end' variant="contained" endIcon={<BorderColorRoundedIcon />} onClick={handleEditAmount} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                    )
+                        :
+                        (<>
+                            <Grid item xs={12} display="flex" alignItems="flex-end" className='contenedor'>
+                                <Grid container >
+                                    <Grid item xs={10}>
+                                        <TextField
+                                            inputProps={{
+                                                inputMode: "numeric",
+                                                pattern: "[0-9]*"
+                                            }}
+                                            value={newAmount}
+                                            onChange={handleAmountChange}
+                                            label="Cantidad"
+                                            variant="standard"
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        <Button variant="contained" onClick={handleSaveAmount}>
+                                            Guardar
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </>
+                        )}
+
+                    <Grid item xs={12} className='contendor'>
+                        <Typography className='w100'>Tipo de moneda: </Typography>
+                        <Typography className='w200'>{dataTransfer.currency}</Typography>
+                    </Grid>
+                    <Grid item xs={12} className='contendor'>
+                        <Typography className='w100'>CBU: </Typography>
+                        <Typography className='w200'>{dataTransfer.cbu}</Typography>
+                    </Grid>
+                    <Grid item xs={12} >
+                        <Button variant="contained">
+                            Transferir
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} className='contendor'>
-                    <Typography >CBU: {dataTransfer.cbu}</Typography>
-                </Grid>
-                <Grid item xs={12} >
-                    <Button variant="contained">
-                        Transferir
-                    </Button>
-                </Grid>
-            </Grid>
             </Box>
         </>
     )

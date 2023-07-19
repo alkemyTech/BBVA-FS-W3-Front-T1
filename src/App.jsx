@@ -1,5 +1,5 @@
 import "./App.css";
-import { Transferencias } from "./pages/Transferencias";
+import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 
 
 
@@ -7,7 +7,7 @@ import { Transferencias } from "./pages/Transferencias";
 function App() {
   return (
     <>
-    <Transferencias/>    
+    <LoadTransfer/>    
     </>
   );
 }
