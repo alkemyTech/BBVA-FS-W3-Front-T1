@@ -1,0 +1,45 @@
+*{font-family: "Roboto";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerBox{
+    
+    display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        border: 5px solid #0D2F36;
+        border-radius: 10px;
+        margin: 5vh 25vw;
+        min-height: 70vh;
+}
+.containerGrid{
+    display:flex;
+    padding: 5%;
+}
+
+.informacion{
+    color: #0D2F36;
+    font-weight: 900 !important;
+    font-size: 1.7em !important;
+}
+
+.aclaracion{
+    color: #2BA0B5;
+    font-weight: 900 !important;
+    font-size: 2.5em !important;
+}
+
+.datos{
+    color: #1C6875;
+    font-weight: 900 !important;
+    font-size: 1.3em !important;
+}
+
+.boton{
+    background-color: #2BA0B5 !important;
+
+}
+
+
