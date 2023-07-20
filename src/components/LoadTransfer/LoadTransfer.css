@@ -19,7 +19,7 @@
         align-items: center;
         border: 1px solid gray;
         border-radius: 10px;
-        margin: 10%;
+        margin: 10vh;
         min-height: 70vh;
 }
 .containerResume{
@@ -38,5 +38,5 @@
     font-size: 1.5em !important;
 }
 .boton{
-    align-self: center;
+    background-color: #1C6875 !important;
 }

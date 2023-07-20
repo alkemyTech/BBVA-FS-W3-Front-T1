@@ -73,7 +73,7 @@ export const BuscarCuentaForm = ({ buscarCuentaSumit }) => {
         <Grid item xs={12} >
           <Grid container display="flex" direction="column" alignItems="flex-end">
             <Grid item xs={12} >
-              <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+              <Button className='boton' type="submit" variant="contained" endIcon={<SendIcon />}>
                 Siguiente
               </Button>
             </Grid>
