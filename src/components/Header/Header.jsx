@@ -23,7 +23,14 @@ export const Header = ({ userName, setUserName, setJwt }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#2BA0B5" }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#2BA0B5",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.6)",
+          borderRadius:"0px 0px 30px 30px"
+        }}
+      >
         <Toolbar>
           <WalletIcon size="large" sx={{ mr: 2 }} />
           <Typography
