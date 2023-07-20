@@ -4,10 +4,11 @@ import { Login } from "./components/login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
+import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 
 function App() {
-  const [userName, setUserName] = useState("");
-  const [jwt, setJwt] = useState("");
+  const [userName, setUserName] = useState("Evaristo");
+  const [jwt, setJwt] = useState("prueba");
 
   return (
     <>
@@ -29,9 +30,10 @@ function App() {
                   </>
                 }
               />
-              <Route path="/plazo-fijo" element={<h1>Prueba plazo fijo</h1>} />
+              <Route path="/plazo-fijo" element={<SimulatedFixedTerm/>}/>
             </>
           )}
+          
         </Routes>
       </Page>
     </>
