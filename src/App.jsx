@@ -7,8 +7,8 @@ import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 
 function App() {
-  const [userName, setUserName] = useState("Evaristo");
-  const [jwt, setJwt] = useState("prueba");
+  const [userName, setUserName] = useState("Nombre Prueba");
+  const [jwt, setJwt] = useState("Prueba");
 
   return (
     <>
