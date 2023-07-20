@@ -30,18 +30,20 @@ export const Login = ({ setUserName, setJwt }) => {
           email,
           password,
         });
-        const userName = (response.data.data.user.firstName + " " + response.data.data.user.lastName);
-        const token = response.data.data.token;
-
-        console.log(response)
-        console.log(userName)
-        console.log(token)
-
         setValidation(false);
         setMsgError("");
-        setUserName(userName)
-        setJwt(token)
 
+        const userName =
+          response.data.data.user.firstName +
+          " " +
+          response.data.data.user.lastName;
+        const token = response.data.data.token;
+        const mail = response.data.data.user.email;
+        localStorage.setItem("token", token);
+        localStorage.setItem("nombre", userName);
+        localStorage.setItem("email", mail);
+        setUserName(userName);
+        setJwt(token);
         navigate("/home");
 
     } catch (error) {
