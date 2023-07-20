@@ -33,10 +33,6 @@ export const Login = ({ setUserName, setJwt }) => {
         });
         setValidation(false);
         setMsgError("");
-        setUserName(userName)
-        setJwt(token)
-
-
         const userName =
           response.data.data.user.firstName +
           " " +

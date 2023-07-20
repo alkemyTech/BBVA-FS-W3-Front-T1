@@ -1,14 +1,21 @@
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import WalletIcon from "@mui/icons-material/Wallet";
+import LogoutIcon from "@mui/icons-material/Logout";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
+import "./Header.css";
 
 export const Header = ({ userName, setUserName, setJwt }) => {
   const pages = ["home", "deposito", "transferencia", "plazo fijo"];
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
 
@@ -19,6 +26,14 @@ export const Header = ({ userName, setUserName, setJwt }) => {
     setUserName("");
     setJwt("");
     navigate("/");
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -42,62 +57,87 @@ export const Header = ({ userName, setUserName, setJwt }) => {
           </Typography>
           {userName && (
             <>
-              <Grid container>
+              {/* Menú desplegable en pantallas hasta lg */}
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                sx={{ display: { xs: "block", lg: "none" } }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleMenuClose}>
+                    <Link
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to={`/${page.replace(/\s+/g, "-")}`}
+                    >
+                      {page.toUpperCase()}
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                sx={{ display: { xs: "none", lg: "flex" } }} // Mostrar en pantallas md y ocultar en pantallas xs
+              >
                 {pages.map((page) => (
                   <Grid
                     item
                     xs={6}
                     md={2}
-                    textAlign={"center"}
-                    alignSelf={"center"}
-                    
+                    textAlign="center"
+                    alignSelf="center"
                     key={page}
                   >
                     <Link
                       style={{ textDecoration: "none", color: "inherit" }}
                       to={`/${page.replace(/\s+/g, "-")}`}
                     >
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          "&:hover": {
-                            color: "#0D2F36",
-                            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-                            transform: "translateY(-2px)",
-                            transition: "transform 0.3s ease",
-                          },
-                        }}
-                      >
+                      <Typography variant="subtitle1" className="inHover">
                         {page.toUpperCase()}
                       </Typography>
                     </Link>
                   </Grid>
                 ))}
-
-                <Grid item xs={4}>
-                  <Box
-                    display={"flex"}
-                    justifyContent={"flex-end"}
-                    alignItems={"center"}
+              </Grid>
+              <Grid item xs={3}>
+                <Box
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                >
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to="/home"
                   >
-                    <Link
-                      style={{ textDecoration: "none", color: "inherit" }}
-                      to={"/home"}
+                    <Typography
+                      variant="h6"
+                      className="inHover"
+                      sx={{ color: "white" }}
                     >
-                      <Typography variant="h6">{userName}</Typography>
-                    </Link>
-                    <AccountCircle sx={{ marginX: "1rem" }} />
+                      {userName}
+                    </Typography>
+                  </Link>
 
-                    <Button
-                      variant="outlined"
-                      color="inherit"
-                      sx={{ fontWeight: "bold" }}
-                      onClick={handleClickLogout}
-                    >
-                      LogOut
-                    </Button>
-                  </Box>
-                </Grid>
+                  {/* Icono de AccountCircle que despliega el menú en pantallas hasta lg */}
+                  <IconButton
+                    color="inherit"
+                    aria-label="menu"
+                    className="inHover"
+                    onClick={handleMenuOpen}
+                    sx={{ display: { xs: "block", lg: "none" } }}
+                  >
+                    <AccountCircle />
+                  </IconButton>
+
+                  <IconButton
+                    className="inHover"
+                    sx={{ color: "white" }}
+                    onClick={handleClickLogout}
+                    children={<LogoutIcon fontSize="large" />}
+                  />
+                </Box>
               </Grid>
             </>
           )}

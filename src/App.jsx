@@ -1,6 +1,6 @@
 import { Route, Routes, Outlet } from "react-router-dom";
 import "./App.css";
-import { Login } from "./components/login/Login";
+import { Login } from "./components/Login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
 import { UserInfo } from "./components/Profile/UserInfo";
@@ -9,8 +9,8 @@ import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/Si
 import { SingUp } from "./components/SingUp/SingUp";
 
 function App() {
-  const [userName, setUserName] = useState("Nombre de prueba");
-  const [jwt, setJwt] = useState("token de prueba");
+  const [userName, setUserName] = useState("Diego Perez");
+  const [jwt, setJwt] = useState("Prueba");
 
   return (
     <>
