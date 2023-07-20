@@ -56,11 +56,11 @@ export const TaskFixedInterface = ({ onSubmit, tipoCarga }) => {
 
 
       <Grid item xs={12} >
-        <Typography className='informacion'> Ingersar cantidad a depositar:</Typography>
+        <Typography className='informacion'> Ingresar cantidad a depositar:</Typography>
       </Grid>
 
       <Grid item xs={12} paddingBottom="5vh">
-        <TextField label="Importe a transferir" fullWidth
+        <TextField label="Importe a depositar" fullWidth
           variant="standard"  {...register('amount', { validate: validateAmount })} />
         {errors.amount && <Alert severity="error">{errors.amount.message}</Alert>}
       </Grid>
@@ -68,10 +68,10 @@ export const TaskFixedInterface = ({ onSubmit, tipoCarga }) => {
 
 
       <Grid item xs={12}>
-        <Typography className='informacion'> Ingersar cantidad de dias: </Typography>
+        <Typography className='informacion'> Ingresar cantidad de dias: </Typography>
       </Grid>
       <Grid item xs={12}>
-        <TextField label="Importe a transferir" fullWidth
+        <TextField label="Cantidad de dias" fullWidth
           variant="standard"  {...register('days', { validate: validateDays })} />
         {errors.days && <Alert severity="error">{errors.days.message}</Alert>}
       </Grid>
