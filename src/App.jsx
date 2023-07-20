@@ -4,6 +4,7 @@ import { Login } from "./components/Login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
+import { CrearDeposito } from "./components/crearDeposito/CrearDeposito";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -20,7 +21,9 @@ function App() {
           {jwt && (
             <>
               <Route path="/home" element={<h1>Prueba Home</h1>} />
-              <Route path="/deposito" element={<h1>Prueba deposito</h1>} />
+              <Route path="/deposito" element={<>
+                    <CrearDeposito/>
+                  </>} />
               <Route
                 path="/transferencia"
                 element={

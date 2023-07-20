@@ -1,9 +1,7 @@
-
 import { TextField, MenuItem, Grid, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export const FormularioDeposito = () => {
-
+export const FormularioDeposito = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -11,12 +9,10 @@ export const FormularioDeposito = () => {
     setValue,
     formState: { errors },
   } = useForm();
-  
+
   const selectedCurrency = watch("currency");
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  onSubmit({ data});
 
   const currencies = [
     {
@@ -30,7 +26,6 @@ export const FormularioDeposito = () => {
   ];
 
   return (
-    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container>
           <Grid item xs={6}>
@@ -95,6 +90,5 @@ export const FormularioDeposito = () => {
           Enviar
         </Button>
       </form>
-    </>
   );
 };
