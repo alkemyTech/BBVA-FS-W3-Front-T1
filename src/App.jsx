@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
+import { CrearDeposito } from "./components/crearDeposito/CrearDeposito";
 
 function App() {
   const [userName, setUserName] = useState("Evaristo");

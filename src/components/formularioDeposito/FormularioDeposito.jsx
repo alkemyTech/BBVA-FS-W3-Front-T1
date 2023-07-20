@@ -1,7 +1,7 @@
-import { TextField, MenuItem, Grid, Button } from "@mui/material";
+import { TextField, MenuItem, Grid, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export const FormularioDeposito = ({ onSubmit }) => {
+export const FormularioDeposito = () => {
   const {
     register,
     handleSubmit,
@@ -12,7 +12,9 @@ export const FormularioDeposito = ({ onSubmit }) => {
 
   const selectedCurrency = watch("currency");
 
-  onSubmit({ data});
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   const currencies = [
     {
@@ -26,69 +28,81 @@ export const FormularioDeposito = ({ onSubmit }) => {
   ];
 
   return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container>
-          <Grid item xs={6}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Monto"
-              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-              {...register("amount", { min: 1 })}
-              error={!!errors.amount}
-              helperText={
-                errors.amount?.type === "min" && (
-                  <p>El monto tiene que ser igual o superior a 1</p>
-                )
-              }
-            />
-          </Grid>
-          <Grid
-            item
-            xs={6}
-            sx={{
-              "& .MuiTextField-root": { width: "13ch" },
-            }}
-          >
-            <TextField
-              required
-              id="outlined-select-currency"
-              select
-              label="Moneda"
-              {...register("currency")}
-              value={selectedCurrency ?? ""}
-              onChange={(event) => setValue("currency", event.target.value)}
-            >
-              {currencies.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
-          <Grid item xs={6} sx={{ mt: 6 }}>
-            <TextField
-              id="outlined-read-only-input"
-              label="Descripción"
-              defaultValue="Deposito"
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
+    <>
+      <Typography variant="h5" align="center" sx={{ mt: 10 }}>
+        ¿Cuanto queres depositar?
+      </Typography>
+      <Grid
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        container
+        spacing={2}
+        sx={{ mt: 10 }}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <TextField
+            required
+            id="outlined-required"
+            label="Monto"
+            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            {...register("amount", { min: 1 })}
+            error={!!errors.amount}
+            helperText={
+              errors.amount?.type === "min" && (
+                <p>El monto tiene que ser igual o superior a 1</p>
+              )
+            }
+          />
         </Grid>
-        <Button
-          type="submit"
-          variant="contained"
+        <Grid
+          item
           sx={{
-            margin: "40px 0",
-            backgroundColor: "#1C6875",
-            width: "50%",
-            minWidth: "10rem",
+            "& .MuiTextField-root": { width: "13ch" },
           }}
         >
-          Enviar
-        </Button>
-      </form>
+          <TextField
+            required
+            id="outlined-select-currency"
+            select
+            label="Moneda"
+            {...register("currency")}
+            value={selectedCurrency ?? ""}
+            onChange={(event) => setValue("currency", event.target.value)}
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item>
+          <TextField
+            id="outlined-read-only-input"
+            label="Descripción"
+            defaultValue="Deposito"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "center", margin: "90px 0" }}
+        >
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
+          >
+            Enviar
+          </Button>
+        </Grid>
+      </Grid>
+    </>
   );
-};
+}

@@ -1,7 +1,9 @@
-
-
 export const RespuestaDeposito = () => {
   return (
-    <div>RespuestaDeposito</div>
-  )
-}
+    <>
+      <Typography variant="h5" align="center" sx={{ mt: 10 }}>
+        Ok, deposito exitoso
+      </Typography>
+    </>
+  );
+};
