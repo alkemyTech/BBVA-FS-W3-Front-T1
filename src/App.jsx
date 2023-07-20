@@ -22,9 +22,7 @@ function App() {
           {jwt && (
             <>
               <Route path="/home" element={<h1>Prueba Home</h1>} />
-              <Route path="/deposito" element={<>
-                    <CrearDeposito/>
-                  </>} />
+              <Route path="/deposito" element={<CrearDeposito/>} />
               <Route
                 path="/transferencia"
                 element={
