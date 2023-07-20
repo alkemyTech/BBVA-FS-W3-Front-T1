@@ -3,6 +3,7 @@ import "./App.css";
 import { Login } from "./components/login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
+import { UserInfo } from "./components/Profile/UserInfo";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 import { SingUp } from "./components/SingUp/SingUp";
@@ -25,7 +26,7 @@ function App() {
           />
           {jwt && (
             <>
-              <Route path="/home" element={<h1>Prueba Home</h1>} />
+              <Route path="/home" element={<><UserInfo /></>} />
               <Route path="/deposito" element={<h1>Prueba deposito</h1>} />
               <Route
                 path="/transferencia"
