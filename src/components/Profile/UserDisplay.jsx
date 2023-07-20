@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Grid,
@@ -7,14 +8,28 @@ import {
   Alert,
   Button,
 } from "@mui/material";
+import { ArrowDownward, CallMade } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
-import { AddCircle } from "@mui/icons-material";
 import "./UserInfo.css";
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
+  const navigate = useNavigate();
+
   const accountUsd = userBalance.accountUsd;
   const accountArs = userBalance.accountArs;
   const fixedTerms = userBalance.fixedTerms;
+
+  const handleTransferClick = () => {
+    navigate("/transferencia");
+  };
+
+  const handleDepositClick = () => {
+    navigate("/deposito");
+  };
+
+  const handleFixedTermClick = () => {
+    navigate("/plazo-fijo");
+  };
 
   return (
     <>
@@ -68,25 +83,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
           </Grid>
 
           {accountArs == null ? (
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Grid item>
-                <Alert severity="warning">No tenés cuenta en pesos.</Alert>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  endIcon={<AddCircle />}
-                >
-                  Crear
-                </Button>
-              </Grid>
-            </Grid>
+            <Alert severity="warning">No tenés una cuenta en pesos.</Alert>
           ) : (
             <Grid item xs={4} className="account">
               <Typography variant="subtitle1" gutterBottom>
@@ -101,18 +98,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
             </Grid>
           )}
           {accountUsd == null ? (
-            <>
-              <Alert severity="warning">
-                No tenés cuenta en dólares, ¿querés abrirla?
-              </Alert>
-              <Button
-                variant="contained"
-                color="primary"
-                endIcon={<AddCircle />}
-              >
-                Crear
-              </Button>
-            </>
+            <Alert severity="warning">No tenés una cuenta en dólares.</Alert>
           ) : (
             <Grid item xs={4} className="account">
               <Typography variant="subtitle1" gutterBottom>
@@ -126,6 +112,33 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
               </Typography>
             </Grid>
           )}
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<ArrowDownward />}
+                onClick={handleDepositClick}
+              >
+                DEPÓSITOS
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<CallMade />}
+                onClick={handleTransferClick}
+              >
+                TRANSFERENCIAS
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
 
         <Grid
@@ -161,6 +174,21 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
               </Typography>
             </Grid>
           ))}
+
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleFixedTermClick}
+            >
+              VER MÁS
+            </Button>
+          </Grid>
         </Grid>
       </Container>
     </>

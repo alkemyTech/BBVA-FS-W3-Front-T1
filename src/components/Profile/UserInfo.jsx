@@ -11,7 +11,7 @@ export const UserInfo = ({}) => {
     email: "user0@example.com",
   });
 
-  //Ejemplo de balance 
+  //Ejemplo de balance como viene del back 
   const userBalance = {
     accountArs: {
       id: 106,
@@ -28,7 +28,21 @@ export const UserInfo = ({}) => {
       creationDate: "2023-07-19T20:41:36",
       updateDate: "2023-07-19T20:41:36",
     },
-    accountUsd: null,
+    accountUsd: {
+      id: 107,
+      currency: "USD",
+      transactionLimit: 1000.0,
+      balance: 6500.0,
+      userId: {
+        id: 77,
+        firstName: "FistName",
+        lastName: "LastName",
+        email: "user0@example.com",
+      },
+      cbu: "0001562489321478523698",
+      creationDate: "2023-07-19T20:41:36",
+      updateDate: "2023-07-19T20:41:36",
+    },
     historyArs: [],
     historyUsd: [],
     fixedTerms: [
