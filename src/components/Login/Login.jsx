@@ -24,38 +24,38 @@ export const Login = ({ setUserName, setJwt }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", {
-        email,
-        password,
-      });
-      setValidation(false);
-      setMsgError("");
+        const response = await axios.post("http://localhost:8080/auth/login", {
+          email,
+          password,
+        });
+        const userName = (response.data.data.user.firstName + " " + response.data.data.user.lastName);
+        const token = response.data.data.token;
 
-      const userName =
-        response.data.data.user.firstName +
-        " " +
-        response.data.data.user.lastName;
-      const token = response.data.data.token;
-      const mail = response.data.data.user.email;
-      localStorage.setItem("token", token);
-      localStorage.setItem("nombre", userName);
-      localStorage.setItem("email", mail);
-      setUserName(userName);
-      setJwt(token);
-      navigate("/home");
+        console.log(response)
+        console.log(userName)
+        console.log(token)
+
+        setValidation(false);
+        setMsgError("");
+        setUserName(userName)
+        setJwt(token)
+
+        navigate("/home");
+
     } catch (error) {
-      const errorStatus = error.response.status;
-      setValidation("");
-      setMsgError("");
-      setValidation(true);
+      const errorStatus = error.response.status
+        setValidation("");
+        setMsgError("");
+        setValidation(true)
 
-      if (errorStatus === 400) {
-        setMsgError(error.response.data.message);
-      } else if (errorStatus === 403) {
-        setMsgError("Usuario o contraseña incorrecto");
+        if(errorStatus === 400){
+          setMsgError(error.response.data.message)
+        }else if (errorStatus === 403){
+          setMsgError("Usuario o contraseña incorrecto")
+        }
       }
-    }
   };
 
   return (
@@ -118,6 +118,7 @@ export const Login = ({ setUserName, setJwt }) => {
               minWidth: "10rem",
               "&:hover": { backgroundColor: "#2BA0B5" },
             }}
+            onClick={()=> {navigate("/sing-up");}}
           >
             Registrarse
           </Button>
