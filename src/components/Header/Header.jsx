@@ -7,7 +7,7 @@ import WalletIcon from "@mui/icons-material/Wallet";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addUserName } from "../../redux/userSlice";
+import { addUserId, addUserName } from "../../redux/userSlice";
 
 export const Header = () => {
   const pages = ["home", "deposito", "transferencia", "plazo fijo"];
@@ -22,7 +22,8 @@ export const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("nombre");
     localStorage.removeItem("email");
-    dispatch(addUserName(""))
+    dispatch(addUserId(""));
+    dispatch(addUserName(""));
 
     navigate("/");
   };

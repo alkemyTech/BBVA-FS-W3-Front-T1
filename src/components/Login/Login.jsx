@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { addUserName } from "../../redux/userSlice";
+import { addUserName, addUserId } from "../../redux/userSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,10 +37,8 @@ export const Login = () => {
       setValidation(false);
       setMsgError("");
 
-      const userName =
-        response.data.data.user.firstName +
-        " " +
-        response.data.data.user.lastName;
+      const {id,firstName, lastName} = response.data.data.user;
+      const userName = firstName +" "+lastName;
       const token = response.data.data.token;
       const mail = response.data.data.user.email;
 
@@ -48,6 +46,7 @@ export const Login = () => {
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
 
+      dispatch(addUserId(id));
       dispatch(addUserName(userName));
 
       navigate("/home");
