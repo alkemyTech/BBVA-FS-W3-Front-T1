@@ -23,7 +23,7 @@ export const Login = ({setUserName, setJwt}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
         const response = await axios.post("http://localhost:8080/auth/login", {
           email,
@@ -35,20 +35,20 @@ export const Login = ({setUserName, setJwt}) => {
         console.log(response)
         console.log(userName)
         console.log(token)
-        
+
         setValidation(false);
         setMsgError("");
         setUserName(userName)
         setJwt(token)
-        
+
         navigate("/home");
 
     } catch (error) {
       const errorStatus = error.response.status
-        setValidation("");  
+        setValidation("");
         setMsgError("");
         setValidation(true)
-        
+
         if(errorStatus === 400){
           setMsgError(error.response.data.message)
         }else if (errorStatus === 403){
@@ -120,6 +120,7 @@ export const Login = ({setUserName, setJwt}) => {
               minWidth: "10rem",
               "&:hover":{backgroundColor:"#2BA0B5"}
             }}
+            onClick={()=> {navigate("/sing-up");}}
           >
             Registrarse
           </Button>

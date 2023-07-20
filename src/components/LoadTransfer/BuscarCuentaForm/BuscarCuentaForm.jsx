@@ -1,47 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Typography, TextField, ToggleButtonGroup, ToggleButton, Button, Alert, Box } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import React, { useState, useEffect } from "react";
+import {
+  Grid,
+  Typography,
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton,
+  Button,
+  Alert,
+  Box,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import { Controller, useForm } from "react-hook-form";
-import "../LoadTransfer.css"
+import "../LoadTransfer.css";
 
 export const BuscarCuentaForm = ({ buscarCuentaSumit }) => {
-  const { register, handleSubmit, control, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     validateCriteriaMode: "all",
     reValidateMode: "onChange",
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const validateCBU = (value) => {
     if (value.length !== 22) {
-      return 'el CBU debe contener 22 digitos';
+      return "el CBU debe contener 22 digitos";
     }
 
     if (!/^\d+$/.test(value)) {
-      return 'el CBU debe estar compuesto solo de numeros';
+      return "el CBU debe estar compuesto solo de numeros";
     }
     return true;
   };
 
   const validateAmount = (value) => {
     if (!/^\d+$/.test(value)) {
-      return 'Ingresar solo numeros';
+      return "Ingresar solo numeros";
     }
     if (value <= 0) {
-      return 'Ingresar un importe positivo'
+      return "Ingresar un importe positivo";
     }
     return true;
-  }
-
+  };
 
   return (
-    <Box className='containerGrande'>
-      <Grid container spacing={4} component="form" onSubmit={handleSubmit(buscarCuentaSumit)}
-        className='containerResume' >
-        <Grid item xs={12} >
-          <Typography className="w200">Ingrese el CBU de la cuenta a transferir</Typography>
+    <Box className="containerGrande">
+      <Grid
+        container
+        spacing={4}
+        component="form"
+        onSubmit={handleSubmit(buscarCuentaSumit)}
+        className="containerResume"
+      >
+        <Grid item xs={12}>
+          <Typography className="w200">
+            Ingrese el CBU de la cuenta a transferir
+          </Typography>
         </Grid>
-        <Grid item xs={10} >
-          <TextField label="CBU" variant="standard" fullWidth {...register('cbu', { validate: validateCBU })}
+        <Grid item xs={10}>
+          <TextField
+            label="CBU"
+            variant="standard"
+            inputProps={{ maxLength: 22 }}
+            fullWidth
+            {...register("cbu", { validate: validateCBU })}
           />
           {errors.cbu && <Alert severity="error">{errors.cbu.message}</Alert>}
         </Grid>
@@ -63,17 +88,34 @@ export const BuscarCuentaForm = ({ buscarCuentaSumit }) => {
             )}
           />
         </Grid>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <Typography className="w200">Ingrese importe a transferir</Typography>
         </Grid>
         <Grid item xs={12}>
-          <TextField label="Importe a transferir" variant="standard" fullWidth {...register('amount', { validate: validateAmount })} />
-          {errors.amount && <Alert severity="error">{errors.amount.message}</Alert>}
+          <TextField
+            label="Importe a transferir"
+            variant="standard"
+            fullWidth
+            {...register("amount", { validate: validateAmount })}
+          />
+          {errors.amount && (
+            <Alert severity="error">{errors.amount.message}</Alert>
+          )}
         </Grid>
-        <Grid item xs={12} >
-          <Grid container display="flex" direction="column" alignItems="flex-end">
-            <Grid item xs={12} >
-              <Button className='boton' type="submit" variant="contained" endIcon={<SendIcon />}>
+        <Grid item xs={12}>
+          <Grid
+            container
+            display="flex"
+            direction="column"
+            alignItems="flex-end"
+          >
+            <Grid item xs={12}>
+              <Button
+                className="boton"
+                type="submit"
+                variant="contained"
+                endIcon={<SendIcon />}
+              >
                 Siguiente
               </Button>
             </Grid>
@@ -81,5 +123,5 @@ export const BuscarCuentaForm = ({ buscarCuentaSumit }) => {
         </Grid>
       </Grid>
     </Box>
-  )
-}
+  );
+};

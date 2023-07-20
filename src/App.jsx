@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
+import { SingUp } from "./components/SingUp/SingUp";
 
 function App() {
   const [userName, setUserName] = useState("Evaristo");
@@ -17,6 +18,10 @@ function App() {
           <Route
             path="*"
             element={<Login setUserName={setUserName} setJwt={setJwt} />}
+          />
+          <Route
+            path="sing-up"
+            element={<SingUp/>}
           />
           {jwt && (
             <>
@@ -33,7 +38,7 @@ function App() {
               <Route path="/plazo-fijo" element={<SimulatedFixedTerm/>}/>
             </>
           )}
-          
+
         </Routes>
       </Page>
     </>
