@@ -7,3 +7,5 @@ Con el boton logout se eliminan los datos del localStorage.
 3-"axios": "^1.4.0"
 4-"react-router-dom": "^6.14.2"
 5-"react-hook-form": "^7.45.2"
+6-"@reduxjs/toolkit": "^1.9.5"
+7-"react-redux": "^8.1.1"
