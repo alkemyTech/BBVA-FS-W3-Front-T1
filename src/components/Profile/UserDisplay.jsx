@@ -1,6 +1,14 @@
 import React from "react";
-import { Typography, Grid, IconButton, Container } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  IconButton,
+  Container,
+  Alert,
+  Button,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { AddCircle } from "@mui/icons-material";
 import "./UserInfo.css";
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
@@ -11,11 +19,13 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   return (
     <>
       <Container maxWidth="xl">
-        <Grid container 
+        <Grid
+          container
           className="exterior"
           direction="row"
           justifyContent="center"
-          alignItems="center">
+          alignItems="center"
+        >
           <Grid item xs={4}>
             <Grid container>
               <Typography variant="h4" color="initial">
@@ -33,6 +43,9 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
               Email: {userData.email}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Contraseña: ******
             </Typography>
           </Grid>
           <Grid item xs={4}>
@@ -53,28 +66,66 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item xs={4} className="account">
-            <Typography variant="subtitle1" gutterBottom>
-              CBU: {accountArs.cbu}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Moneda: {accountArs.currency}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Balance: $ {accountArs.balance}
-            </Typography>
-          </Grid>
-          <Grid item xs={4} className="account">
-            <Typography variant="subtitle1" gutterBottom>
-              CBU: {accountUsd.cbu}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Moneda: {accountUsd.currency}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              Balance: $ {accountUsd.balance}
-            </Typography>
-          </Grid>
+
+          {accountArs == null ? (
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Alert severity="warning">No tenés cuenta en pesos.</Alert>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={<AddCircle />}
+                >
+                  Crear
+                </Button>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid item xs={4} className="account">
+              <Typography variant="subtitle1" gutterBottom>
+                CBU: {accountArs.cbu}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Moneda: {accountArs.currency}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Balance: $ {accountArs.balance}
+              </Typography>
+            </Grid>
+          )}
+          {accountUsd == null ? (
+            <>
+              <Alert severity="warning">
+                No tenés cuenta en dólares, ¿querés abrirla?
+              </Alert>
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<AddCircle />}
+              >
+                Crear
+              </Button>
+            </>
+          ) : (
+            <Grid item xs={4} className="account">
+              <Typography variant="subtitle1" gutterBottom>
+                CBU: {accountUsd.cbu}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Moneda: {accountUsd.currency}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Balance: $ {accountUsd.balance}
+              </Typography>
+            </Grid>
+          )}
         </Grid>
 
         <Grid
@@ -110,31 +161,6 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
               </Typography>
             </Grid>
           ))}
-
-          {/*
-           {
-          "id": 4,
-          "amount": 5500.0,
-          "account": {
-              "id": 121,
-              "currency": "ARS",
-              "transactionLimit": 300000.0,
-              "balance": 39323.0,
-              "userId": {
-                  "id": 89,
-                  "firstName": "FistName",
-                  "lastName": "LastName",
-                  "email": "userCuentaEnPesos@example.com"
-              },
-              "cbu": "4304534308963772238902",
-              "creationDate": "2023-07-19T22:20:46",
-              "updateDate": "2023-07-19T22:25:35"
-          },
-          "interest": 660.0,
-          "creationDate": "2023-07-20T01:25:35.000+00:00",
-          "closingDate": "2023-09-18T01:25:35.000+00:00"
-      }
-          */}
         </Grid>
       </Container>
     </>

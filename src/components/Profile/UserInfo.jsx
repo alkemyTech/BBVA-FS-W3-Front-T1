@@ -11,6 +11,7 @@ export const UserInfo = ({}) => {
     email: "user0@example.com",
   });
 
+  //Ejemplo de balance 
   const userBalance = {
     accountArs: {
       id: 106,
@@ -27,21 +28,7 @@ export const UserInfo = ({}) => {
       creationDate: "2023-07-19T20:41:36",
       updateDate: "2023-07-19T20:41:36",
     },
-    accountUsd: {
-      id: 105,
-      currency: "USD",
-      transactionLimit: 1000.0,
-      balance: 3500.0,
-      userId: {
-        id: 77,
-        firstName: "FistName",
-        lastName: "LastName",
-        email: "user0@example.com",
-      },
-      cbu: "8642751367454548060316",
-      creationDate: "2023-07-19T20:41:36",
-      updateDate: "2023-07-19T20:41:36",
-    },
+    accountUsd: null,
     historyArs: [],
     historyUsd: [],
     fixedTerms: [
@@ -89,72 +76,6 @@ export const UserInfo = ({}) => {
           "creationDate": "2023-07-20T01:25:17.000+00:00",
           "closingDate": "2023-09-23T01:25:17.000+00:00"
       },
-      {
-          "id": 3,
-          "amount": 7777.0,
-          "account": {
-              "id": 121,
-              "currency": "ARS",
-              "transactionLimit": 300000.0,
-              "balance": 39323.0,
-              "userId": {
-                  "id": 89,
-                  "firstName": "FistName",
-                  "lastName": "LastName",
-                  "email": "userCuentaEnPesos@example.com"
-              },
-              "cbu": "4304534308963772238902",
-              "creationDate": "2023-07-19T22:20:46",
-              "updateDate": "2023-07-19T22:25:35"
-          },
-          "interest": 497.728,
-          "creationDate": "2023-07-20T01:25:27.000+00:00",
-          "closingDate": "2023-08-21T01:25:27.000+00:00"
-      },
-      {
-          "id": 4,
-          "amount": 5500.0,
-          "account": {
-              "id": 121,
-              "currency": "ARS",
-              "transactionLimit": 300000.0,
-              "balance": 39323.0,
-              "userId": {
-                  "id": 89,
-                  "firstName": "FistName",
-                  "lastName": "LastName",
-                  "email": "userCuentaEnPesos@example.com"
-              },
-              "cbu": "4304534308963772238902",
-              "creationDate": "2023-07-19T22:20:46",
-              "updateDate": "2023-07-19T22:25:35"
-          },
-          "interest": 660.0,
-          "creationDate": "2023-07-20T01:25:35.000+00:00",
-          "closingDate": "2023-09-18T01:25:35.000+00:00"
-      },
-      {
-        "id": 5,
-        "amount": 5500.0,
-        "account": {
-            "id": 121,
-            "currency": "ARS",
-            "transactionLimit": 300000.0,
-            "balance": 39323.0,
-            "userId": {
-                "id": 89,
-                "firstName": "FistName",
-                "lastName": "LastName",
-                "email": "userCuentaEnPesos@example.com"
-            },
-            "cbu": "4304534308963772238902",
-            "creationDate": "2023-07-19T22:20:46",
-            "updateDate": "2023-07-19T22:25:35"
-        },
-        "interest": 660.0,
-        "creationDate": "2023-07-20T01:25:35.000+00:00",
-        "closingDate": "2023-09-18T01:25:35.000+00:00"
-    }
   ],
   };
 

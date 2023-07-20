@@ -1,10 +1,13 @@
 .exterior{
     padding-top: 50px;
-    padding-bottom: 50px;
+    margin-bottom: 100px;
+    color:#454545;
 }
 
 .fixed-term{
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border: 1px solid black;
+    padding:20px;
+}
+
+.account {
+    padding:20px;
 }

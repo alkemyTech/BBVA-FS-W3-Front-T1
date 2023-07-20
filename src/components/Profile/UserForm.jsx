@@ -52,6 +52,16 @@ export const UserForm = ({ userData, onSave }) => {
             margin="normal"
           />
         </Grid>
+        <Grid item>
+          <TextField
+            label="Password"
+            name="password"
+            value={editedData.password}
+            onChange={handleChange}
+            margin="normal"
+          />
+        </Grid>
+
         <Button
           variant="contained"
           onClick={handleSave}

@@ -2,7 +2,7 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import "./App.css";
 import { Page } from "./pages/Page";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer"
-import { Home } from "./components/Profile/Home"
+import { UserInfo } from "./components/Profile/UserInfo";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <Route path="/" element={<h1>Prueba footer</h1>} />
           <Route path="transferencia" element={<><LoadTransfer /></>}>
           </Route>
-          <Route path="home" element={<><Home /></>}></Route>
+          <Route path="home" element={<><UserInfo /></>}></Route>
         </Routes>
       </Page>
     </>
