@@ -8,8 +8,8 @@ import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 
 function App() {
-  const [userName, setUserName] = useState("Nombre Prueba");
-  const [jwt, setJwt] = useState("Prueba");
+  const [userName, setUserName] = useState("Nombre de prueba");
+  const [jwt, setJwt] = useState("token de prueba"); 
 
   return (
     <>
@@ -31,7 +31,7 @@ function App() {
                   </>
                 }
               />
-              <Route path="/plazo-fijo" element={<SimulatedFixedTerm/>}/>
+              <Route path="/plazo-fijo" element={<SimulatedFixedTerm />} />
             </>
           )}
         </Routes>
