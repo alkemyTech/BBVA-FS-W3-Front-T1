@@ -3,11 +3,16 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login = ({ setUserName, setJwt }) => {
+import { useDispatch } from "react-redux";
+import { addUserName } from "../../redux/userSlice";
+
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false);
   const [msgError, setMsgError] = useState("");
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -38,11 +43,13 @@ export const Login = ({ setUserName, setJwt }) => {
         response.data.data.user.lastName;
       const token = response.data.data.token;
       const mail = response.data.data.user.email;
+
       localStorage.setItem("token", token);
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
-      setUserName(userName);
-      setJwt(token);
+
+      dispatch(addUserName(userName));
+
       navigate("/home");
     } catch (error) {
       const errorStatus = error.response.status;

@@ -6,18 +6,24 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { addUserName } from "../../redux/userSlice";
 
-export const Header = ({ userName, setUserName, setJwt }) => {
+export const Header = () => {
   const pages = ["home", "deposito", "transferencia", "plazo fijo"];
 
   const navigate = useNavigate();
+  
+  const dispatch = useDispatch();
+
+  const userName = useSelector((state) => state.user.userName);
 
   const handleClickLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("nombre");
     localStorage.removeItem("email");
-    setUserName("");
-    setJwt("");
+    dispatch(addUserName(""))
+
     navigate("/");
   };
 
