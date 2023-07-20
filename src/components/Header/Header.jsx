@@ -28,7 +28,7 @@ export const Header = ({ userName, setUserName, setJwt }) => {
         sx={{
           backgroundColor: "#2BA0B5",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.6)",
-          borderRadius:"0px 0px 30px 30px"
+          borderRadius: "0px 0px 30px 30px",
         }}
       >
         <Toolbar>
@@ -46,17 +46,28 @@ export const Header = ({ userName, setUserName, setJwt }) => {
                 {pages.map((page) => (
                   <Grid
                     item
-                    xs={2}
+                    xs={6}
+                    md={2}
                     textAlign={"center"}
                     alignSelf={"center"}
-                    paddingLeft={"4rem"}
+                    
                     key={page}
                   >
                     <Link
                       style={{ textDecoration: "none", color: "inherit" }}
                       to={`/${page.replace(/\s+/g, "-")}`}
                     >
-                      <Typography variant="subtitle1">
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          "&:hover": {
+                            color: "#0D2F36",
+                            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+                            transform: "translateY(-2px)",
+                            transition: "transform 0.3s ease",
+                          },
+                        }}
+                      >
                         {page.toUpperCase()}
                       </Typography>
                     </Link>
