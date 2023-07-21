@@ -9,10 +9,10 @@ import {
   Button,
 } from "@mui/material";
 import { useState } from "react";
-import { BuscarCuentaForm } from "./BuscarCuentaForm1/BuscarCuentaForm";
 import { SearchCbu } from "./SearchCbu/SearchCbu";
 import { SelectAmount } from "./SelectAmount/SelectAmount";
 import { TransferResume } from "./TransferResume/TransferResume";
+import axios from "axios";
 
 const steps = ["Buscar Cuenta", "importe", "Resumen"];
 
@@ -45,11 +45,41 @@ export const TransferCeckOut = () => {
   };
 
   const SelectAmountSubmit = (data) => {
-    // TODO: buscar cuenta
     console.log(data);
-    dataAccount.cbu = data.amount;
+    dataAccount.amount = data.amount;
 
     handleNext();
+  };
+
+  const ResumeSubmit = async () => {
+    console.log(dataAccount);
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const idAccount = 28;
+
+    const requestBody = {
+      id: idAccount,
+      amount: dataAccount.amount,
+    };
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const apiUrl =
+      dataAccount.currency === "ARS"
+        ? "http://localhost:8080/transactions/sendArs"
+        : "http://localhost:8080/transactions/sendUsd";
+
+    axios
+      .post(apiUrl, requestBody, config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // handleNext();
   };
 
   function getStepContent(step) {
@@ -65,8 +95,14 @@ export const TransferCeckOut = () => {
             handleBack={handleBack}
           />
         );
-        case 2:
-          return <TransferResume dataTransfer={dataAccount} />;
+      case 2:
+        return (
+          <TransferResume
+            dataTransfer={dataAccount}
+            handleBack={handleBack}
+            ResumeSubmit={ResumeSubmit}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
@@ -90,24 +126,7 @@ export const TransferCeckOut = () => {
             ))}
           </Stepper>
 
-          <>
-            {getStepContent(activeStep)}
-            {/* <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              {activeStep !== 0 && (
-                <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                  Back
-                </Button>
-              )}
-
-              <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 1 ? 'Confirmar Transferencia' : 'Siguiente'}
-                </Button>
-            </Box> */}
-          </>
+          <>{getStepContent(activeStep)}</>
         </Paper>
       </Container>
     </>

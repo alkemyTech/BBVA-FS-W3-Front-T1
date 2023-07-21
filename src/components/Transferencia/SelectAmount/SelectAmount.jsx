@@ -25,9 +25,9 @@ export const SelectAmount = ({
     control,
     formState: { errors },
   } = useForm({
-    validateCriteriaMode: "all",
-    reValidateMode: "onChange",
-    mode: "onChange",
+    // validateCriteriaMode: "all",
+    // reValidateMode: "onChange",
+    // mode: "onChange",
   });
 
   const validateAmount = (value) => {
@@ -40,9 +40,9 @@ export const SelectAmount = ({
     return true;
   };
 
-//   display:flex;
-//   padding: 5%;
-//   justify-content: center;
+  //   display:flex;
+  //   padding: 5%;
+  //   justify-content: center;
 
   return (
     <Box display={"flex"} padding={"5%"} justifyContent={"center"}>
@@ -90,7 +90,7 @@ export const SelectAmount = ({
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Button
-            sx={{backgroundColor:  "#2BA0B5"}}
+            sx={{ backgroundColor: "#2BA0B5" }}
             type="button"
             variant="contained"
             onClick={handleBack}
@@ -98,7 +98,7 @@ export const SelectAmount = ({
             Anterior
           </Button>
           <Button
-            sx={{backgroundColor:  "#2BA0B5"}}
+            sx={{ backgroundColor: "#2BA0B5" }}
             type="submit"
             variant="contained"
           >
