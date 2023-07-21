@@ -31,14 +31,11 @@ function App() {
       <Page>
         <Routes>
           <Route path="*" element={<Login />} />
-          <Route
-            path="sing-up"
-            element={<SingUp/>}
-          />
+          <Route path="sing-up" element={<SingUp />} />
           {user && (
             <>
-              <Route path="/home" element={<UserInfo/>} />
-              <Route path="/deposito" element={<CrearDeposito/>} />
+              <Route path="/home" element={<UserInfo />} />
+              <Route path="/deposito" element={<CrearDeposito />} />
               <Route
                 path="/transferencia"
                 element={
@@ -50,7 +47,6 @@ function App() {
               <Route path="/plazo-fijo" element={<SimulatedFixedTerm />} />
             </>
           )}
-
         </Routes>
       </Page>
     </>
