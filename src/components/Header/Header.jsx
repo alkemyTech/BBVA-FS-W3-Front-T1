@@ -119,11 +119,11 @@ export const Header = () => {
                     to="/home"
                   >
                     <Typography
-                      variant="h6"
+                      variant="subtitle1"
                       className="inHover"
-                      sx={{ color: "white" }}
+                      sx={{ color: "inherit" }}
                     >
-                      {userName}
+                      {userName.toUpperCase()}
                     </Typography>
                   </Link>
 
@@ -140,7 +140,7 @@ export const Header = () => {
 
                   <IconButton
                     className="inHover"
-                    sx={{ color: "white" }}
+                    sx={{ color: "inherit" }}
                     onClick={handleClickLogout}
                     children={<LogoutIcon fontSize="large" />}
                   />
