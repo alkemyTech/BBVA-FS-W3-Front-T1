@@ -124,6 +124,7 @@ export const Login = () => {
               minWidth: "10rem",
               "&:hover": { backgroundColor: "#2BA0B5" },
             }}
+            onClick={() => {navigate("sing-up")}}
           >
             Registrarse
           </Button>
