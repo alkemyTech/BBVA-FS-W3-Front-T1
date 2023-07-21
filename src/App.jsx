@@ -3,13 +3,15 @@ import "./App.css";
 import { Login } from "./components/login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
+import { UserInfo } from "./components/Profile/UserInfo";
 import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
+import { SingUp } from "./components/SingUp/SingUp";
 import { CrearDeposito } from "./components/crearDeposito/CrearDeposito";
 
 function App() {
   const [userName, setUserName] = useState("Nombre de prueba");
-  const [jwt, setJwt] = useState("token de prueba"); 
+  const [jwt, setJwt] = useState("token de prueba");
 
   return (
     <>
@@ -19,10 +21,14 @@ function App() {
             path="*"
             element={<Login setUserName={setUserName} setJwt={setJwt} />}
           />
+          <Route
+            path="sing-up"
+            element={<SingUp/>}
+          />
           {jwt && (
             <>
               <Route path="/home" element={<h1>Prueba Home</h1>} />
-              <Route path="/deposito" element={<CrearDeposito/>} />
+              <Route path="/deposito" element={<h1>Prueba deposito</h1>} />
               <Route
                 path="/transferencia"
                 element={
@@ -34,6 +40,7 @@ function App() {
               <Route path="/plazo-fijo" element={<SimulatedFixedTerm />} />
             </>
           )}
+
         </Routes>
       </Page>
     </>
