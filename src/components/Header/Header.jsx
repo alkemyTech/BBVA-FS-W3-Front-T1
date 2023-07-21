@@ -10,21 +10,27 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
-import { Grid } from "@mui/material";
-import "./Header.css";
+import { Button, Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { addUserId, addUserName } from "../../redux/userSlice";
 
-export const Header = ({ userName, setUserName, setJwt }) => {
+export const Header = () => {
   const pages = ["home", "deposito", "transferencia", "plazo fijo"];
   const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
+  
+  const dispatch = useDispatch();
+
+  const userName = useSelector((state) => state.user.userName);
 
   const handleClickLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("nombre");
     localStorage.removeItem("email");
-    setUserName("");
-    setJwt("");
+    dispatch(addUserId(""));
+    dispatch(addUserName(""));
+
     navigate("/");
   };
 
