@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserId, addUserName } from "../../redux/userSlice";
+import "./Header.css"
 
 export const Header = () => {
   const pages = ["home", "deposito", "transferencia", "plazo fijo"];
