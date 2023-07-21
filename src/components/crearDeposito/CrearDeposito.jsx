@@ -1,13 +1,16 @@
 import React from 'react'
-import { useState } from 'react';
-import { RespuestaDeposito } from '../RespuestaDeposito/RespuestaDeposito';
-import { FormularioDeposito } from '../formularioDeposito/formularioDeposito';
+import { useState } from 'react'
+import { FormularioDeposito } from './FormularioDeposito/FormularioDeposito';
+import { RespuestaDeposito } from './RespuestaDeposito/RespuestaDeposito';
 
 export const CrearDeposito = () => {
+
+const [mostrarFormularioDeposito,setMostrarFormularioDeposito] = useState(false);
 
 
 
   return (
-    <FormularioDeposito/>
+    <> {!mostrarFormularioDeposito? <FormularioDeposito setMostrarFormularioDeposito={setMostrarFormularioDeposito} />:<RespuestaDeposito/>} </>
+  
      );
 }

@@ -1,14 +1,34 @@
-import { TextField, MenuItem, Grid, Button, Typography } from "@mui/material";
+import { TextField, MenuItem, Grid, Button, Typography,Alert } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export const FormularioDeposito = () => {
+export const FormularioDeposito = ({setMostrarFormularioDeposito}) => {
   const {
     register,
     handleSubmit,
     watch,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+      validateCriteriaMode: "all",
+      reValidateMode: "onChange",
+      mode: "onChange"
+    });
+  
+
+  
+  
+    const validateAmount = (value) => {
+      if (!/^\d+$/.test(value)) {
+        return 'Ingresar solo numeros';
+      }
+      if (value <= 0) {
+        return 'Ingresar un importe positivo'
+      }
+      return true;
+    }
+
+
+
 
   const selectedCurrency = watch("currency");
 
@@ -29,8 +49,8 @@ export const FormularioDeposito = () => {
 
   return (
     <>
-      <Typography variant="h5" align="center" sx={{ mt: 10 }}>
-        ¿Cuanto queres depositar?
+      <Typography variant="h5" gutterBottom align="center" sx={{ mt: 10 } }>
+        <b>¿Cuánto querés depositar?</b>
       </Typography>
       <Grid
         component="form"
@@ -48,14 +68,9 @@ export const FormularioDeposito = () => {
             id="outlined-required"
             label="Monto"
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            {...register("amount", { min: 1 })}
-            error={!!errors.amount}
-            helperText={
-              errors.amount?.type === "min" && (
-                <p>El monto tiene que ser igual o superior a 1</p>
-              )
-            }
+            {...register("amount", { validate: validateAmount })}
           />
+         {errors.amount && <Alert severity="error">{errors.amount.message}</Alert>} 
         </Grid>
         <Grid
           item
@@ -81,6 +96,7 @@ export const FormularioDeposito = () => {
         </Grid>
         <Grid item>
           <TextField
+          disabled
             id="outlined-read-only-input"
             label="Descripción"
             defaultValue="Deposito"
@@ -98,6 +114,7 @@ export const FormularioDeposito = () => {
             type="submit"
             variant="contained"
             sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
+            onSubmit={()=>{setMostrarFormularioDeposito(true)}}
           >
             Enviar
           </Button>
