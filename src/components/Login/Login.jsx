@@ -3,11 +3,16 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login = ({ setUserName, setJwt }) => {
+import { useDispatch } from "react-redux";
+import { addUserName, addUserId } from "../../redux/userSlice";
+
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false);
   const [msgError, setMsgError] = useState("");
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -32,17 +37,18 @@ export const Login = ({ setUserName, setJwt }) => {
       setValidation(false);
       setMsgError("");
 
-      const userName =
-        response.data.data.user.firstName +
-        " " +
-        response.data.data.user.lastName;
+      const {id,firstName, lastName} = response.data.data.user;
+      const userName = firstName +" "+lastName;
       const token = response.data.data.token;
       const mail = response.data.data.user.email;
+
       localStorage.setItem("token", token);
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
-      setUserName(userName);
-      setJwt(token);
+
+      dispatch(addUserId(id));
+      dispatch(addUserName(userName));
+
       navigate("/home");
     } catch (error) {
       const errorStatus = error.response.status;
