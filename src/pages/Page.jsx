@@ -5,7 +5,7 @@ export const Page = (props) => {
   return (
     <>
       <Header/>
-      <div>{props.children}</div>
+      <div style={{minHeight:"86vh"}}>{props.children}</div>
       <Footer />
     </>
   );

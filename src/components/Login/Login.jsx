@@ -80,7 +80,7 @@ export const Login = () => {
           maxWidth={"30rem"}
         >
           <TextField
-            label="Email"
+            label="Correo electrónico"
             type="email"
             variant="outlined"
             value={email}
@@ -90,7 +90,7 @@ export const Login = () => {
             sx={{ mb: "1rem" }}
           />
           <TextField
-            label="Password"
+            label="Contraseña"
             type="password"
             variant="outlined"
             value={password}
