@@ -1,6 +1,6 @@
 import { Typography, Grid, Box,Alert, Divider,AlertTitle } from "@mui/material";
 
-export const RespuestaDeposito = () => {
+export const RespuestaDeposito = ({data}) => {
   return (
     <>
       <Grid
@@ -32,10 +32,10 @@ export const RespuestaDeposito = () => {
           borderRadius: 2,
         }}
       >
-        <Typography fontSize={20} marginBottom={1} marginLeft={2} ><b>$9000</b></Typography>
+        <Typography fontSize={20} marginBottom={1} marginLeft={2} ><b>${data.amount}</b></Typography>
         <Divider/>
-        <Typography  marginTop={4} fontSize={15}>Se depositó en</Typography>
-        <Typography fontSize={15}><b>CBU: 1234567890123456789012</b></Typography>
+        <Typography  marginTop={4} fontSize={15}>Se depositó en:</Typography>
+        <Typography fontSize={15}><b>Cuenta en {data.currency}</b></Typography>
       </Box>
       <Alert severity="info">
  Se acreditará en unos instantes
