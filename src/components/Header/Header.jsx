@@ -26,9 +26,7 @@ export const Header = () => {
   const userName = useSelector((state) => state.user.userName);
 
   const handleClickLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("nombre");
-    localStorage.removeItem("email");
+    localStorage.clear();
     dispatch(addUserId(""));
     dispatch(addUserName(""));
 
