@@ -48,7 +48,7 @@ export const TransferCheckOut = () => {
   const SearchCbuSubmit = async (data) => {
     console.log(data);
     const requestBody = {
-      cbu: data.cbu
+      cbu: data.cbu,
     };
     //--------------
     const token = localStorage.getItem("token");
@@ -56,7 +56,7 @@ export const TransferCheckOut = () => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    console.log("llegue")
+    console.log("llegue");
     axios
       .get(`http://localhost:8080/accounts/cbu/${data.cbu}`, config)
       .then((response) => {
@@ -65,9 +65,13 @@ export const TransferCheckOut = () => {
         dataAccount.cbu = data.cbu;
         dataAccount.currency = response.data.data.currency;
         dataAccount.id = response.data.data.id;
-        dataAccount.firstName= response.data.data.userId.firstName;
-        dataAccount.lastName= response.data.data.userId.lastName;
-        setUserCbu({firstName: response.data.data.userId.firstName, lastName: response.data.data.userId.lastName})
+        dataAccount.firstName = response.data.data.userId.firstName;
+        dataAccount.lastName = response.data.data.userId.lastName;
+        setUserCbu({
+          firstName: response.data.data.userId.firstName,
+          lastName: response.data.data.userId.lastName,
+          currency: response.data.data.userId.lastName,
+        });
       })
       .catch((error) => {
         console.log(error);
