@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,17 +13,14 @@ export const Login = () => {
   const [msgError, setMsgError] = useState("");
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -45,10 +42,9 @@ export const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
-
+      localStorage.removeItem("tokenExpired");
       dispatch(addUserId(id));
       dispatch(addUserName(userName));
-
       navigate("/home");
     } catch (error) {
       const errorStatus = error.response.status;
@@ -64,6 +60,14 @@ export const Login = () => {
     }
   };
 
+  useEffect(() => {
+    const tokenExpired = localStorage.getItem("tokenExpired");
+    if (tokenExpired){
+      setMsgError(tokenExpired);
+      setValidation(true);
+    }
+  }, [])
+  
   return (
     <Grid
       container
@@ -113,8 +117,6 @@ export const Login = () => {
           >
             Iniciar sesión
           </Button>
-          {validation && <Alert severity="error"> {msgError} </Alert>}
-
           <Typography variant="subtitle1">No posee cuenta?</Typography>
           <Button
             variant="contained"
@@ -128,6 +130,7 @@ export const Login = () => {
           >
             Registrarse
           </Button>
+          {validation && <Alert sx={{mt:"1rem"}} severity="error"> {msgError} </Alert>}
         </Box>
       </Grid>
     </Grid>
