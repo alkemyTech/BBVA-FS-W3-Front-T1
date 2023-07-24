@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Controller, useForm } from "react-hook-form";
-import { padding } from "@mui/system";
+import StyledButton from "../../buttonStyles/buttonStyles";
 
 export const SelectAmount = ({
   SelectAmountSubmit,
@@ -52,7 +52,7 @@ export const SelectAmount = ({
         component="form"
         onSubmit={handleSubmit(SelectAmountSubmit)}
       >
-        
+
         <Grid item xs={12}>
           <Typography variant="h5">
             <b>Ingrese importe a transferir</b>
@@ -74,21 +74,21 @@ export const SelectAmount = ({
           xs={12}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <Button
+          <StyledButton
             sx={{ backgroundColor: "#2BA0B5" }}
             type="button"
             variant="contained"
             onClick={handleBack}
           >
             Anterior
-          </Button>
-          <Button
+          </StyledButton>
+          <StyledButton
             sx={{ backgroundColor: "#2BA0B5" }}
             type="submit"
             variant="contained"
           >
             Siguiente
-          </Button>
+          </StyledButton>
         </Grid>
       </Grid>
     </Box>
