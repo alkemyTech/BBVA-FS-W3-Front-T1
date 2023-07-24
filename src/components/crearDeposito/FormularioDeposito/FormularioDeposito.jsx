@@ -2,6 +2,7 @@ import { TextField, MenuItem, Grid, Button, Typography,Alert } from "@mui/materi
 import { useForm } from "react-hook-form";
 
 export const FormularioDeposito = ({setMostrarFormularioDeposito,onSubmit}) => {
+  
   const {
     register,
     handleSubmit,
@@ -14,9 +15,6 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito,onSubmit}) => {
       mode: "onChange"
     });
   
-
-  
-  
     const validateAmount = (value) => {
       if (!/^\d+$/.test(value)) {
         return 'Ingresar solo numeros';
@@ -27,12 +25,7 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito,onSubmit}) => {
       return true;
     }
 
-
-
-
   const selectedCurrency = watch("currency");
-
- 
 
   const currencies = [
     {
