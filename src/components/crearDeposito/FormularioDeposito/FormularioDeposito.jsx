@@ -1,7 +1,8 @@
 import { TextField, MenuItem, Grid, Button, Typography,Alert } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export const FormularioDeposito = ({setMostrarFormularioDeposito}) => {
+export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
+  
   const {
     register,
     handleSubmit,
@@ -14,9 +15,6 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito}) => {
       mode: "onChange"
     });
   
-
-  
-  
     const validateAmount = (value) => {
       if (!/^\d+$/.test(value)) {
         return 'Ingresar solo numeros';
@@ -27,14 +25,7 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito}) => {
       return true;
     }
 
-
-
-
   const selectedCurrency = watch("currency");
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   const currencies = [
     {
@@ -114,11 +105,11 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito}) => {
             type="submit"
             variant="contained"
             sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
-            onSubmit={()=>{setMostrarFormularioDeposito(true)}}
           >
             Enviar
           </Button>
         </Grid>
+        {validation && <Alert severity="error"> {msgError} </Alert>}
       </Grid>
     </>
   );
