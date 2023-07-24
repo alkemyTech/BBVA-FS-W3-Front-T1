@@ -13,6 +13,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import "../UserInfo.css";
+import StyledButton from "../../buttonStyles/buttonStyles";
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const navigate = useNavigate();
@@ -160,22 +161,18 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
 
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
+            <StyledButton
               onClick={handleDepositClick}
             >
               DEPÓSITOS
-            </Button>
+            </StyledButton>
           </Grid>
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
+            <StyledButton
               onClick={handleTransferClick}
             >
               TRANSFERENCIAS
-            </Button>
+            </StyledButton>
           </Grid>
         </Grid>
         </Box>
@@ -218,13 +215,11 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
         </Grid>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
+            <StyledButton
               onClick={handleFixedTermClick}
             >
               VER MÁS
-            </Button>
+            </StyledButton>
           </Grid>
         </Grid>
         </Box>
