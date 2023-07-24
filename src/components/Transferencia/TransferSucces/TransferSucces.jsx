@@ -3,9 +3,10 @@ import {
     Grid,
   } from "@mui/material";
 import StyledButton from "../../buttonStyles/buttonStyles";
+import { useNavigate } from "react-router-dom";
 
-
-export const TransferSucces = ({response}) => {
+export const TransferSucces = ({response, newTrasfer}) => {
+    const navigate = useNavigate();
   return (
     <>
         <Grid container  spacing={2}>
@@ -38,10 +39,10 @@ export const TransferSucces = ({response}) => {
             <Grid item xs={12}>
                 <Grid container spacing={15}>
                     <Grid item xs={6}>
-                        <StyledButton>Home</StyledButton>
+                        <StyledButton onClick={()=>{ navigate("/home")}}>Home</StyledButton>
                     </Grid>
                     <Grid item xs={6}>
-                        <StyledButton>Otra Transferencia</StyledButton>
+                        <StyledButton onClick={newTrasfer}>Otra Transferencia</StyledButton>
                     </Grid>
                 </Grid>
             </Grid>

@@ -79,8 +79,13 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
                   <b>El dueño de la cuenta es: </b>
                 </Typography>
                 <Typography>
-                  {console.log(userCbu)}
                   {userCbu.firstName}, {userCbu.lastName}
+                </Typography>
+                <Typography variant="h6">
+                  <b>El tipo de moneda es: </b>
+                </Typography>
+                <Typography>
+                  {userCbu.currency}
                 </Typography>
               </Box>
             </Grid>

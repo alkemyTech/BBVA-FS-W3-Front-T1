@@ -26,7 +26,7 @@ const dataAccount = {
   lastName: "",
   cbu: "",
   currency: "",
-  amount: 1.0,
+  amount: 0,
 };
 
 export const TransferCheckOut = () => {
@@ -70,7 +70,7 @@ export const TransferCheckOut = () => {
         setUserCbu({
           firstName: response.data.data.userId.firstName,
           lastName: response.data.data.userId.lastName,
-          currency: response.data.data.userId.lastName,
+          currency: response.data.data.currency,
         });
       })
       .catch((error) => {
@@ -81,6 +81,12 @@ export const TransferCheckOut = () => {
       });
     //--------------
   };
+
+  const SearchCbuHandleNext = () =>{
+    if (userCbu){
+      handleNext();
+    }
+  }
 
   const SelectAmountSubmit = (data) => {
     console.log(data);
@@ -122,13 +128,23 @@ export const TransferCheckOut = () => {
       });
   };
 
+  const newTransfer = () => {
+    dataAccount.id = 0;
+    dataAccount.amount= 0;
+    dataAccount.firstName = "";
+    dataAccount.lastName = "";
+    dataAccount.currency = "";
+    setUserCbu(null);
+    setActiveStep(0);
+  }
+
   function getStepContent(step) {
     switch (step) {
       case 0:
         return (
           <SearchCbu
             SearchCbuSubmit={SearchCbuSubmit}
-            handleNext={handleNext}
+            handleNext={SearchCbuHandleNext}
             userCbu={userCbu}
           />
         );
@@ -170,7 +186,7 @@ export const TransferCheckOut = () => {
           </Stepper>
           {activeStep === steps.length ? (
             <>
-              <TransferSucces response={response} />
+              <TransferSucces response={response} newTrasfer={newTransfer}/>
             </>
           ) : (
             <>
