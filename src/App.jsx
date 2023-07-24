@@ -3,12 +3,13 @@ import "./App.css";
 import { Login } from "./components/Login/Login";
 import { Page } from "./pages/Page";
 import { UserInfo } from "./components/Profile/UserInfo";
-import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 import { SingUp } from "./components/SingUp/SingUp";
+import { TransferCheckOut } from "./components/Transferencia/TransferCheckOut";
 import { CrearDeposito } from "./components/crearDeposito/CrearDeposito";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+
 
 function App() {
   const user = useSelector((state) => state.user.userName);
@@ -40,7 +41,7 @@ function App() {
                 path="/transferencia"
                 element={
                   <>
-                    <LoadTransfer />
+                    <TransferCheckOut />
                   </>
                 }
               />
