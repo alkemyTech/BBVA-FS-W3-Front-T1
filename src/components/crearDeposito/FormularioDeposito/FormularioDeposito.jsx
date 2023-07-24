@@ -1,7 +1,7 @@
 import { TextField, MenuItem, Grid, Button, Typography,Alert } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export const FormularioDeposito = ({setMostrarFormularioDeposito,onSubmit}) => {
+export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
   
   const {
     register,
@@ -109,6 +109,7 @@ export const FormularioDeposito = ({setMostrarFormularioDeposito,onSubmit}) => {
             Enviar
           </Button>
         </Grid>
+        {validation && <Alert severity="error"> {msgError} </Alert>}
       </Grid>
     </>
   );

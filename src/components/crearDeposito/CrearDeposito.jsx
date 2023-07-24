@@ -11,6 +11,7 @@ export const CrearDeposito = () => {
   const [data, setData] = useState("");
   const [error, setError] = useState("");
   const [msgError, setMsgError] = useState("");
+  const [validation, setValidation] = useState(false);
 
   const onSubmit = async (data) => {
     
@@ -34,6 +35,7 @@ export const CrearDeposito = () => {
     } catch (error) {
       setError(error);
       const errorStatus = error.response.status;
+      setValidation(true);
       if (errorStatus === 400) {
         setMsgError(error.response.data.message);
       } else {
@@ -42,35 +44,16 @@ export const CrearDeposito = () => {
     }
   };
 
-  if (error) {
-    return (
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        padding={"2.5rem"}
-      >
-        <Grid item>
-          <Alert variant="outlined" severity="error">
-            <Typography>
-              <b>{msgError}</b>
-            </Typography>
-          </Alert>
-        </Grid>
-      </Grid>
-    );
-  }
+  
 
-  if (!error) {
     return (
       <>
         {!mostrarFormularioDeposito ? (
-          <FormularioDeposito onSubmit={onSubmit}/>
+          <FormularioDeposito onSubmit={onSubmit} validation={validation} msgError={msgError}/>
         ) : (
           <RespuestaDeposito data={data}/>
         )}
       </>
     );
   }
-};
+
