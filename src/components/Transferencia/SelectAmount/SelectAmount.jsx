@@ -52,22 +52,7 @@ export const SelectAmount = ({
         component="form"
         onSubmit={handleSubmit(SelectAmountSubmit)}
       >
-        <Grid item xs={12}>
-          <Box
-            sx={{
-              backgroundColor: "#87a3a8",
-              padding: "2rem",
-              borderRadius: 2,
-            }}
-          >
-            <Typography variant="h6">
-              <b>El dueño de la cuenta es: </b>
-            </Typography>
-            <Typography>
-              {firstName} {lastName}
-            </Typography>
-          </Box>
-        </Grid>
+        
         <Grid item xs={12}>
           <Typography variant="h5">
             <b>Ingrese importe a transferir</b>

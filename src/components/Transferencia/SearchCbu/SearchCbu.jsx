@@ -1,4 +1,3 @@
-
 import {
   Grid,
   Typography,
@@ -8,15 +7,18 @@ import {
   Button,
   Alert,
   Box,
+  Icon,
+  IconButton,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Controller, useForm } from "react-hook-form";
+import SearchIcon from "@mui/icons-material/Search";
+import StyledButton from "../../buttonStyles/buttonStyles";
 
-export const SearchCbu = ({ SearchCbuSubmit }) => {
+export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm({
     validateCriteriaMode: "all",
@@ -59,33 +61,36 @@ export const SearchCbu = ({ SearchCbuSubmit }) => {
             />
             {errors.cbu && <Alert severity="error">{errors.cbu.message}</Alert>}
           </Grid>
-          <Grid item xs={4} >
-            <Controller
-              name="moneda"
-              control={control}
-              defaultValue="ARS"
-              render={({ field }) => (
-                <ToggleButtonGroup
-                  exclusive
-                  aria-label="Moneda"
-                  value={field.value}
-                  onChange={(event, value) => field.onChange(value)}
-                >
-                  <ToggleButton value="ARS">ARS</ToggleButton>
-                  <ToggleButton value="USD">USD</ToggleButton>
-                </ToggleButtonGroup>
-              )}
-            />
+          <Grid item xs={4}>
+            <StyledButton type="submit" endIcon={<SearchIcon />}>
+              Buscar
+            </StyledButton>
           </Grid>
-
-          <Grid item xs={12} sx={ {display: 'flex', justifyContent: 'flex-end', marginTop: 4}}>
-                <Button
-                    sx={{backgroundColor:  "#2BA0B5"}}
-                    type="submit"
-                    variant="contained"
-                >
-                  Siguiente
-                </Button>
+          {userCbu && (
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  backgroundColor: "#87a3a8",
+                  padding: "2rem",
+                  borderRadius: 2,
+                }}
+              >
+                <Typography variant="h6">
+                  <b>El dueño de la cuenta es: </b>
+                </Typography>
+                <Typography>
+                  {console.log(userCbu)}
+                  {userCbu.firstName}, {userCbu.lastName}
+                </Typography>
+              </Box>
+            </Grid>
+          )}
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}
+          >
+            <StyledButton onClick={handleNext}>Siguiente</StyledButton>
           </Grid>
         </Grid>
       </Box>

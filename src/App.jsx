@@ -4,10 +4,9 @@ import { Login } from "./components/login/Login";
 import { useState } from "react";
 import { Page } from "./pages/Page";
 import { UserInfo } from "./components/Profile/UserInfo";
-import { LoadTransfer } from "./components/LoadTransfer/LoadTransfer";
 import { SimulatedFixedTerm } from "./components/FixedTerm/SimulatedFixedTerm/SimulatedFixedTerm";
 import { SingUp } from "./components/SingUp/SingUp";
-import { TransferCeckOut } from "./components/Transferencia/TransferCeckOut";
+import { TransferCheckOut } from "./components/Transferencia/TransferCheckOut";
 
 function App() {
   const [userName, setUserName] = useState("Nombre de prueba");
@@ -33,7 +32,7 @@ function App() {
                 path="/transferencia"
                 element={
                   <>
-                    <TransferCeckOut />
+                    <TransferCheckOut />
                   </>
                 }
               />
