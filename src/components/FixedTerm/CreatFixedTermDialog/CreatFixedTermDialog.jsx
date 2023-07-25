@@ -50,12 +50,14 @@ export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
           }
 
           setFixTermData(newData);
-          console.log(setIsTransferSucced);
           setIsTransferSucced(true);
           handleClose();
         })
         .catch((error) => {
           console.log(error)
+          if(error.response.status === 403){
+            tokenExpired(navigate,dispatch);
+          }
           setErrorMessage(error.response.data.message);
         });
     };

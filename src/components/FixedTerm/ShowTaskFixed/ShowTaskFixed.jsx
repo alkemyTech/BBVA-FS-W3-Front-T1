@@ -1,22 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid , Snackbar, Alert} from "@mui/material";
 import TypographyInfo from "../TypographyInformation/TypographyInformation";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import TypographyData from "../TypographyData/TypographyData";
 import { CreatFixedTermDialog } from "../CreatFixedTermDialog/CreatFixedTermDialog";
 import { useDataContext } from "../FixedTerm";
-import {useState} from 'react'
+import { useState } from "react";
 
 export const ShowTaskFixed = () => {
-  const [ isTransferSucced, setIsTransferSucced ] = useState(false);
+  const [isTransferSucced, setIsTransferSucced] = useState(false);
   const navigate = useNavigate();
-  const { fixTermData, setReceivedData} = useDataContext();
-
+  const { fixTermData, setReceivedData } = useDataContext();
 
   const returnHome = () => {
     navigate("/home");
   };
-
 
   return (
     <>
@@ -43,14 +41,24 @@ export const ShowTaskFixed = () => {
         </Grid>
         {!isTransferSucced ? (
           <Grid item xs={12}>
-            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced}/>
+            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced} />
           </Grid>
-         ) : (
-           <Grid item xs={12}>
-             <TypographyInfo>Balance de tu cuenta</TypographyInfo>
-             <TypographyData>{fixTermData.balance}</TypographyData>
-           </Grid>
-         )}
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <TypographyInfo>Balance de tu cuenta</TypographyInfo>
+              <TypographyData>{fixTermData.balance}</TypographyData>
+            </Grid>
+            <Snackbar open={true} autoHideDuration={10}>
+              <Alert
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                El plazo fijo se realizó con éxito
+              </Alert>
+            </Snackbar>
+          </>
+        )}
         <Grid item xs={12}>
           <Grid container justifyContent="space-between" spacing={4}>
             <Grid item xs={12} md={2}>

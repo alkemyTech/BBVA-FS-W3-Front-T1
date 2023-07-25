@@ -4,6 +4,9 @@ import { Container, Paper } from "@mui/material";
 import { ShowTaskFixed } from "../ShowTaskFixed/ShowTaskFixed";
 import axios from "axios";
 import { FixedTerm, useDataContext } from "../FixedTerm";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { tokenExpired } from "../../../utils/tokenExpired";
 
 
 export const SimulatedFixedTerm = () => {
@@ -11,6 +14,8 @@ export const SimulatedFixedTerm = () => {
   // const [recivedData, setrecivedData] = useState(false);
   const [errorMessage,setErrorMessage] = useState(null);
   const { fixTermData, setFixTermData, receivedData, setReceivedData } = useDataContext();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
   const handleSubmit = (data) => {
@@ -31,7 +36,9 @@ export const SimulatedFixedTerm = () => {
 
       })
       .catch((error) => {
-        
+        if(error.response.status === 403){
+          tokenExpired(navigate,dispatch);
+        }
         setErrorMessage(error.response.data.message);
       });
   };
