@@ -1,7 +1,6 @@
 import React from "react";
 import {
-  Alert,
-  Button,
+  Dialog,
   Grid,
   Typography,
   Container,
@@ -9,14 +8,29 @@ import {
   Box,
   IconButton,
   CardActionArea,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../UserInfo.css";
 import StyledButton from "../../buttonStyles/buttonStyles";
+import { Movements } from "../Movements/Movements";
+
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const navigate = useNavigate();
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleTransferClick = () => {
     navigate("/transferencias");
@@ -40,6 +54,14 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -105,13 +127,13 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
             spacing={4}
           >
             {accountArs == null ? (
-              <Grid item>
-                <Alert severity="warning">No tenés una cuenta en pesos.</Alert>
+              <Grid item >
+                {/*<Alert severity="warning">No tenés una cuenta en pesos.</Alert>*/}
               </Grid>
             ) : (
-              <Grid item xs={6} className="card-style">
+              <Grid item xs={12} md={6} className="card-style">
                 <Card>
-                  <CardActionArea>
+                  <CardActionArea onClick={handleOpenDialog}>
                     <Box m={1} p={2}>
                       <Typography variant="subtitle1" gutterBottom>
                         Moneda: {accountArs.currency}
@@ -127,18 +149,55 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                       </Typography>
                     </Box>
                   </CardActionArea>
+                  
+                  <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Movimientos</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Fecha</TableCell>
+                    <TableCell align="right">Descripción</TableCell>
+                    <TableCell align="right">Importe</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {historyArs.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.transactionDate}
+                      </TableCell>
+                      <TableCell align="right">{row.description}</TableCell>
+                      <TableCell align="right">{row.amount}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <StyledButton onClick={handleCloseDialog} color="primary">
+            Cerrar
+          </StyledButton>
+        </DialogActions>
+        </Dialog>
+            
                 </Card>
               </Grid>
             )}
 
             {accountUsd == null ? (
               <Grid item>
-                <Alert severity="warning">
-                  No tenés una cuenta en dólares.
-                </Alert>
+                {/*<Alert severity="warning">No tenés una cuenta en dólares.</Alert>*/}
               </Grid>
             ) : (
-              <Grid item xs={6} className="card-style">
+              <Grid item xs={12} md={6} className="card-style">
                 <Card>
                   <CardActionArea>
                     <Box m={1} p={2}>
