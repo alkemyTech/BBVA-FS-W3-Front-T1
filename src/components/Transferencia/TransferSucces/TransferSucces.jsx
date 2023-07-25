@@ -39,7 +39,7 @@ export const TransferSucces = ({response, newTrasfer}) => {
             <Grid item xs={12}>
                 <Grid container spacing={15}>
                     <Grid item xs={6}>
-                        <StyledButton onClick={()=>{ navigate("/home")}}>Home</StyledButton>
+                        <StyledButton onClick={()=>{ navigate("/inicio")}}>Home</StyledButton>
                     </Grid>
                     <Grid item xs={6}>
                         <StyledButton onClick={newTrasfer}>Otra Transferencia</StyledButton>

@@ -47,7 +47,7 @@ export const Login = () => {
       dispatch(addUserId(id));
       dispatch(addUserName(userName));
       setLoader(false)
-      navigate("/home");
+      navigate("/inicio");
     } catch (error) {
       setLoader(false);
       const errorStatus = error.response.status;

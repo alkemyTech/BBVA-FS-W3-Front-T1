@@ -13,7 +13,7 @@ export const ShowTaskFixed = () => {
   const { fixTermData, setReceivedData } = useDataContext();
 
   const returnHome = () => {
-    navigate("/home");
+    navigate("/inicio");
   };
 
   return (

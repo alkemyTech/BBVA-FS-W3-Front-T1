@@ -9,6 +9,7 @@ import { CrearDeposito } from "./components/crearDeposito/CrearDeposito";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { FixedTerm } from "./components/FixedTerm/FixedTerm";
+import { Pagos } from "./components/Pagos/Pagos";
 
 
 function App() {
@@ -33,16 +34,17 @@ function App() {
           <Route path="sing-up" element={<SingUp />} />
           {user && (
             <>
-              <Route path="/home" element={<UserInfo />} />
-              <Route path="/deposito" element={<CrearDeposito />} />
+              <Route path="/inicio" element={<UserInfo />} />
+              <Route path="/depositos" element={<CrearDeposito />} />
               <Route
-                path="/transferencia"
+                path="/transferencias"
                 element={
                   <>
                     <TransferCheckOut />
                   </>
                 }
               />
+              <Route path="/pagos" element={<Pagos/>} />
               <Route path="/plazo-fijo" element={<FixedTerm />} />
             </>
           )}

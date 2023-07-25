@@ -16,7 +16,7 @@ import { addUserId, addUserName } from "../../redux/userSlice";
 import "./Header.css"
 
 export const Header = () => {
-  const pages = ["home", "deposito", "transferencia", "plazo fijo"];
+  const pages = ["inicio", "depositos", "transferencias", "pagos", "plazo fijo"];
   const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
@@ -114,7 +114,7 @@ export const Header = () => {
                 >
                   <Link
                     style={{ textDecoration: "none", color: "inherit" }}
-                    to="/home"
+                    to="/inicio"
                   >
                     <Typography
                       variant="subtitle1"

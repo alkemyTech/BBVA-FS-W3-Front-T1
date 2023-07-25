@@ -9,11 +9,16 @@ import StyledButton from '../../buttonStyles/buttonStyles';
 import { useDataContext } from '../FixedTerm';
 import axios from "axios";
 import { Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
     const [open, setOpen] = useState(false);
     const [errorMessage,setErrorMessage] = useState(null);
     const { fixTermData, setFixTermData} = useDataContext();
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleClickOpen = () => {
       setOpen(true);
