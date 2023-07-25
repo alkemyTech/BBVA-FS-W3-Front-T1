@@ -1,13 +1,13 @@
+body{
+    background-color: #F5F5F5;
+}
 .exterior{
     padding-top: 50px;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
     color:#454545;
 }
 
-.fixed-term{
-    padding:20px;
+.card-style{
+    padding: 20px;
 }
 
-.account {
-    padding:20px;
-}
