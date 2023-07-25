@@ -15,9 +15,7 @@ function App() {
   const user = useSelector((state) => state.user.userName);
 
   const handleUnload = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("nombre");
+    localStorage.clear();
   };
 
   useEffect(() => {
