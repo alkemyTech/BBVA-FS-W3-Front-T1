@@ -56,7 +56,6 @@ export const TransferCheckOut = () => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    console.log("llegue");
     axios
       .get(`http://localhost:8080/accounts/cbu/${data.cbu}`, config)
       .then((response) => {
