@@ -70,7 +70,7 @@ export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
     return (
       <>
         <StyledButton variant="outlined" onClick={handleClickOpen}>
-          Generar Transferencia
+          Crear plazo fijo
         </StyledButton>
         <Dialog
           open={open}
