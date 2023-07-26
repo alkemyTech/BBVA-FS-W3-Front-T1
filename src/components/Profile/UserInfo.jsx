@@ -64,7 +64,11 @@ export const UserInfo = () => {
           localStorage.setItem("cbuArs", balance.accountArs.cbu);
         balance.accountUsd &&
           localStorage.setItem("cbuUsd", balance.accountUsd.cbu);
-          balance.accountArs &&
+        balance.accountArs &&
+          localStorage.setItem("idArs", balance.accountArs.id);
+        balance.accountUsd &&
+          localStorage.setItem("idUsd", balance.accountUsd.id);
+        balance.accountArs &&
           localStorage.setItem("idArs", balance.accountArs.id);
         balance.accountUsd &&
           localStorage.setItem("idUsd", balance.accountUsd.id);
