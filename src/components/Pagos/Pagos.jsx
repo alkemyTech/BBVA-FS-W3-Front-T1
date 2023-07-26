@@ -1,25 +1,22 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Container,
-  Grid,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import {Alert, Box, Button, Container, Grid, MenuItem,
+  Paper, TextField, Typography} from "@mui/material";
 import { useState } from "react";
 import { tokenExpired } from "../../utils/tokenExpired";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Loader } from "../Loader/Loader";
+import { RespuestaPagos } from "./RespuestaPagos/RespuestaPagos";
+import StyledButton from "../buttonStyles/buttonStyles";
 
 export const Pagos = () => {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("ARS");
+  const [services, setServices] = useState("LUZ");
   const [errorMessage, setErrorMessage] = useState("");
   const [validation, setValidation] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [data, setData] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,10 +42,15 @@ export const Pagos = () => {
     console.log(e.target.value);
   };
 
+  const onChangeServices = (e)=>{
+    setServices(e.target.value);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setValidation(false);
     setErrorMessage(false);
+    setLoader(true)
 
     const token = localStorage.getItem("token");
     const config = {
@@ -64,16 +66,21 @@ export const Pagos = () => {
       currency: currency,
     };
     const apiUrl = "http://localhost:8080/transactions/payment";
-    
+
     axios
       .post(apiUrl, requestBody, config)
       .then((response) => {
+        setTimeout(() => {
+          setLoader(false)
+          setData(requestBody)
+        }, 2000);
         console.log(response);
       })
       .catch((error) => {
-        setValidation(true)
-        if(error.response.status === 403){
-          tokenExpired(navigate,dispatch);
+        setLoader(false)
+        setValidation(true);
+        if (error.response.status === 403) {
+          tokenExpired(navigate, dispatch);
         }
         setErrorMessage(error.response.data.message);
         console.log(error);
@@ -81,6 +88,16 @@ export const Pagos = () => {
   };
   return (
     <>
+    {data != "" ? 
+    (
+    <RespuestaPagos data={data} setData={setData} services={services}/>
+    )
+    :
+    (
+      <>
+      {loader ? (
+        <Loader loader={loader} />
+      ) : (
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
           <Grid
@@ -105,7 +122,6 @@ export const Pagos = () => {
                   value={amount}
                   sx={{ mr: "1rem" }}
                 />
-
                 <TextField
                   id="outlined-select-currency"
                   select
@@ -127,6 +143,7 @@ export const Pagos = () => {
                   label="Servicio"
                   defaultValue="LUZ"
                   helperText="¿Qué servicio va a abonar?"
+                  onChange={onChangeServices}
                   fullWidth
                 >
                   {utilities.map((option) => (
@@ -137,13 +154,12 @@ export const Pagos = () => {
                 </TextField>
               </Grid>
               <Grid item xs={12} mt={1} sx={{ minWidth: "22rem" }}>
-                <Button
+                <StyledButton
                   variant="contained"
-                  sx={{ backgroundColor: "#1C6875" }}
                   onClick={handleSubmit}
                 >
                   PAGAR
-                </Button>
+                </StyledButton>
               </Grid>
               {validation && (
                 <Alert sx={{ mt: "1rem" }} severity="error">
@@ -154,6 +170,10 @@ export const Pagos = () => {
           </Grid>
         </Paper>
       </Container>
+      )}
+      </>
+    )}
+      
     </>
   );
 };
