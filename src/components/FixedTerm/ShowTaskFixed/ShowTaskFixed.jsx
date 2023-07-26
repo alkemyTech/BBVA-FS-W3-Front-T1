@@ -1,53 +1,81 @@
-import {useNavigate} from 'react-router-dom'
-import { Button, Grid, Typography } from '@mui/material';
-import "../FixedTermStyles.css"
+import { useNavigate } from "react-router-dom";
+import { Grid , Snackbar, Alert} from "@mui/material";
+import TypographyInfo from "../TypographyInformation/TypographyInformation";
+import StyledButton from "../../buttonStyles/buttonStyles";
+import TypographyData from "../TypographyData/TypographyData";
+import { CreatFixedTermDialog } from "../CreatFixedTermDialog/CreatFixedTermDialog";
+import { useDataContext } from "../FixedTerm";
+import { useState } from "react";
 
-export const ShowTaskFixed = ({onClickOtro}) => {
-    const navigate = useNavigate();
+export const ShowTaskFixed = () => {
+  const [isTransferSucced, setIsTransferSucced] = useState(false);
+  const navigate = useNavigate();
+  const { fixTermData, setReceivedData } = useDataContext();
 
-    const returnHome = () =>{
-        navigate("/home")
-    }
+  const returnHome = () => {
+    navigate("/home");
+  };
 
-
-    return (
-        <>
-            <Grid container spacing={6} textAlign="center">
-                <Grid item xs={12}>
-                    <Typography className='informacion'>Monto invertido </Typography>
-                    <Typography className='datos'>10000 (Borrar)</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography className='informacion'>Interes obtenido </Typography>
-                    <Typography className='datos'>600 (Borrar)</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography className='informacion' >Monto total a cobrar</Typography>
-                    <Typography className='datos' >10600 (Borrar)</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography className='informacion'>Inicio del plazo fijo</Typography>
-                    <Typography className='datos'>10-2-2023 (Boorar)</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography className='informacion'>Finalizacion del plazo fijo</Typography>
-                    <Typography className='datos'>10-3-2023 (Boorar)</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="space-between" >
-                        <Grid item xs={2} >
-                            <Button variant="contained" className='boton' onClick={returnHome}>
-                                Home
-                            </Button>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Button variant="contained" className='boton' onClick={onClickOtro}>
-                                otro
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Grid>
+  return (
+    <>
+      <Grid container spacing={3} textAlign="center">
+        <Grid item xs={12}>
+          <TypographyInfo>Monto invertido </TypographyInfo>
+          <TypographyData>{fixTermData.montoInverito}</TypographyData>
+        </Grid>
+        <Grid item xs={12}>
+          <TypographyInfo>Interes obtenido </TypographyInfo>
+          <TypographyData>{fixTermData.interes}</TypographyData>
+        </Grid>
+        <Grid item xs={12}>
+          <TypographyInfo>Monto total a cobrar</TypographyInfo>
+          <TypographyData>{fixTermData.montoTotal}</TypographyData>
+        </Grid>
+        <Grid item xs={12}>
+          <TypographyInfo>Inicio del plazo fijo</TypographyInfo>
+          <TypographyData>{fixTermData.fechaCreacion}</TypographyData>
+        </Grid>
+        <Grid item xs={12}>
+          <TypographyInfo>Finalizacion del plazo fijo</TypographyInfo>
+          <TypographyData>{fixTermData.fechaFinalizacion}</TypographyData>
+        </Grid>
+        {!isTransferSucced ? (
+          <Grid item xs={12}>
+            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced} />
+          </Grid>
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <TypographyInfo>Balance de tu cuenta</TypographyInfo>
+              <TypographyData>{fixTermData.balance}</TypographyData>
             </Grid>
-        </>
-    )
-}
+            <Snackbar open={true} autoHideDuration={10}>
+              <Alert
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                El plazo fijo se realizó con éxito
+              </Alert>
+            </Snackbar>
+          </>
+        )}
+        <Grid item xs={12}>
+          <Grid container justifyContent="space-between" spacing={4}>
+            <Grid item xs={12} md={2}>
+              <StyledButton onClick={returnHome}>Home</StyledButton>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <StyledButton
+                onClick={() => {
+                  setReceivedData(false);
+                }}
+              >
+                otro
+              </StyledButton>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
