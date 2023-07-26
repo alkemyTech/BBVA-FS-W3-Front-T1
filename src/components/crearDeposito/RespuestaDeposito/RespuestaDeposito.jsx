@@ -7,8 +7,10 @@ import {
   AlertTitle,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export const RespuestaDeposito = ({ data }) => {
+export const RespuestaDeposito = ({ data,date }) => {
+  const navigate = useNavigate();
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
@@ -41,14 +43,28 @@ export const RespuestaDeposito = ({ data }) => {
             <b>${data.amount}</b>
           </Typography>
           <Divider />
-          <Typography marginTop={4} fontSize={15}>
-            Se depositó en:
+          <Typography marginTop={3} fontSize={15}>
+           Fecha: <b>{date}</b>
           </Typography>
-          <Typography fontSize={15}>
-            <b>Cuenta en {data.currency}</b>
+          <Typography marginTop={3} fontSize={15}>
+            Se depositó en: <b>Cuenta en {data.currency}</b>
           </Typography>
         </Box>
         <Alert severity="info">Se acreditará en unos instantes</Alert>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "center", margin: "90px 0" }}
+        >
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
+            onClick={() => {navigate("/home")}}
+          >
+            Volver al inicio
+          </Button>
+        </Grid>
       </Grid>
     </>
   );
