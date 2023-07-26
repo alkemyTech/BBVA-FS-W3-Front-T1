@@ -9,6 +9,7 @@ export const CrearDeposito = () => {
 
   const [mostrarFormularioDeposito, setMostrarFormularioDeposito] = useState(false);
   const [data, setData] = useState("");
+  const [date, setDate] = useState("");
   const [error, setError] = useState("");
   const [msgError, setMsgError] = useState("");
   const [validation, setValidation] = useState(false);
@@ -29,6 +30,10 @@ export const CrearDeposito = () => {
         data,
         { headers }
       );
+     
+    setDate((new Date(response.data.transactionDate)).toLocaleDateString());
+   
+
 
       setMostrarFormularioDeposito(true);
 
@@ -51,7 +56,7 @@ export const CrearDeposito = () => {
         {!mostrarFormularioDeposito ? (
           <FormularioDeposito onSubmit={onSubmit} validation={validation} msgError={msgError}/>
         ) : (
-          <RespuestaDeposito data={data}/>
+          <RespuestaDeposito data={data} date={date}/>
         )}
       </>
     );

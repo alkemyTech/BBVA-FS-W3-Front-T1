@@ -19,8 +19,8 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
       if (!/^\d+$/.test(value)) {
         return 'Ingresar solo numeros';
       }
-      if (value <= 0) {
-        return 'Ingresar un importe positivo'
+      if (value < 0) {
+        return 'Ingresar un importe mayor a cero'
       }
       return true;
     }
@@ -53,7 +53,7 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item>
+        <Grid item sx={{ mb: 3 } }>
           <TextField
             required
             id="outlined-required"
@@ -66,10 +66,11 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
         <Grid
           item
           sx={{
-            "& .MuiTextField-root": { width: "13ch" },
+            "& .MuiTextField-root": { width: "13ch" }, mb: 3
           }}
         >
           <TextField
+    
             required
             id="outlined-select-currency"
             select
@@ -87,13 +88,12 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
         </Grid>
         <Grid item>
           <TextField
-          disabled
-            id="outlined-read-only-input"
-            label="Descripción"
-            defaultValue="Deposito"
-            InputProps={{
-              readOnly: true,
-            }}
+            id="outlined"
+            label="Concepto"
+            defaultValue="Varios"
+            inputProps={{ maxLength: 100 }}
+            helperText="Ingresar hasta 100 caracteres"
+           
           />
         </Grid>
         <Grid
