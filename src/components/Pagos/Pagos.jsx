@@ -69,10 +69,12 @@ export const Pagos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setValidation(false);
-    setErrorMessage(false);
     setLoader(true);
+    
+  const idAccountArs = localStorage.getItem("idArs");
+  const idAccountUsd = localStorage.getItem("idUsd");
 
+  if((currency === "ARS" && idAccountArs) || (currency ==="USD" && idAccountUsd) ){
     const token = localStorage.getItem("token");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -80,8 +82,8 @@ export const Pagos = () => {
 
     const idAccount =
       currency === "ARS"
-        ? localStorage.getItem("idArs")
-        : localStorage.getItem("idUsd");
+        ? idAccountArs
+        : idAccountUsd;
     const requestBody = {
       id: idAccount,
       amount: amount,
@@ -115,6 +117,11 @@ export const Pagos = () => {
         setErrorMessage(error.response.data.message);
         console.log(error);
       });
+  } else{
+    setLoader(false)
+    setErrorMessage(`No posee cuenta en ${currency} para realizar el pago`)
+    setValidation(true)
+  }
   };
   return (
     <>
