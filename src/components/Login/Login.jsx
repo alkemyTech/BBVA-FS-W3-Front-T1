@@ -98,8 +98,8 @@ export const Login = () => {
               textAlign={"center"}
               maxWidth={"25rem"}
             >
-              <Avatar sx={{ p: 1, bgcolor: "#1C6875", mx:"11rem",mb:".7rem" }}>
-              <Typography>
+              <Avatar sx={{ bgcolor: "#1C6875", mx:"11rem",mb:".7rem" }}>
+              <Typography sx={{pt:0.5}}>
               <LockOpenIcon/>
               </Typography>
               </Avatar>
