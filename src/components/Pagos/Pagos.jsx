@@ -115,7 +115,6 @@ export const Pagos = () => {
           tokenExpired(navigate, dispatch);
         }
         setErrorMessage(error.response.data.message);
-        console.log(error);
       });
   } else{
     setLoader(false)

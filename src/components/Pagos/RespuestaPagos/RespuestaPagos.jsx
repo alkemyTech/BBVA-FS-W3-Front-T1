@@ -5,7 +5,6 @@ import StyledButton from "../../buttonStyles/buttonStyles";
 export const RespuestaPagos = ({ data, setData}) => {
     const navigate = useNavigate();
     
-    console.log(data)
     const {amount, description} = data.transactionPayment;
     const currency = data.updatedAccount.currency;
 
