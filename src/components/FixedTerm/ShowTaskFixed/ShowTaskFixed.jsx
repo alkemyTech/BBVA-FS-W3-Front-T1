@@ -13,7 +13,7 @@ export const ShowTaskFixed = () => {
   const { fixTermData, setReceivedData } = useDataContext();
 
   const returnHome = () => {
-    navigate("/home");
+    navigate("/inicio");
   };
 
   return (
@@ -62,7 +62,7 @@ export const ShowTaskFixed = () => {
         <Grid item xs={12}>
           <Grid container justifyContent="space-between" spacing={4}>
             <Grid item xs={12} md={2}>
-              <StyledButton onClick={returnHome}>Home</StyledButton>
+              <StyledButton onClick={returnHome}>Inicio</StyledButton>
             </Grid>
             <Grid item xs={12} md={2}>
               <StyledButton

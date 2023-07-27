@@ -43,7 +43,7 @@ export const SingUp = () => {
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
       console.log("llegue");
-      navigate("/home");
+      navigate("/inicio");
     } catch (error) {
       const errorStatus = error.response.status;
 
