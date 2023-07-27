@@ -3,7 +3,9 @@ import { useState } from "react";
 import { FormularioDeposito } from "./FormularioDeposito/FormularioDeposito";
 import { RespuestaDeposito } from "./RespuestaDeposito/RespuestaDeposito";
 import axios from "axios";
-import { Alert, Box, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {tokenExpired} from "../../utils/tokenExpired";
 
 export const CrearDeposito = () => {
 
@@ -13,10 +15,14 @@ export const CrearDeposito = () => {
   const [error, setError] = useState("");
   const [msgError, setMsgError] = useState("");
   const [validation, setValidation] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const onSubmit = async (data) => {
     
     setData(data);
+    console.log(data);
 
     try {
       const token = localStorage.getItem("token");
@@ -41,10 +47,10 @@ export const CrearDeposito = () => {
       setError(error);
       const errorStatus = error.response.status;
       setValidation(true);
-      if (errorStatus === 400) {
-        setMsgError(error.response.data.message);
+      if (errorStatus === 403) {
+        tokenExpired(navigate,dispatch);
       } else {
-        setMsgError("intente nuevamente en unos instantes");
+        setMsgError(error.response.data.message);
       }
     }
   };
