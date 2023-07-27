@@ -19,11 +19,11 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const navigate = useNavigate();
 
   const handleTransferClick = () => {
-    navigate("/transferencia");
+    navigate("/transferencias");
   };
 
   const handleDepositClick = () => {
-    navigate("/deposito");
+    navigate("/depositos");
   };
 
   const handleFixedTermClick = () => {
