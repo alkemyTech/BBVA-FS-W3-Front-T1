@@ -1,10 +1,19 @@
-import { Alert, Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserName, addUserId } from "../../redux/userSlice";
 import { Loader } from "../Loader/Loader";
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +55,7 @@ export const Login = () => {
       localStorage.removeItem("tokenExpired");
       dispatch(addUserId(id));
       dispatch(addUserName(userName));
-      setLoader(false)
+      setLoader(false);
       navigate("/inicio");
     } catch (error) {
       setLoader(false);
@@ -71,81 +80,91 @@ export const Login = () => {
   }, []);
 
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-      padding={"2.5rem"}
-    >
-      {loader ? (
-        <Loader loader={loader} />
-      ) : (
-        <Grid item xs={12}>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            textAlign={"center"}
-            maxWidth={"30rem"}
-          >
-            <TextField
-              label="Correo electrónico"
-              type="email"
-              variant="outlined"
-              value={email}
-              onChange={onChangeEmail}
-              required
-              fullWidth
-              sx={{ mb: "1rem" }}
-            />
-            <TextField
-              label="Contraseña"
-              type="password"
-              variant="outlined"
-              value={password}
-              required
-              onChange={onChangePassword}
-              fullWidth
-              sx={{ mb: "1rem" }}
-            />
-
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                backgroundColor: "#1C6875",
-                width: "50%",
-                minWidth: "10rem",
-                mb: "0.5rem",
-                "&:hover": { backgroundColor: "#2BA0B5" },
-              }}
+    <div style={{ minHeight: "85.7vh" }}>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        pt={8}
+      >
+        {loader ? (
+          <Loader loader={loader} />
+        ) : (
+          <Grid item xs={12}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              textAlign={"center"}
+              maxWidth={"25rem"}
             >
-              Iniciar sesión
-            </Button>
-            <Typography variant="subtitle1">No posee cuenta?</Typography>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#1C6875",
-                width: "50%",
-                minWidth: "10rem",
-                "&:hover": { backgroundColor: "#2BA0B5" },
-              }}
-              onClick={() => {
-                navigate("sing-up");
-              }}
-            >
-              Registrarse
-            </Button>
-            {validation && (
-              <Alert sx={{ mt: "1rem" }} severity="error">
-                {" "}
-                {msgError}{" "}
-              </Alert>
-            )}
-          </Box>
-        </Grid>
-      )}
-    </Grid>
+              <Avatar sx={{ p: 1, bgcolor: "#1C6875", mx:"11rem",mb:".7rem" }}>
+              <Typography>
+              <LockOpenIcon/>
+              </Typography>
+              </Avatar>
+              <Typography component="h1" variant="h5" pb={3}>
+                INICIO DE SESIÓN
+              </Typography>
+              <TextField
+                label="Correo electrónico"
+                type="email"
+                variant="outlined"
+                value={email}
+                onChange={onChangeEmail}
+                required
+                fullWidth
+                sx={{ mb: "1rem" }}
+              />
+              <TextField
+                label="Contraseña"
+                type="password"
+                variant="outlined"
+                value={password}
+                required
+                onChange={onChangePassword}
+                fullWidth
+                sx={{ mb: "1rem" }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  backgroundColor: "#2BA0B5",
+                  width:"50%",
+                  minWidth: "10rem",
+                  mb: "0.5rem",
+                  "&:hover": { backgroundColor: "#1C6875" },
+                }}
+              >
+                Iniciar sesión
+              </Button>
+              <Typography variant="subtitle1">¿No tenés una cuenta?</Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#2BA0B5",
+                  width: "50%",
+                  minWidth: "10rem",
+                  mt:"0.5rem",
+                  "&:hover": { backgroundColor: "#1C6875" },
+                }}
+                onClick={() => {
+                  navigate("sing-up");
+                }}
+              >
+                Registrarse
+              </Button>
+              {validation && (
+                <Alert sx={{ mt: "1rem" }} severity="error">
+                  {" "}
+                  {msgError}{" "}
+                </Alert>
+              )}
+            </Box>
+          </Grid>
+        )}
+      </Grid>
+    </div>
   );
 };

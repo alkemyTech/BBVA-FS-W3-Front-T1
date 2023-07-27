@@ -123,7 +123,7 @@ export const Pagos = () => {
   }
   };
   return (
-    <>
+    <div style={{minHeight:"80.6vh"}}>
       {data != "" ? (
         <RespuestaPagos
           data={data}
@@ -135,14 +135,13 @@ export const Pagos = () => {
             <Loader loader={loader} />
           ) : (
             <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-              <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+              <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
                 <Grid
                   container
                   direction="column"
                   justifyContent="center"
                   alignItems="center"
                   textAlign={"center"}
-                  pt={0}
                 >
                   <form onSubmit={handleSubmit}>
                     <Grid item xs={12}>
@@ -201,7 +200,10 @@ export const Pagos = () => {
                             required
                             value={otros}
                             onChange={onChangeOtros}
-                            helperText="Indique el servicio a abonar"
+                            helperText="Indique el servicio a abonar."
+                            inputProps={{
+                              maxLength:15,
+                            }}
                             fullWidth
                           />
                         </Grid>
@@ -226,6 +228,6 @@ export const Pagos = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };

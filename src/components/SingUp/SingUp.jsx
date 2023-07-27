@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { Alert } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import StyledButton from "../buttonStyles/buttonStyles";
 
 export const SingUp = () => {
   const [msgError, setMsgError] = useState();
@@ -56,7 +57,7 @@ export const SingUp = () => {
   };
 
   return (
-    <>
+    <div style={{minHeight:"78.9vh"}}>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -70,7 +71,7 @@ export const SingUp = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            REGISTRARSE
           </Typography>
           <Box
             component="form"
@@ -160,7 +161,7 @@ export const SingUp = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Email"
+                  label="email"
                   name="email"
                   autoComplete="email"
                 />
@@ -187,10 +188,14 @@ export const SingUp = () => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: "#2BA0B5",
+                "&:hover": { backgroundColor: "#1C6875" },
+              }}
             >
-              Sign Up
+              Registrate
             </Button>
 
             {msgError && <Alert severity="error">{msgError}</Alert>}
@@ -198,13 +203,13 @@ export const SingUp = () => {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Ya tiene una cuetna creada ? Log in
+                  Ya tiene una cuenta creada ? Inicie sesión
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
   );
 };
