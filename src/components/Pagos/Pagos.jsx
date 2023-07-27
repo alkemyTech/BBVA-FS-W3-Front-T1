@@ -39,7 +39,7 @@ export const Pagos = () => {
   ];
 
   const onChangeAmount = (e) => {
-    if (/^[0-9]*$/.test(e.target.value)) {
+    if (/^(?!0\d*$)\d*(\.\d{0,2})?$/.test(e.target.value)) {
       setErrorMessage("");
       setValidation(false);
       setAmount(e.target.value);
