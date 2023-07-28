@@ -13,14 +13,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserId, addUserName } from "../../redux/userSlice";
-import "./Header.css"
+import "./Header.css";
 
 export const Header = () => {
-  const pages = ["inicio", "depositos", "transferencias", "pagos", "plazo fijo"];
+  const pages = [
+    "inicio",
+    "depositos",
+    "transferencias",
+    "pagos",
+    "plazo fijo",
+  ];
   const [anchorEl, setAnchorEl] = useState(null);
 
   const navigate = useNavigate();
-  
+
   const dispatch = useDispatch();
 
   const userName = useSelector((state) => state.user.userName);
@@ -48,7 +54,7 @@ export const Header = () => {
         sx={{
           backgroundColor: "#2BA0B5",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.6)",
-          borderRadius: "0px 0px 30px 30px",
+          borderRadius: "0px 0px 20px 20px",
         }}
       >
         <Toolbar>

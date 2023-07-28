@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { FixedTerm } from "./components/FixedTerm/FixedTerm";
 import { Pagos } from "./components/Pagos/Pagos";
+import { CrearCuenta } from "./components/CrearCuenta/CrearCuenta";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
               />
               <Route path="/pagos" element={<Pagos/>} />
               <Route path="/plazo-fijo" element={<FixedTerm />} />
+              <Route path="/crearcuenta" element={<CrearCuenta/>} />
             </>
           )}
         </Routes>

@@ -39,7 +39,7 @@ export const Pagos = () => {
   ];
 
   const onChangeAmount = (e) => {
-    if (/^[0-9]*$/.test(e.target.value)) {
+    if (/^(?!0\d*$)\d*(\.\d{0,2})?$/.test(e.target.value)) {
       setErrorMessage("");
       setValidation(false);
       setAmount(e.target.value);
@@ -115,7 +115,6 @@ export const Pagos = () => {
           tokenExpired(navigate, dispatch);
         }
         setErrorMessage(error.response.data.message);
-        console.log(error);
       });
   } else{
     setLoader(false)
@@ -124,7 +123,7 @@ export const Pagos = () => {
   }
   };
   return (
-    <>
+    <div style={{minHeight:"80.6vh"}}>
       {data != "" ? (
         <RespuestaPagos
           data={data}
@@ -136,14 +135,13 @@ export const Pagos = () => {
             <Loader loader={loader} />
           ) : (
             <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-              <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+              <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
                 <Grid
                   container
                   direction="column"
                   justifyContent="center"
                   alignItems="center"
                   textAlign={"center"}
-                  pt={0}
                 >
                   <form onSubmit={handleSubmit}>
                     <Grid item xs={12}>
@@ -202,7 +200,10 @@ export const Pagos = () => {
                             required
                             value={otros}
                             onChange={onChangeOtros}
-                            helperText="Indique el servicio a abonar"
+                            helperText="Indique el servicio a abonar."
+                            inputProps={{
+                              maxLength:15,
+                            }}
                             fullWidth
                           />
                         </Grid>
@@ -227,6 +228,6 @@ export const Pagos = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
