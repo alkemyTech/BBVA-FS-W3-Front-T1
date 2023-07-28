@@ -53,10 +53,12 @@ export const Login = () => {
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
       localStorage.removeItem("tokenExpired");
-      dispatch(addUserId(id));
-      dispatch(addUserName(userName));
-      setLoader(false);
-      navigate("/inicio");
+      setTimeout(() => {
+        dispatch(addUserId(id));
+        dispatch(addUserName(userName));
+        setLoader(false);
+        navigate("/inicio");
+      }, 1000);
     } catch (error) {
       setLoader(false);
       const errorStatus = error.response.status;
@@ -76,6 +78,10 @@ export const Login = () => {
     if (tokenExpired) {
       setMsgError(tokenExpired);
       setValidation(true);
+    }else{
+      localStorage.clear();
+      dispatch(addUserId(""));
+      dispatch(addUserName(""));
     }
   }, []);
 
@@ -88,9 +94,8 @@ export const Login = () => {
         alignItems="center"
         pt={8}
       >
-        {loader ? (
-          <Loader loader={loader} />
-        ) : (
+        {loader && <Loader loader={loader} />}
+
           <Grid item xs={12}>
             <Box
               component="form"
@@ -164,7 +169,6 @@ export const Login = () => {
               )}
             </Box>
           </Grid>
-        )}
       </Grid>
     </div>
   );

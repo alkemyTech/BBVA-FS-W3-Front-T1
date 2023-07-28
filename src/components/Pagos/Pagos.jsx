@@ -101,12 +101,14 @@ export const Pagos = () => {
           currency === "ARS"
             ? localStorage.setItem("balanceArs", balanceArs)
             : localStorage.setItem("balanceUsd", balanceUsd);
-          setData(response.data.data);
-          setOtros("");
-          setAmount("");
-          setServices("GAS");
-          setCurrency("ARS");
-          setLoader(false);
+            setTimeout(() => {
+            setData(response.data.data);
+            setOtros("");
+            setAmount("");
+            setServices("GAS");
+            setCurrency("ARS");
+            setLoader(false);            
+          }, 1000);
         })
         .catch((error) => {
           setLoader(false);
@@ -128,104 +130,102 @@ export const Pagos = () => {
         <RespuestaPagos data={data} setData={setData} />
       ) : (
         <>
-          {loader ? (
-            <Loader loader={loader} />
-          ) : (
-            <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-              <Paper
-                sx={{
-                  my: { xs: 3, md: 6 },
-                  p: { xs: 2, md: 5 },
-                  boxShadow: "5",
-                  borderRadius: "20px 20px",
-                }}
+          {loader && <Loader loader={loader} />}
+
+          <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+            <Paper
+              sx={{
+                my: { xs: 3, md: 6 },
+                p: { xs: 2, md: 5 },
+                boxShadow: "5",
+                borderRadius: "20px 20px",
+              }}
+            >
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                textAlign={"center"}
               >
-                <Grid
-                  container
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  textAlign={"center"}
-                >
-                  <form onSubmit={handleSubmit}>
-                    <Grid item xs={12}>
-                      <Typography variant="h4" mb={4}>
-                        Pagá tus servicios
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12} mt={3}>
-                      <TextField
-                        label="Monto"
-                        required
-                        variant="outlined"
-                        onChange={onChangeAmount}
-                        value={amount}
-                        sx={{ mr: "1rem" }}
-                      />
-                      <TextField
-                        id="outlined-select-currency"
-                        select
-                        label="Cuenta"
-                        defaultValue=""
-                        helperText="¿Con qué moneda?"
-                        onChange={onChangeCurrency}
-                      >
-                        {currencies.map((currency) => (
-                          <MenuItem key={currency.value} value={currency.value}>
-                            {currency.value}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </Grid>
-                    <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
-                      <TextField
-                        select
-                        label="Servicio"
-                        required
-                        defaultValue="GAS"
-                        helperText="Seleccione el servicio a abonar"
-                        onChange={onChangeServices}
-                        fullWidth
-                      >
-                        {utilities.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.value}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                      {services === "OTROS" && (
-                        <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
-                          <TextField
-                            label="Servicio"
-                            required
-                            value={otros}
-                            onChange={onChangeOtros}
-                            helperText="Indique el servicio a abonar. Máx(20)"
-                            inputProps={{
-                              maxLength: 15,
-                            }}
-                            fullWidth
-                          />
-                        </Grid>
-                      )}
-                    </Grid>
-                    {amount && currency && services && (
-                      <Grid item xs={12} mt={1} sx={{ minWidth: "22rem" }}>
-                        <StyledButton variant="contained" type="submit">
-                          PAGAR
-                        </StyledButton>
+                <form onSubmit={handleSubmit}>
+                  <Grid item xs={12}>
+                    <Typography variant="h4" mb={4}>
+                      Pagá tus servicios
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} mt={3}>
+                    <TextField
+                      label="Monto"
+                      required
+                      variant="outlined"
+                      onChange={onChangeAmount}
+                      value={amount}
+                      sx={{ mr: "1rem" }}
+                    />
+                    <TextField
+                      id="outlined-select-currency"
+                      select
+                      label="Cuenta"
+                      defaultValue=""
+                      helperText="¿Con qué moneda?"
+                      onChange={onChangeCurrency}
+                    >
+                      {currencies.map((currency) => (
+                        <MenuItem key={currency.value} value={currency.value}>
+                          {currency.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
+                    <TextField
+                      select
+                      label="Servicio"
+                      required
+                      defaultValue="GAS"
+                      helperText="Seleccione el servicio a abonar"
+                      onChange={onChangeServices}
+                      fullWidth
+                    >
+                      {utilities.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    {services === "OTROS" && (
+                      <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
+                        <TextField
+                          label="Servicio"
+                          required
+                          value={otros}
+                          onChange={onChangeOtros}
+                          helperText="Indique el servicio a abonar. Máx(20)"
+                          inputProps={{
+                            maxLength: 15,
+                          }}
+                          fullWidth
+                        />
                       </Grid>
                     )}
-                    {validation && (
-                      <Alert sx={{ mt: "1rem" }} severity="error">
-                        {errorMessage}
-                      </Alert>
-                    )}
-                  </form>
-                </Grid>
-              </Paper>
-            </Container>
-          )}
+                  </Grid>
+                  {amount && currency && services && (
+                    <Grid item xs={12} mt={1} sx={{ minWidth: "22rem" }}>
+                      <StyledButton variant="contained" type="submit">
+                        PAGAR
+                      </StyledButton>
+                    </Grid>
+                  )}
+                  {validation && (
+                    <Alert sx={{ mt: "1rem" }} severity="error">
+                      {errorMessage}
+                    </Alert>
+                  )}
+                </form>
+              </Grid>
+            </Paper>
+          </Container>
         </>
       )}
     </div>
