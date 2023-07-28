@@ -8,7 +8,6 @@ export const DialogLogout = ({ logout, setLogout}) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userName = useSelector((state) => state.user.userName);
 
     const handleClickCancelar = ()=>{
         setLogout(false);
