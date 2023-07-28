@@ -17,6 +17,10 @@ import { TransferResume } from "./TransferResume/TransferResume";
 import axios from "axios";
 import StyledButton from "../buttonStyles/buttonStyles";
 import { TransferSucces } from "./TransferSucces/TransferSucces";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { tokenExpired } from "../../utils/tokenExpired";
+import { Loader } from "../Loader/Loader";
 
 const steps = ["Buscar Cuenta", "importe", "Resumen"];
 
@@ -34,6 +38,9 @@ export const TransferCheckOut = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [userCbu, setUserCbu] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNext = () => {
     setError(null);
@@ -46,6 +53,7 @@ export const TransferCheckOut = () => {
   };
 
   const SearchCbuSubmit = async (data) => {
+    setIsLoading(true);
     console.log(data);
     const requestBody = {
       cbu: data.cbu,
@@ -59,7 +67,7 @@ export const TransferCheckOut = () => {
     axios
       .get(`http://localhost:8080/accounts/cbu/${data.cbu}`, config)
       .then((response) => {
-        console.log(response.data);
+        setIsLoading(false);
         setError(null);
         dataAccount.cbu = data.cbu;
         dataAccount.currency = response.data.data.currency;
@@ -71,18 +79,25 @@ export const TransferCheckOut = () => {
           lastName: response.data.data.userId.lastName,
           currency: response.data.data.currency,
         });
+        let currency = ""
+        if (response.data.data.currency === "ARS"){
+          currency = localStorage.getItem("idArs");}
+        else{
+          currency = localStorage.getItem("idUsd");}
+        (!currency) && setError("Usted no posee una cuenta en ese tipo de moneda")
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.data);
-        setError(error);
+        setIsLoading(false);
+        if(error.response.status === 403){
+          tokenExpired(navigate,dispatch);
+        }
+        setError(error.response.data.message);
         setUserCbu(null);
       });
-    //--------------
   };
 
   const SearchCbuHandleNext = () =>{
-    if (userCbu){
+    if (userCbu && !error){
       handleNext();
     }
   }
@@ -121,8 +136,9 @@ export const TransferCheckOut = () => {
         handleNext();
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.data);
+        if(error.response.status === 403){
+          tokenExpired(navigate,dispatch);
+        }
         setError(error);
       });
   };
@@ -170,9 +186,13 @@ export const TransferCheckOut = () => {
   }
 
   return (
-    <>
+    <div style={{ minHeight: "81vh" }}>
+      {isLoading ?
+
+      <Loader loader={isLoading}/>
+      :
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
           <Typography component="h1" variant="h4" align="center">
             Transferencia
           </Typography>
@@ -191,12 +211,14 @@ export const TransferCheckOut = () => {
             <>
               {getStepContent(activeStep)}
               {error && (
-                <Alert severity="error">{error.response.data.message}</Alert>
+                <Box marginTop={'10px'}>
+                <Alert severity="error" >{error}</Alert>
+                </Box>
               )}
             </>
           )}
         </Paper>
-      </Container>
-    </>
+      </Container>}
+    </div>
   );
 };

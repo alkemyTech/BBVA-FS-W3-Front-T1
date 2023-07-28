@@ -1,6 +1,7 @@
 import {
     Typography,
     Grid,
+    Box
   } from "@mui/material";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import { useNavigate } from "react-router-dom";
@@ -36,15 +37,10 @@ export const TransferSucces = ({response, newTrasfer}) => {
                 <img src={ "src/assets/success-goal.svg"} alt="Success Goal" style={{ maxWidth: "100%", height: "auto" }} />
             </Grid>
 
-            <Grid item xs={12}>
-                <Grid container spacing={15}>
-                    <Grid item xs={6}>
-                        <StyledButton onClick={()=>{ navigate("/inicio")}}>Home</StyledButton>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <StyledButton onClick={newTrasfer}>Otra Transferencia</StyledButton>
-                    </Grid>
-                </Grid>
+            <Grid item xs={12} display={"flex"} justifyContent={"center"} marginTop={"1rem"}>
+
+                <StyledButton onClick={newTrasfer}>Otra Transferencia</StyledButton>
+
             </Grid>
         </Grid>
 

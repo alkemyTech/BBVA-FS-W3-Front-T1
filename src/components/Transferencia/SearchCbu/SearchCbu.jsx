@@ -54,8 +54,9 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
           <Grid item xs={8}>
             <TextField
               label="CBU"
-              variant="standard"
+              variant="outlined"
               inputProps={{ maxLength: 22 }}
+              helperText="Ingresar cbu de 22 digitos"
               fullWidth
               {...register("cbu", { validate: validateCBU })}
             />
@@ -67,12 +68,12 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
             </StyledButton>
           </Grid>
           {userCbu && (
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <Box
                 sx={{
-                  backgroundColor: "#87a3a8",
-                  padding: "2rem",
-                  borderRadius: 2,
+                  backgroundColor: '#2BA0B540',
+                  padding: "1.5rem",
+                  borderRadius: 2
                 }}
               >
                 <Typography variant="h6">
@@ -93,7 +94,7 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
           <Grid
             item
             xs={12}
-            sx={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}
+            sx={{ display: "flex", justifyContent: "flex-end" }}
           >
             <StyledButton onClick={handleNext}>Siguiente</StyledButton>
           </Grid>
