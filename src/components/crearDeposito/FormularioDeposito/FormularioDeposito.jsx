@@ -1,9 +1,15 @@
-import { TextField, MenuItem, Grid, Button, Typography,Alert } from "@mui/material";
+import {
+  TextField,
+  Snackbar,
+  MenuItem,
+  Grid,
+  Typography,
+  Alert,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
+import StyledButton from "../../buttonStyles/buttonStyles";
 
-
-export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
-  
+export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
   const {
     register,
     handleSubmit,
@@ -15,7 +21,7 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
     reValidateMode: "onChange",
     mode: "onChange",
   });
-  
+
   const validateAmount = (value) => {
     if (value <= 0) {
       return "Ingresar un monto mayor a cero";
@@ -23,8 +29,9 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
     if (!/^(?!0\d*$)\d*(\.\d{0,2})?$/.test(value)) {
       return "Ingresar un monto valido";
     }
-  return true;
+    return true;
   };
+
   const selectedCurrency = watch("currency");
 
   const currencies = [
@@ -40,79 +47,68 @@ export const FormularioDeposito = ({onSubmit,validation,msgError}) => {
 
   return (
     <>
-      <Typography variant="h5" gutterBottom align="center" sx={{ mt: 10 } }>
-        <b>¿Cuánto querés depositar?</b>
+      <Typography variant="h5" align="center">
+        <b>¿CUANTO QUERES DEPOSITAR?</b>
       </Typography>
       <Grid
         component="form"
         onSubmit={handleSubmit(onSubmit)}
         container
-        spacing={2}
-        sx={{ mt: 8 }}
-        direction="row"
+        sx={{ mt: 4 }}
+        direction="column"
         justifyContent="center"
         alignItems="center"
+        textAlign={"center"}
       >
-        <Grid item sx={{ mb: 3 } }>
+        <Grid item xs={12} sx={{ mb: 3 }}>
           <TextField
             required
             id="outlined-required"
             label="Monto"
-            {...register("amount",{ validate: validateAmount })}
-      
+            {...register("amount", { validate: validateAmount })}
+            sx={{ mr: "1rem" }}
           />
-          
-        </Grid>
-  
-        
-        <Grid
-          item
-          sx={{
-            "& .MuiTextField-root": { width: "13ch" }, mb: 3
-          }}
-        >
           <TextField
-    
-            required
+            sx={{ width: "7rem" }}
             id="outlined-select-currency"
+            required
             select
             label="Moneda"
-            {...register("currency")}
-            value={selectedCurrency ?? ""}
+            defaultValue=""
             onChange={(event) => setValue("currency", event.target.value)}
+            {...register("currency")}
           >
-            {currencies.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
+            {currencies.map((currency) => (
+              <MenuItem key={currency.value} value={currency.value}>
+                {currency.value}
               </MenuItem>
             ))}
           </TextField>
         </Grid>
-        <Grid item >
+
+        <Grid item xs={12} sx={{ minWidth: "22rem" }}>
           <TextField
             id="outlined"
             label="Concepto"
             defaultValue="Varios"
             inputProps={{ maxLength: 100 }}
             helperText="Ingresar hasta 100 caracteres"
+            fullWidth
             {...register("description")}
-           
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "center", margin: "60px 0" }}
-        >
-          <Button
-            type="submit"
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <StyledButton
             variant="contained"
-            sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
+            type="submit"
+            sx={{ mt: "1rem", mb: "1rem" }}
           >
-            Enviar
-          </Button>
+            DEPOSITAR
+          </StyledButton>
         </Grid>
-        {errors.amount && <Alert severity="error">{errors.amount.message}</Alert>}
+        {errors.amount && (
+          <Alert severity="error">{errors.amount.message}</Alert>
+        )}
         {validation && <Alert severity="error"> {msgError} </Alert>}
       </Grid>
     </>

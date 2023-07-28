@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Grid , Snackbar, Alert} from "@mui/material";
+import { Grid, Snackbar, Alert } from "@mui/material";
 import TypographyInfo from "../TypographyInformation/TypographyInformation";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import TypographyData from "../TypographyData/TypographyData";
@@ -50,10 +50,7 @@ export const ShowTaskFixed = () => {
               <TypographyData>{fixTermData.balance}</TypographyData>
             </Grid>
             <Snackbar open={true} autoHideDuration={10}>
-              <Alert
-                severity="success"
-                sx={{ width: "100%" }}
-              >
+              <Alert severity="success" sx={{ width: "100%" }}>
                 El plazo fijo se realizó con éxito
               </Alert>
             </Snackbar>
