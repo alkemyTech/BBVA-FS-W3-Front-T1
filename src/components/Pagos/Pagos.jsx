@@ -123,7 +123,7 @@ export const Pagos = () => {
   }
   };
   return (
-    <div style={{minHeight:"80.6vh"}}>
+    <div style={{minHeight:"80.5vh"}}>
       {data != "" ? (
         <RespuestaPagos
           data={data}

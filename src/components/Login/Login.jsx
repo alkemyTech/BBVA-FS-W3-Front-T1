@@ -80,7 +80,7 @@ export const Login = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: "85.7vh" }}>
+    <div style={{ minHeight: "85.6vh" }}>
       <Grid
         container
         direction="column"

@@ -1,12 +1,11 @@
-import { Box, Card, CardActionArea } from "@mui/material";
+import { Card, CardActionArea } from "@mui/material";
 
 export const CustomCard = (props) => {
   return (
     <Card
       sx={{
-        maxWidth: 250,
-        maxHeight:360,
-        boxShadow: "-4px 6px 18px -3px rgba(0,0,0,1)",
+        maxWidth: 200,
+        boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px;" 
       }}
     >
       <CardActionArea onClick={props.handleClick}>
