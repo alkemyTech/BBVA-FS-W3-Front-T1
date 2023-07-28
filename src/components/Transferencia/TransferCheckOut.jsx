@@ -79,20 +79,25 @@ export const TransferCheckOut = () => {
           lastName: response.data.data.userId.lastName,
           currency: response.data.data.currency,
         });
-
+        let currency = ""
+        if (response.data.data.currency === "ARS"){
+          currency = localStorage.getItem("idArs");}
+        else{
+          currency = localStorage.getItem("idUsd");}
+        (!currency) && setError("Usted no posee una cuenta en ese tipo de moneda")
       })
       .catch((error) => {
         setIsLoading(false);
         if(error.response.status === 403){
           tokenExpired(navigate,dispatch);
         }
-        setError(error);
+        setError(error.response.data.message);
         setUserCbu(null);
       });
   };
 
   const SearchCbuHandleNext = () =>{
-    if (userCbu){
+    if (userCbu && !error){
       handleNext();
     }
   }
@@ -181,13 +186,13 @@ export const TransferCheckOut = () => {
   }
 
   return (
-    <>
+    <div style={{ minHeight: "81vh" }}>
       {isLoading ?
 
       <Loader loader={isLoading}/>
       :
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
           <Typography component="h1" variant="h4" align="center">
             Transferencia
           </Typography>
@@ -206,12 +211,14 @@ export const TransferCheckOut = () => {
             <>
               {getStepContent(activeStep)}
               {error && (
-                <Alert severity="error">{error.response.data.message}</Alert>
+                <Box marginTop={'10px'}>
+                <Alert severity="error" >{error}</Alert>
+                </Box>
               )}
             </>
           )}
         </Paper>
       </Container>}
-    </>
+    </div>
   );
 };

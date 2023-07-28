@@ -7,20 +7,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import { useDataContext } from "../FixedTerm";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
-import StyledButton from "../../buttonStyles/buttonStyles";
-import { useDataContext } from "../FixedTerm";
-import axios from "axios";
-import { Alert } from "@mui/material";
+import { Loader } from "../../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Loader } from "../../Loader/Loader";
+import axios from "axios";
+import { Alert } from "@mui/material";
 
 export const CreatFixedTermDialog = ({ setIsTransferSucced }) => {
   const [open, setOpen] = useState(false);
@@ -89,7 +80,7 @@ export const CreatFixedTermDialog = ({ setIsTransferSucced }) => {
 
   return (
     <>
-      <StyledButton onClick={handleClickOpen}>Crear plazo fijo</StyledButton>
+      <StyledButton onClick={handleClickOpen}>crear</StyledButton>
       <Dialog
         open={open}
         onClose={handleClose}

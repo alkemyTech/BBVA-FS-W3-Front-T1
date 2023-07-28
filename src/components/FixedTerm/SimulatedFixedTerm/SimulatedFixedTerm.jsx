@@ -48,12 +48,12 @@ export const SimulatedFixedTerm = () => {
   };
 
   return (
-    <>
+    <div style={{ minHeight: "81vh" }}>
       {isLoading ? (
         <Loader loader={isLoading} />
       ) : (
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-          <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
+          <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
             {!receivedData ? (
               <>
                 <TaskFixedInterface onSubmit={handleSubmit} />
@@ -65,6 +65,6 @@ export const SimulatedFixedTerm = () => {
           </Paper>
         </Container>
       )}
-    </>
+    </div>
   );
 };
