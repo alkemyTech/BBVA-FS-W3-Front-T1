@@ -3,7 +3,8 @@ import StyledButton from "../../buttonStyles/buttonStyles";
 
 export const RespuestaPagos = ({ data, setData}) => {    
     const {amount, description} = data.transactionPayment;
-    const currency = data.updatedAccount.currency;
+    const {currency, cbu} = data.updatedAccount;
+    const idTransaction = data.transactionPayment.id 
 
     const handleClickPagarOtro = ()=>{
       setData("");
@@ -31,13 +32,13 @@ export const RespuestaPagos = ({ data, setData}) => {
           sx={{
             boxShadow: 10,
             width: "25rem",
-            height: "11rem",
-            p: 1,
+            height: "auto",
+            p: 2,
             m: 1,
             borderRadius: 2,
           }}
         >
-          <Typography fontSize={20} marginBottom={1} marginLeft={2}>
+          <Typography fontSize={20} marginBottom={1}>
             <b>Se debitó: ${amount}</b>
           </Typography>
           <Divider />
@@ -52,6 +53,18 @@ export const RespuestaPagos = ({ data, setData}) => {
           </Typography>
           <Typography fontSize={15}>
             <b>Cuenta en {currency}</b>
+          </Typography>
+          <Typography marginTop={1} fontSize={15}>
+            Cbu de la cuenta:
+          </Typography>
+          <Typography fontSize={15}>
+            <b>{cbu}</b>
+          </Typography>
+          <Typography marginTop={1} fontSize={15}>
+            Número de transacción:
+          </Typography>
+          <Typography fontSize={15}>
+            <b>{idTransaction}</b>
           </Typography>
         </Box>
         <Box sx={{ mt: "1rem" }}>
@@ -68,3 +81,4 @@ export const RespuestaPagos = ({ data, setData}) => {
     </div>
   );
 };
+

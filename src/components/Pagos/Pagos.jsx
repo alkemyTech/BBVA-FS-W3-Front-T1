@@ -146,11 +146,10 @@ export const Pagos = () => {
                   <form onSubmit={handleSubmit}>
                     <Grid item xs={12}>
                       <Typography
-                        variant="h5"
+                        variant="h4"
                         mb={4}
-                        sx={{ letterSpacing: ".1rem" }}
                       >
-                        <b>PAGÁ TUS SERVICIOS</b>
+                        Pagá tus servicios
                       </Typography>
                     </Grid>
                     <Grid item xs={12} mt={3}>
@@ -200,7 +199,7 @@ export const Pagos = () => {
                             required
                             value={otros}
                             onChange={onChangeOtros}
-                            helperText="Indique el servicio a abonar."
+                            helperText="Indique el servicio a abonar. Máx(20)"
                             inputProps={{
                               maxLength:15,
                             }}
