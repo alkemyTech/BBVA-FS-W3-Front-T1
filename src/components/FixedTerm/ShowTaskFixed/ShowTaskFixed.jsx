@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Grid , Snackbar, Alert} from "@mui/material";
+import { Grid, Snackbar, Alert } from "@mui/material";
 import TypographyInfo from "../TypographyInformation/TypographyInformation";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import TypographyData from "../TypographyData/TypographyData";
@@ -46,10 +46,7 @@ export const ShowTaskFixed = () => {
               <TypographyData>{fixTermData.balance}</TypographyData>
             </Grid>
             <Snackbar open={true} autoHideDuration={10}>
-              <Alert
-                severity="success"
-                sx={{ width: "100%" }}
-              >
+              <Alert severity="success" sx={{ width: "100%" }}>
                 El plazo fijo se realizó con éxito
               </Alert>
             </Snackbar>
@@ -57,12 +54,7 @@ export const ShowTaskFixed = () => {
         )}
         <Grid item xs={12}>
           <Grid container justifyContent="space-between" spacing={4}>
-          <Grid item xs={12} md={5}>
-          {!isTransferSucced &&
-            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced} />
-            }
-          </Grid>
-            <Grid item xs={12} md={2} marginRight={'2vw'}>
+            <Grid item xs={12} md={2}>
               <StyledButton
                 onClick={() => {
                   setReceivedData(false);
@@ -70,6 +62,14 @@ export const ShowTaskFixed = () => {
               >
                 otro
               </StyledButton>
+            </Grid>
+
+            <Grid item xs={12} md={5}>
+              {!isTransferSucced && (
+                <CreatFixedTermDialog
+                  setIsTransferSucced={setIsTransferSucced}
+                />
+              )}
             </Grid>
           </Grid>
         </Grid>
