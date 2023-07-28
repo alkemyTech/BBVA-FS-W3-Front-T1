@@ -1,8 +1,10 @@
 import { Backdrop, Box, Button, Typography } from "@mui/material"
 import StyledButton from "../../buttonStyles/buttonStyles"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { addUserId, addUserName } from "../../../redux/userSlice";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckIcon from '@mui/icons-material/Check';
 
 export const DialogLogout = ({ logout, setLogout}) => {
 
@@ -45,12 +47,14 @@ export const DialogLogout = ({ logout, setLogout}) => {
                     sx={{mr:"2rem"}}
                       variant="contained"
                       color="warning"
+                      endIcon={<CancelIcon />}
                       onClick={handleClickCancelar}
                     >
                       CANCELAR
                     </Button>
                     <StyledButton
                       variant="contained"
+                      endIcon={<CheckIcon />}
                       onClick={handleClickConfirmar}
                     >
                       CONFIRMAR
