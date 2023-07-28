@@ -4,7 +4,8 @@ export const CustomCard = (props) => {
   return (
     <Card
       sx={{
-        maxWidth: 315,
+        maxWidth: 250,
+        maxHeight:360,
         boxShadow: "-4px 6px 18px -3px rgba(0,0,0,1)",
       }}
     >
