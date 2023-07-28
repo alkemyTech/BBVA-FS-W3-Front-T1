@@ -89,21 +89,25 @@ export const CrearCuenta = () => {
                 confirmar={confirmar}
               />
             </>}
-            <>
-              <Box display={"flex"} justifyContent={"space-evenly"} pt={"5rem"} textAlign={"center"}>
+            <div style={{textAlign:"center"}}>
+            <Typography variant="h4" pt={5}>
+              CREÁ TU CUENTA
+            </Typography>
+              <Box display={"flex"} justifyContent={"space-evenly"} pt={"5rem"} textAlign={"center"} paddingX={35}>
                 <CustomCard handleClick={handleClickArs}>
                   <CardMedia
                     component="img"
-                    sx={{ height: "250px", width: "100%"}}
+                    sx={{ height: "200px", width: "100%", mb:3}}
                     src={pesoImg}
                     alt="Peso Argentino"
+                    
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       CUENTA EN ARS
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      <b>Creá tu cuenta en pesos argentinos</b>
+                      <b>Creá tu cuenta en pesos</b>
                       <br />
                       La misma se abrirá con un límite de transaccion de $300000
                     </Typography>
@@ -112,7 +116,7 @@ export const CrearCuenta = () => {
                 <CustomCard handleClick={handleClickUsd}>
                   <CardMedia
                     component="img"
-                    sx={{ height: "250px", width: "100%" }}
+                    sx={{ height: "200px", width: "100%",mb:3 }}
                     src={dollarImg}
                     alt="Dólar estadounidense"
                   />
@@ -143,7 +147,7 @@ export const CrearCuenta = () => {
                   )}
                 </Grid>
               )}
-            </>
+            </div>
         </>
       )}
     </div>
