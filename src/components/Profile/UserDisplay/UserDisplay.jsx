@@ -7,18 +7,7 @@ import {
   Card,
   Box,
   IconButton,
-  CardActionArea,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper
+  CardActionArea
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
@@ -27,10 +16,10 @@ import "../UserInfo.css";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import { Movements } from "../Movements/Movements";
 
-
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogUSD, setOpenDialogUSD] = useState(false);
 
   const handleTransferClick = () => {
     navigate("/transferencias");
@@ -44,24 +33,32 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
     navigate("/plazo-fijo");
   };
 
-  if (!userBalance || !userData) {
-    return <div>Loading...</div>;
-  }
-
   const { accountArs, historyArs, accountUsd, historyUsd, fixedTerms } =
     userBalance;
 
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear();
+  
+      return `${day}/${month}/${year}`;
+    };
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
 
+  const handleOpenDialogUSD = () => {
+    setOpenDialogUSD(true);
+  };
+
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  };
+
+  const handleCloseDialogUSD = () => {
+    setOpenDialogUSD(false);
   };
 
   return (
@@ -127,68 +124,30 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
             spacing={4}
           >
             {accountArs == null ? (
-              <Grid item >
-                {/*<Alert severity="warning">No tenés una cuenta en pesos.</Alert>*/}
+              <Grid item>
+                <Alert severity="warning">No tenés una cuenta en pesos.</Alert>
               </Grid>
             ) : (
-              <Grid item xs={12} md={6} className="card-style">
+              <Grid item xs={12} sm={12} md={6} className="card-style">
                 <Card>
                   <CardActionArea onClick={handleOpenDialog}>
                     <Box m={1} p={2}>
+                    <Typography variant="h5" gutterBottom >
+                        Saldo: $ {accountArs.balance}
+                      </Typography>
                       <Typography variant="subtitle1" gutterBottom>
-                        Moneda: {accountArs.currency}
+                        Moneda: Pesos
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
                         CBU: {accountArs.cbu}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Balance: $ {accountArs.balance}
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
                         Límite diario: $ {accountArs.transactionLimit}
                       </Typography>
                     </Box>
                   </CardActionArea>
-                  
-                  <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Movimientos</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Fecha</TableCell>
-                    <TableCell align="right">Descripción</TableCell>
-                    <TableCell align="right">Importe</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {historyArs.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.transactionDate}
-                      </TableCell>
-                      <TableCell align="right">{row.description}</TableCell>
-                      <TableCell align="right">{row.amount}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <StyledButton onClick={handleCloseDialog} color="primary">
-            Cerrar
-          </StyledButton>
-        </DialogActions>
-        </Dialog>
-            
-                </Card>
+                  <Movements  openDialog={openDialog} handleCloseDialog={handleCloseDialog} currency={"ARS"}/>
+                  </Card>
               </Grid>
             )}
 
@@ -197,24 +156,25 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                 {/*<Alert severity="warning">No tenés una cuenta en dólares.</Alert>*/}
               </Grid>
             ) : (
-              <Grid item xs={12} md={6} className="card-style">
+              <Grid item xs={12} sm={12} md={6} className="card-style">
                 <Card>
-                  <CardActionArea>
+                  <CardActionArea onClick={handleOpenDialogUSD}>
                     <Box m={1} p={2}>
+                    <Typography variant="h5" gutterBottom>
+                        Saldo: U$D {accountUsd.balance}
+                      </Typography>
                       <Typography variant="subtitle1" gutterBottom>
-                        Moneda: {accountUsd.currency}
+                        Moneda: Dólares
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
                         CBU: {accountUsd.cbu}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Balance: U$D {accountUsd.balance}
                       </Typography>
                       <Typography variant="subtitle1" gutterBottom>
                         Límite diario: U$D {accountUsd.transactionLimit}
                       </Typography>
                     </Box>
                   </CardActionArea>
+                  <Movements  openDialog={openDialogUSD} handleCloseDialog={handleCloseDialogUSD} currency={"USD"} />
                 </Card>
               </Grid>
             )}
