@@ -54,8 +54,9 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
           <Grid item xs={8}>
             <TextField
               label="CBU"
-              variant="standard"
+              variant="outlined"
               inputProps={{ maxLength: 22 }}
+              helperText="Ingresar cbu de 22 digitos"
               fullWidth
               {...register("cbu", { validate: validateCBU })}
             />

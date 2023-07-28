@@ -61,7 +61,7 @@ export const SelectAmount = ({
         <Grid item xs={12}>
           <TextField
             label="Importe a transferir"
-            variant="standard"
+            variant="outlined"
             fullWidth
             {...register("amount", { validate: validateAmount })}
           />

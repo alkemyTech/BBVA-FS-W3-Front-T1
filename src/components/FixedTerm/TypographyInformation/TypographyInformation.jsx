@@ -7,7 +7,7 @@ const TypographyInfo = ({ children }) => {
         style={{
           color: '#0D2F36',
           fontWeight: 900,
-          fontSize: '1.7em',
+          fontSize: '1.4em',
         }}
       >
         {children}

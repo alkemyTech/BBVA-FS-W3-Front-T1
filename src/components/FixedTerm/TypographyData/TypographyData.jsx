@@ -6,8 +6,8 @@ const TypographyData = ({ children }) => {
       <Typography
         style={{
           color: '#1C6875',
-          fontWeight: 900,
-          fontSize: '1.3em',
+          fontWeight: 700,
+          fontSize: '1.2em',
         }}
       >
         {children}

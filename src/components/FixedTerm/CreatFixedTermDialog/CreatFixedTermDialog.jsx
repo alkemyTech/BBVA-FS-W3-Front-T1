@@ -25,8 +25,9 @@ export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
     };
 
     const handleClose = () => {
-      setErrorMessage(null);
+
       setOpen(false);
+      setErrorMessage(null);
     };
 
     const createFixedTerm= ()=>{
@@ -42,21 +43,22 @@ export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
         .post("http://localhost:8080/fixedTerm", requestBody, config)
         .then((response) => {
           console.log(response);
-          response.data.data.closingDate = response.data.data.closingDate.split("T")[0];
-          response.data.data.creationDate = response.data.data.creationDate.split("T")[0];
+          response.data.data.savedFixedTerm.closingDate = response.data.data.savedFixedTerm.closingDate.split("T")[0];
+          response.data.data.savedFixedTerm.creationDate = response.data.data.savedFixedTerm.creationDate.split("T")[0];
 
           const newData = {
-            montoInverito: response.data.data.amount,
-            fechaCreacion: response.data.data.creationDate,
-            fechaFinalizacion: response.data.data.closingDate,
-            interes: response.data.data.interest,
-            montoTotal: response.data.data.amount + response.data.data.interest,
-            balance: response.data.data.account.balance,
+            montoInverito: response.data.data.savedFixedTerm.amount,
+            fechaCreacion: response.data.data.savedFixedTerm.creationDate,
+            fechaFinalizacion: response.data.data.savedFixedTerm.closingDate,
+            interes: response.data.data.savedFixedTerm.interest,
+            montoTotal: response.data.data.savedFixedTerm.amount + response.data.data.savedFixedTerm.interest,
+            balance: response.data.data.savedFixedTerm.account.balance,
           }
-
+          console.log("antes");
           setFixTermData(newData);
           setIsTransferSucced(true);
           handleClose();
+          console.log("despues");
         })
         .catch((error) => {
           console.log(error)
@@ -69,7 +71,7 @@ export const CreatFixedTermDialog = ({setIsTransferSucced}) => {
 
     return (
       <>
-        <StyledButton variant="outlined" onClick={handleClickOpen}>
+        <StyledButton onClick={handleClickOpen}>
           Crear plazo fijo
         </StyledButton>
         <Dialog

@@ -39,11 +39,7 @@ export const ShowTaskFixed = () => {
           <TypographyInfo>Finalizacion del plazo fijo</TypographyInfo>
           <TypographyData>{fixTermData.fechaFinalizacion}</TypographyData>
         </Grid>
-        {!isTransferSucced ? (
-          <Grid item xs={12}>
-            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced} />
-          </Grid>
-        ) : (
+        {isTransferSucced && (
           <>
             <Grid item xs={12}>
               <TypographyInfo>Balance de tu cuenta</TypographyInfo>
@@ -61,10 +57,12 @@ export const ShowTaskFixed = () => {
         )}
         <Grid item xs={12}>
           <Grid container justifyContent="space-between" spacing={4}>
-            <Grid item xs={12} md={2}>
-              <StyledButton onClick={returnHome}>Inicio</StyledButton>
-            </Grid>
-            <Grid item xs={12} md={2}>
+          <Grid item xs={12} md={5}>
+          {!isTransferSucced &&
+            <CreatFixedTermDialog setIsTransferSucced={setIsTransferSucced} />
+            }
+          </Grid>
+            <Grid item xs={12} md={2} marginRight={'2vw'}>
               <StyledButton
                 onClick={() => {
                   setReceivedData(false);
