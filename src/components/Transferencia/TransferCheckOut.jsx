@@ -17,6 +17,10 @@ import { TransferResume } from "./TransferResume/TransferResume";
 import axios from "axios";
 import StyledButton from "../buttonStyles/buttonStyles";
 import { TransferSucces } from "./TransferSucces/TransferSucces";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { tokenExpired } from "../../utils/tokenExpired";
+import { Loader } from "../Loader/Loader";
 
 const steps = ["Buscar Cuenta", "importe", "Resumen"];
 
@@ -34,6 +38,9 @@ export const TransferCheckOut = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [userCbu, setUserCbu] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNext = () => {
     setError(null);
@@ -46,6 +53,7 @@ export const TransferCheckOut = () => {
   };
 
   const SearchCbuSubmit = async (data) => {
+    setIsLoading(true);
     console.log(data);
     const requestBody = {
       cbu: data.cbu,
@@ -59,7 +67,7 @@ export const TransferCheckOut = () => {
     axios
       .get(`http://localhost:8080/accounts/cbu/${data.cbu}`, config)
       .then((response) => {
-        console.log(response.data);
+        setIsLoading(false);
         setError(null);
         dataAccount.cbu = data.cbu;
         dataAccount.currency = response.data.data.currency;
@@ -71,14 +79,16 @@ export const TransferCheckOut = () => {
           lastName: response.data.data.userId.lastName,
           currency: response.data.data.currency,
         });
+
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.data);
+        setIsLoading(false);
+        if(error.response.status === 403){
+          tokenExpired(navigate,dispatch);
+        }
         setError(error);
         setUserCbu(null);
       });
-    //--------------
   };
 
   const SearchCbuHandleNext = () =>{
@@ -121,8 +131,9 @@ export const TransferCheckOut = () => {
         handleNext();
       })
       .catch((error) => {
-        console.log(error);
-        console.log(error.data);
+        if(error.response.status === 403){
+          tokenExpired(navigate,dispatch);
+        }
         setError(error);
       });
   };
@@ -171,6 +182,10 @@ export const TransferCheckOut = () => {
 
   return (
     <>
+      {isLoading ?
+
+      <Loader loader={isLoading}/>
+      :
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
           <Typography component="h1" variant="h4" align="center">
@@ -196,7 +211,7 @@ export const TransferCheckOut = () => {
             </>
           )}
         </Paper>
-      </Container>
+      </Container>}
     </>
   );
 };

@@ -5,7 +5,7 @@ const DataContext = createContext();
 
 export const useDataContext = () => useContext(DataContext);
 
-export const FixedTerm = ({ children }) => {
+export const FixedTerm = () => {
   const [fixTermData, setFixTermData] = useState(null);
   const [receivedData, setReceivedData] = useState(false);
 
