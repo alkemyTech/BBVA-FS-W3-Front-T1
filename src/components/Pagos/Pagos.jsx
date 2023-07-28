@@ -70,72 +70,76 @@ export const Pagos = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
-    
-  const idAccountArs = localStorage.getItem("idArs");
-  const idAccountUsd = localStorage.getItem("idUsd");
 
-  if((currency === "ARS" && idAccountArs) || (currency ==="USD" && idAccountUsd) ){
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    const idAccountArs = localStorage.getItem("idArs");
+    const idAccountUsd = localStorage.getItem("idUsd");
 
-    const idAccount =
-      currency === "ARS"
-        ? idAccountArs
-        : idAccountUsd;
-    const requestBody = {
-      id: idAccount,
-      amount: amount,
-      currency: currency,
-      description: otros ? otros : services,
-    };
+    if (
+      (currency === "ARS" && idAccountArs) ||
+      (currency === "USD" && idAccountUsd)
+    ) {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
 
-    const apiUrl = "http://localhost:8080/transactions/payment";
+      const idAccount = currency === "ARS" ? idAccountArs : idAccountUsd;
+      const requestBody = {
+        id: idAccount,
+        amount: amount,
+        currency: currency,
+        description: otros ? otros : services,
+      };
 
-    axios
-      .post(apiUrl, requestBody, config)
-      .then((response) => {
-        const balanceArs = response.data.data.updatedAccount.balance;
-        const balanceUsd = response.data.data.updatedAccount.balance;
-        currency === "ARS"
-          ? localStorage.setItem("balanceArs", balanceArs)
-          : localStorage.setItem("balanceUsd", balanceUsd);
-        setData(response.data.data);
-        setOtros("");
-        setAmount("");
-        setServices("GAS");
-        setCurrency("ARS");
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-        setValidation(true);
-        if (error.response.status === 403) {
-          tokenExpired(navigate, dispatch);
-        }
-        setErrorMessage(error.response.data.message);
-      });
-  } else{
-    setLoader(false)
-    setErrorMessage(`No posee cuenta en ${currency} para realizar el pago`)
-    setValidation(true)
-  }
+      const apiUrl = "http://localhost:8080/transactions/payment";
+
+      axios
+        .post(apiUrl, requestBody, config)
+        .then((response) => {
+          const balanceArs = response.data.data.updatedAccount.balance;
+          const balanceUsd = response.data.data.updatedAccount.balance;
+          currency === "ARS"
+            ? localStorage.setItem("balanceArs", balanceArs)
+            : localStorage.setItem("balanceUsd", balanceUsd);
+          setData(response.data.data);
+          setOtros("");
+          setAmount("");
+          setServices("GAS");
+          setCurrency("ARS");
+          setLoader(false);
+        })
+        .catch((error) => {
+          setLoader(false);
+          setValidation(true);
+          if (error.response.status === 403) {
+            tokenExpired(navigate, dispatch);
+          }
+          setErrorMessage(error.response.data.message);
+        });
+    } else {
+      setLoader(false);
+      setErrorMessage(`No posee cuenta en ${currency} para realizar el pago`);
+      setValidation(true);
+    }
   };
   return (
-    <div style={{minHeight:"80.5vh"}}>
+    <div style={{ minHeight: "80.5vh" }}>
       {data != "" ? (
-        <RespuestaPagos
-          data={data}
-          setData={setData}
-        />
+        <RespuestaPagos data={data} setData={setData} />
       ) : (
         <>
           {loader ? (
             <Loader loader={loader} />
           ) : (
             <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-              <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
+              <Paper
+                sx={{
+                  my: { xs: 3, md: 6 },
+                  p: { xs: 2, md: 5 },
+                  boxShadow: "5",
+                  borderRadius: "20px 20px",
+                }}
+              >
                 <Grid
                   container
                   direction="column"
@@ -145,10 +149,7 @@ export const Pagos = () => {
                 >
                   <form onSubmit={handleSubmit}>
                     <Grid item xs={12}>
-                      <Typography
-                        variant="h4"
-                        mb={4}
-                      >
+                      <Typography variant="h4" mb={4}>
                         Pagá tus servicios
                       </Typography>
                     </Grid>
@@ -201,7 +202,7 @@ export const Pagos = () => {
                             onChange={onChangeOtros}
                             helperText="Indique el servicio a abonar. Máx(20)"
                             inputProps={{
-                              maxLength:15,
+                              maxLength: 15,
                             }}
                             fullWidth
                           />

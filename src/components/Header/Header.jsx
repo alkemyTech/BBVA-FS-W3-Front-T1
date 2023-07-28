@@ -52,8 +52,7 @@ export const Header = () => {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "#2BA0B5",
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.6)",
+          background: "linear-gradient(to right, #4b79a1, #2279A1)",
           borderRadius: "0px 0px 20px 20px",
         }}
       >

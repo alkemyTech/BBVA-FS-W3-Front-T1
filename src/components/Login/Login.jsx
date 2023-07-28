@@ -98,7 +98,7 @@ export const Login = () => {
               textAlign={"center"}
               maxWidth={"25rem"}
             >
-              <Avatar sx={{ bgcolor: "#1C6875", mx:"11rem",mb:".7rem" }}>
+              <Avatar sx={{ bgcolor: "#2279A1", mx:"11rem",mb:".7rem" }}>
               <Typography sx={{pt:0.5}}>
               <LockOpenIcon/>
               </Typography>
@@ -114,7 +114,8 @@ export const Login = () => {
                 onChange={onChangeEmail}
                 required
                 fullWidth
-                sx={{ mb: "1rem" }}
+                sx={{ mb: "1rem", backgroundColor:"white" }}
+                autoFocus
               />
               <TextField
                 label="Contraseña"
@@ -124,17 +125,17 @@ export const Login = () => {
                 required
                 onChange={onChangePassword}
                 fullWidth
-                sx={{ mb: "1rem" }}
+                sx={{ mb: "1rem", backgroundColor:"white" }}
               />
               <Button
                 type="submit"
                 variant="contained"
                 sx={{
-                  backgroundColor: "#2BA0B5",
+                  backgroundColor: "#4b79a1",
                   width:"50%",
                   minWidth: "10rem",
                   mb: "0.5rem",
-                  "&:hover": { backgroundColor: "#1C6875" },
+                  "&:hover": { backgroundColor: "#2279A1" },
                 }}
               >
                 Iniciar sesión
@@ -143,11 +144,11 @@ export const Login = () => {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: "#2BA0B5",
+                  backgroundColor: "#4b79a1",
                   width: "50%",
                   minWidth: "10rem",
                   mt:"0.5rem",
-                  "&:hover": { backgroundColor: "#1C6875" },
+                  "&:hover": { backgroundColor: "#2279A1" },
                 }}
                 onClick={() => {
                   navigate("sing-up");

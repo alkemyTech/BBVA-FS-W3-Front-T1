@@ -8,8 +8,7 @@ export const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#2BA0B5",
-
+        background: "linear-gradient(to right, #4b79a1, #2279A1)",
         width: "100%",
         padding: "0.5rem",
         borderRadius: "20px 20px 0px 0px",
@@ -25,9 +24,9 @@ export const Footer = () => {
           textAlign={"center"}
           alignSelf={"center"}
         >
-          <EmailIcon />
+          <EmailIcon sx={{color:"white"}}/>
           <br />
-          <Typography variant="body1" color="#0D2F36">
+          <Typography variant="inherit" color="white">
             consultas@alkywall.com
           </Typography>
         </Grid>
@@ -48,6 +47,7 @@ export const Footer = () => {
               fontSize="large"
               sx={{
                 mr: "0.7rem",
+                color:"white",
                 "&:hover": {
                   color: "#A32460",
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
@@ -66,6 +66,7 @@ export const Footer = () => {
               fontSize="large"
               sx={{
                 mr: "0.7rem",
+                color:"white",
                 "&:hover": {
                   color: "#3b5998",
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
@@ -83,7 +84,7 @@ export const Footer = () => {
           textAlign={"center"}
           alignSelf={"center"}
         >
-          <Typography variant="body1" color="#0D2F36">
+          <Typography variant="inherit" color="white">
             Tech Titans 2023
             <br />
             ©Todos los derechos reservados.
