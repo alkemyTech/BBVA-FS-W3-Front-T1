@@ -2,10 +2,10 @@ import { styled } from "@mui/system";
 import { Button } from "@mui/material";
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#2BA0B5",
+  backgroundColor: "#4b79a1",
   color: "#FFFFFF",
   "&:hover": {
-    backgroundColor: "#1C6875",
+    backgroundColor: "#2279A1",
   },
 }));
 
