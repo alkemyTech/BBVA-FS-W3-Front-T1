@@ -9,13 +9,15 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { addUserId, addUserName } from "../../redux/userSlice";
+import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 import "./Header.css";
+import { useSelector } from "react-redux";
+import { DialogLogout } from "./DialogLogout/DialogLogout";
 
 export const Header = () => {
+  const [logout, setLogout] = useState(false);
+
   const pages = [
     "inicio",
     "depositos",
@@ -25,18 +27,10 @@ export const Header = () => {
   ];
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
   const userName = useSelector((state) => state.user.userName);
 
   const handleClickLogout = () => {
-    localStorage.clear();
-    dispatch(addUserId(""));
-    dispatch(addUserName(""));
-
-    navigate("/");
+    setLogout(true);
   };
 
   const handleMenuOpen = (event) => {
@@ -151,6 +145,7 @@ export const Header = () => {
               </Grid>
             </>
           )}
+          {logout && <DialogLogout logout={logout} setLogout={setLogout} />}
         </Toolbar>
       </AppBar>
     </Box>
