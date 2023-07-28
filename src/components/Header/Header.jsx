@@ -105,7 +105,7 @@ export const Header = () => {
                       style={{ textDecoration: "none", color: "inherit" }}
                       to={`/${page.replace(/\s+/g, "-")}`}
                     >
-                      <Typography variant="subtitle1" className="inHover">
+                      <Typography variant="inherit" className="inHover">
                         {page.toUpperCase()}
                       </Typography>
                     </Link>
@@ -123,7 +123,7 @@ export const Header = () => {
                     to="/inicio"
                   >
                     <Typography
-                      variant="subtitle1"
+                      variant=""
                       className="inHover"
                       sx={{ color: "inherit" }}
                     >

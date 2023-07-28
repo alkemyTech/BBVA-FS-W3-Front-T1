@@ -107,14 +107,14 @@ export const CrearCuenta = () => {
                   width:"50vw"
                 }}
               >
-                <Typography variant="h4" align="center" pt={"1.5rem"}>
-                  Abrí tu cuenta
+                <Typography variant="inherit" fontSize={"2em"} align="center" pt={"1.5rem"}>
+                  ABRÍ TU CUENTA
                 </Typography>
                 <Box
                   display={"flex"}
                   justifyContent={"space-evenly"}
                   pt={"2rem"}
-                  pb={"3rem"}
+                  pb={"4rem"}
                   textAlign={"center"}
                 >
                   <CustomCard handleClick={handleClickArs}>
@@ -125,8 +125,8 @@ export const CrearCuenta = () => {
                       alt="Peso Argentino"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        CUENTA EN ARS
+                      <Typography gutterBottom variant="subtitle2" component="div">
+                        CUENTA EN PESOS
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <b>Creá tu cuenta en pesos</b>
@@ -144,8 +144,8 @@ export const CrearCuenta = () => {
                       alt="Dólar estadounidense"
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        CUENTA EN USD
+                      <Typography gutterBottom variant="subtitle2" component="div">
+                        CUENTA EN DOLARES
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <b>Creá tu cuenta en dólares</b>
