@@ -12,7 +12,7 @@ export const Footer = () => {
 
         width: "100%",
         padding: "0.5rem",
-        borderRadius: "10px 10px 0px 0px",
+        borderRadius: "20px 20px 0px 0px",
         boxShadow: "0px -1px 10px rgba(0, 0, 0, 0.6)",
       }}
     >

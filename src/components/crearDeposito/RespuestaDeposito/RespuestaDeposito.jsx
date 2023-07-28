@@ -1,20 +1,11 @@
-import {
-  Typography,
-  Grid,
-  Box,
-  Alert,
-  Divider,
-  AlertTitle,
-  Button,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Typography, Grid, Box, Alert, Divider } from "@mui/material";
+import StyledButton from "../../buttonStyles/buttonStyles";
 
-export const RespuestaDeposito = ({ data,date }) => {
-  const navigate = useNavigate();
+export const RespuestaDeposito = ({ data, date, handleClick }) => {
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        <Box width="100%" maxWidth="400px" mt={10}>
+        <Box width="100%" maxWidth="350px">
           <Alert variant="outlined" severity="success">
             <Typography>
               <b>¡Listo! Depósito exitoso</b>
@@ -24,7 +15,7 @@ export const RespuestaDeposito = ({ data,date }) => {
       </Grid>
       <Grid
         container
-        mt={4}
+        mt={2}
         direction="column"
         justifyContent="center"
         alignItems="center"
@@ -44,26 +35,22 @@ export const RespuestaDeposito = ({ data,date }) => {
           </Typography>
           <Divider />
           <Typography marginTop={3} fontSize={15}>
-           Fecha: <b>{date}</b>
+            Fecha: <b>{date}</b>
           </Typography>
           <Typography marginTop={3} fontSize={15}>
             Se depositó en: <b>Cuenta en {data.currency}</b>
           </Typography>
         </Box>
         <Alert severity="info">Se acreditará en unos instantes</Alert>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "center", margin: "90px 0" }}
-        >
-          <Button
-            type="submit"
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <StyledButton
             variant="contained"
-            sx={{ backgroundColor: "#1C6875", minWidth: "10rem" }}
-            onClick={() => {navigate("/home")}}
+            type="submit"
+            sx={{ mt: "2rem", mb: "1rem" }}
+            onClick={() => handleClick()}
           >
-            Volver al inicio
-          </Button>
+            OTRO DEPOSITO
+          </StyledButton>
         </Grid>
       </Grid>
     </>
