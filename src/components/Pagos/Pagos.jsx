@@ -210,7 +210,7 @@ export const Pagos = () => {
                           required
                           value={otros}
                           onChange={onChangeOtros}
-                          helperText="Indique el servicio a abonar. Máx(20)"
+                          helperText="Indique el servicio a abonar. Máx(15)"
                           inputProps={{
                             maxLength: 15,
                           }}

@@ -28,12 +28,18 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
   const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
-    if (/^[A-Za-z\s]*$/.test(e.target.value)) {
+    if (/^[A-Za-z\s]*$/.test(e.target.value) && e.target.name != "password") {
       setValidation(false);
       setErrorMsg("");
     const { name, value } = e.target;
-    setEditedData((prevData) => ({ ...prevData, [name]: value }));
-  }else{
+    setEditedData((prevData) => ({ ...prevData, [name]: value })); 
+  }else if(e.target.name === "password"){
+    setValidation(false);
+      setErrorMsg("");
+    const { name, value } = e.target;
+    setEditedData((prevData) => ({ ...prevData, [name]: value })); 
+  }
+  else{
     setErrorMsg("Solo puede ingresar letras");
     setValidation(true)
   }
@@ -105,20 +111,28 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                   value={editedData.firstName}
                   onChange={handleInputChange}
                   margin="dense"
+                  helperText="Máx(15)"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
                 />
               </FormControl>
 
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{mb:".1rem"}}>
                 <TextField
                   label="Apellido"
                   name="lastName"
                   value={editedData.lastName}
                   onChange={handleInputChange}
                   margin="dense"
+                  helperText="Máx(15)"
+                  inputProps={{
+                    maxLength: 15,
+                  }}
                 />
               </FormControl>
 
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{mb:".9rem"}}>
                 <TextField
                   label="Email"
                   value={editedData.email}
@@ -130,12 +144,17 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
               <FormControl fullWidth>
                 <TextField
                   name="password"
+                  type="password"
                   label="Nueva contraseña"
                   value={editedData.password}
                   placeholder="Nueva contraseña"
                   onChange={handleInputChange}
                   autoComplete="off"
                   margin="dense"
+                  helperText="Máx(10)"
+                  inputProps={{
+                    maxLength: 10,
+                  }}
                 />
               </FormControl>
               <Box m={2}>
