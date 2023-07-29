@@ -188,13 +188,13 @@ export const TransferCheckOut = () => {
   }
 
   return (
-    <div style={{ minHeight: "80.4vh" }}>
+    <div style={{ minHeight: "85vh" }}>
       {isLoading ? (
         <Loader loader={isLoading} />
       ) : (
-        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Container component="main" maxWidth="sm" sx={{ pt:"3rem" }}>
           <Paper
-            sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow: "5" }}
+            sx={{p: { xs: 2, md: 5 }, boxShadow: "5" }}
           >
             <Typography component="h1" variant="h4" align="center">
               Transferencia

@@ -31,18 +31,17 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
     if (/^[A-Za-z\s]*$/.test(e.target.value) && e.target.name != "password") {
       setValidation(false);
       setErrorMsg("");
-    const { name, value } = e.target;
-    setEditedData((prevData) => ({ ...prevData, [name]: value })); 
-  }else if(e.target.name === "password"){
-    setValidation(false);
+      const { name, value } = e.target;
+      setEditedData((prevData) => ({ ...prevData, [name]: value }));
+    } else if (e.target.name === "password") {
+      setValidation(false);
       setErrorMsg("");
-    const { name, value } = e.target;
-    setEditedData((prevData) => ({ ...prevData, [name]: value })); 
-  }
-  else{
-    setErrorMsg("Solo puede ingresar letras");
-    setValidation(true)
-  }
+      const { name, value } = e.target;
+      setEditedData((prevData) => ({ ...prevData, [name]: value }));
+    } else {
+      setErrorMsg("Solo puede ingresar letras");
+      setValidation(true);
+    }
   };
 
   const handleSave = async (id) => {
@@ -89,8 +88,8 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ minHeight: "85.6vh" }}>
-      <Card sx={{ mt: "3rem", boxShadow: "5", borderRadius: "20px 20px" }}>
+    <Container maxWidth="md" sx={{ minHeight: "85vh", pt:"3rem" }}>
+      <Card sx={{ boxShadow: "5", borderRadius: "20px 20px" }}>
         <Grid
           container
           direction="column"
@@ -111,30 +110,31 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                   value={editedData.firstName}
                   onChange={handleInputChange}
                   margin="dense"
-                  helperText="Máx(15)"
+                  helperText="Máx (15)"
                   inputProps={{
                     maxLength: 15,
                   }}
                 />
               </FormControl>
 
-              <FormControl fullWidth sx={{mb:".1rem"}}>
+              <FormControl fullWidth sx={{ mb: ".1rem" }}>
                 <TextField
                   label="Apellido"
                   name="lastName"
                   value={editedData.lastName}
                   onChange={handleInputChange}
                   margin="dense"
-                  helperText="Máx(15)"
+                  helperText="Máx (15)"
                   inputProps={{
                     maxLength: 15,
                   }}
                 />
               </FormControl>
 
-              <FormControl fullWidth sx={{mb:".9rem"}}>
+              <FormControl fullWidth>
                 <TextField
                   label="Email"
+                  helperText="No puede modificar el Email"
                   value={editedData.email}
                   disabled
                   margin="dense"
@@ -147,11 +147,10 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                   type="password"
                   label="Nueva contraseña"
                   value={editedData.password}
-                  placeholder="Nueva contraseña"
                   onChange={handleInputChange}
                   autoComplete="off"
                   margin="dense"
-                  helperText="Máx(10)"
+                  helperText="Máx (10)"
                   inputProps={{
                     maxLength: 10,
                   }}
@@ -161,10 +160,17 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                 <Grid container spacing={4}>
                   <Grid item>
                     <Button
-                      variant="contained"
+                      sx={{
+                        borderRadius: "20px",
+                        border: "1px solid",
+                        px: "1rem",
+                        color: "#4b79a1",
+                      }}
+                      variant="text"
                       onClick={handleCancelClick}
-                      color="error"
-                      endIcon={<CancelIcon />}
+                      endIcon={
+                        <CancelIcon color="error" sx={{ mb: "0.1rem" }} />
+                      }
                     >
                       Cancelar
                     </Button>
@@ -172,9 +178,10 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                   <Grid item>
                     <Button
                       variant="contained"
+                      sx={{ borderRadius: "20px" }}
                       onClick={() => handleSave(userId)}
                       color="primary"
-                      endIcon={<SaveIcon />}
+                      endIcon={<SaveIcon sx={{ mb: "0.1rem" }} />}
                     >
                       Guardar
                     </Button>
@@ -183,10 +190,10 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
               </Box>
             </form>
             {validation && (
-                    <Alert sx={{ my: "1rem" }} severity="error">
-                      {errorMsg}
-                    </Alert>
-                  )}
+              <Alert sx={{ my: "1rem" }} severity="error">
+                {errorMsg}
+              </Alert>
+            )}
           </Box>
         </Grid>
       </Card>

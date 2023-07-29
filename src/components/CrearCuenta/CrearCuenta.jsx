@@ -1,15 +1,9 @@
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import {
-  Alert,
-  Box,
-  Container,
-  Grid,
-  Paper,
-} from "@mui/material";
-import dollarImg from "../../assets/dollar.jpg";
-import pesoImg from "../../assets/pesosArg.jpg";
+import { Alert, Box, Container, Divider, Grid, Paper } from "@mui/material";
+import dollarImg from "../../assets/img/dollar.jpg";
+import pesoImg from "../../assets/img/pesosArg.jpg";
 import { useState } from "react";
 import { tokenExpired } from "../../utils/tokenExpired";
 import { useDispatch } from "react-redux";
@@ -82,7 +76,7 @@ export const CrearCuenta = () => {
   };
 
   return (
-    <div style={{ minHeight: "85.6vh" }}>
+    <div style={{ minHeight: "85vh" }}>
       {data != "" ? (
         <RespuestaCrearCuenta data={data} setData={setData} />
       ) : (
@@ -102,14 +96,14 @@ export const CrearCuenta = () => {
                 </>
               )}
               <div>
-                <Container
-                  sx={{ pt: "3rem", display: "flex", justifyContent: "center" }}
-                >
+                <Container component="main" maxWidth="sm" sx={{ mb: 4, pt: 3 }}>
                   <Paper
                     sx={{
-                      borderRadius: "20px 20px",
-                      boxShadow:"5",
-                      width: "40vw",
+                      my: { xs: 3 },
+                      p: { xs: 2, md: 3 },
+                      boxShadow: "5",
+                      borderRadius: "20px",
+                      backgroundColor:"rgba(255, 255, 255, 1)"
                     }}
                   >
                     <Typography variant="h4" align="center" pt={"1.5rem"}>
@@ -117,15 +111,14 @@ export const CrearCuenta = () => {
                     </Typography>
                     <Box
                       display={"flex"}
-                      justifyContent={"space-evenly"}
+                      justifyContent={"space-around"}
                       pt={"2rem"}
-                      pb={"4rem"}
-                      textAlign={"justify"}
+                      pb={"2rem"}
                     >
                       <CustomCard handleClick={handleClickArs}>
                         <CardMedia
                           component="img"
-                          sx={{ height: "130px", width: "100%", mb: 2 }}
+                          sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
                           src={pesoImg}
                           alt="Peso Argentino"
                         />
@@ -133,22 +126,29 @@ export const CrearCuenta = () => {
                           <Typography
                             gutterBottom
                             variant="subtitle2"
-                            component="div"
+                            textAlign={"center"}
                           >
                             CUENTA EN PESOS
                           </Typography>
+                          <Divider sx={{ mb: ".5rem" }} />
                           <Typography variant="body2" color="text.secondary">
                             <b>Creá tu cuenta en pesos</b>
                             <br />
-                            La misma se abrirá con un límite de transacción de{" "}
-                            <b>AR$ 300000</b>
+                            La misma se abrirá con un límite de transacción de:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            textAlign={"center"}
+                          >
+                            <b>$300000</b>
                           </Typography>
                         </CardContent>
                       </CustomCard>
                       <CustomCard handleClick={handleClickUsd}>
                         <CardMedia
                           component="img"
-                          sx={{ height: "130px", width: "100%", mb: 2 }}
+                          sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
                           src={dollarImg}
                           alt="Dólar estadounidense"
                         />
@@ -156,14 +156,21 @@ export const CrearCuenta = () => {
                           <Typography
                             gutterBottom
                             variant="subtitle2"
-                            component="div"
+                            textAlign={"center"}
                           >
                             CUENTA EN DÓLARES
                           </Typography>
+                          <Divider sx={{ mb: ".5rem" }} />
                           <Typography variant="body2" color="text.secondary">
                             <b>Creá tu cuenta en dólares</b>
                             <br />
-                            La misma se abrirá con un límite de transacción de{" "}
+                            La misma se abrirá con un límite de transacción de:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            textAlign={"center"}
+                          >
                             <b>U$S 1000</b>
                           </Typography>
                         </CardContent>
@@ -175,7 +182,7 @@ export const CrearCuenta = () => {
                         direction="column"
                         justifyContent="center"
                         alignItems="center"
-                        pb="3rem"
+                        pb=".5rem"
                       >
                         {errorMsg && <Alert severity="error">{errorMsg}</Alert>}
                       </Grid>

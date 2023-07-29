@@ -46,8 +46,8 @@ export const Header = () => {
       <AppBar
         position="static"
         sx={{
-          background: "linear-gradient(to right, #4b79a1, #2279A1)",
-          borderRadius: "0px 0px 20px 20px",
+          backgroundColor:"rgba(75, 121, 161, 0.9)",
+          boxShadow:" rgba(0, 0, 0, 0.35) 0px 5px 15px"
         }}
       >
         <Toolbar>
@@ -116,9 +116,9 @@ export const Header = () => {
                     to="/inicio"
                   >
                     <Typography
-                      variant=""
+                      variant="inherit"
                       className="inHover"
-                      sx={{ color: "inherit" }}
+                      sx={{ color: "inherit", whiteSpace:"nowrap", mr:"1rem"}}
                     >
                       {userName.toUpperCase()}
                     </Typography>
@@ -128,7 +128,6 @@ export const Header = () => {
                   <IconButton
                     color="inherit"
                     aria-label="menu"
-                    className="inHover"
                     onClick={handleMenuOpen}
                     sx={{ display: { xs: "block", lg: "none" } }}
                   >
@@ -139,7 +138,7 @@ export const Header = () => {
                     className="inHover"
                     sx={{ color: "inherit" }}
                     onClick={handleClickLogout}
-                    children={<LogoutIcon fontSize="large" />}
+                    children={<LogoutIcon fontSize="medium" />}
                   />
                 </Box>
               </Grid>

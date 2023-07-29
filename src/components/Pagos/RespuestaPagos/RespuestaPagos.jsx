@@ -11,7 +11,7 @@ export const RespuestaPagos = ({ data, setData}) => {
     }
 
   return (
-    <div style={{minHeight:"85.6vh"}}>
+    <div style={{minHeight:"85vh"}}>
       <Grid container justifyContent="center" alignItems="center">
         <Box width="100%" maxWidth="400px" pt={5}>
           <Alert variant="outlined" severity="success">

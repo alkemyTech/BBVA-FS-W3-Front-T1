@@ -8,11 +8,9 @@ export const Footer = () => {
     <Box
       component="footer"
       sx={{
-        background: "linear-gradient(to right, #4b79a1, #2279A1)",
+        backgroundColor:"rgba(75, 121, 161, 0.8)",
         width: "100%",
-        padding: "0.5rem",
-        borderRadius: "20px 20px 0px 0px",
-        boxShadow: "0px -1px 10px rgba(0, 0, 0, 0.6)",
+        padding: "1rem",
       }}
     >
       <Grid container>
@@ -24,9 +22,9 @@ export const Footer = () => {
           textAlign={"center"}
           alignSelf={"center"}
         >
-          <EmailIcon sx={{color:"white"}}/>
+          <EmailIcon sx={{color:"#f8f3f6"}} fontSize="inherit"/>
           <br />
-          <Typography variant="inherit" color="white">
+          <Typography variant="body2" color="#f8f3f6">
             consultas@alkywall.com
           </Typography>
         </Grid>
@@ -44,10 +42,10 @@ export const Footer = () => {
             color={"inherit"}
           >
             <InstagramIcon
-              fontSize="large"
+              fontSize="medium"
               sx={{
                 mr: "0.7rem",
-                color:"white",
+                color:"#f8f3f6",
                 "&:hover": {
                   color: "#A32460",
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
@@ -63,10 +61,10 @@ export const Footer = () => {
             color={"inherit"}
           >
             <FacebookIcon
-              fontSize="large"
+              fontSize="medium"
               sx={{
                 mr: "0.7rem",
-                color:"white",
+                color:"#f8f3f6",
                 "&:hover": {
                   color: "#3b5998",
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
@@ -84,10 +82,10 @@ export const Footer = () => {
           textAlign={"center"}
           alignSelf={"center"}
         >
-          <Typography variant="inherit" color="white">
-            Tech Titans 2023
-            <br />
-            ©Todos los derechos reservados.
+          <Typography variant="body2" color="#f8f3f6">
+          ©2023 Tech Titans
+          <br/>
+          Argentina 
           </Typography>
         </Grid>
       </Grid>

@@ -99,7 +99,7 @@ export const Login = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: "85.6vh" }}>
+    <div style={{ minHeight: "85vh" }}>
       <Grid
         container
         direction="column"
@@ -116,7 +116,7 @@ export const Login = () => {
             textAlign={"center"}
             maxWidth={"25rem"}
           >
-            <Avatar sx={{ bgcolor: "#2279A1", mx: "11rem", mb: ".7rem" }}>
+            <Avatar sx={{ bgcolor: "rgba(75, 121, 161, 0.9)", mx: "11rem", mb: ".7rem" }}>
               <Typography sx={{ pt: 0.5 }}>
                 <LockOpenIcon />
               </Typography>
@@ -154,7 +154,7 @@ export const Login = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -166,7 +166,7 @@ export const Login = () => {
               type="submit"
               variant="contained"
               sx={{
-                backgroundColor: "#4b79a1",
+                backgroundColor: "rgba(75, 121, 161, 0.9)",
                 width: "50%",
                 minWidth: "10rem",
                 mb: "0.5rem",
@@ -179,7 +179,7 @@ export const Login = () => {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: "#4b79a1",
+                backgroundColor: "rgba(75, 121, 161, 0.9)",
                 width: "50%",
                 minWidth: "10rem",
                 mt: "0.5rem",

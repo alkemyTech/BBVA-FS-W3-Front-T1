@@ -126,17 +126,16 @@ export const Pagos = () => {
     }
   };
   return (
-    <div style={{ minHeight: "80.5vh" }}>
+    <div style={{ minHeight: "85vh" }}>
       {data != "" ? (
         <RespuestaPagos data={data} setData={setData} />
       ) : (
         <>
           {loader && <Loader loader={loader} />}
 
-          <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+          <Container component="main" maxWidth="sm" sx={{ pt:"3rem" }}>
             <Paper
               sx={{
-                my: { xs: 3, md: 6 },
                 p: { xs: 2, md: 5 },
                 boxShadow: "5",
                 borderRadius: "20px 20px",

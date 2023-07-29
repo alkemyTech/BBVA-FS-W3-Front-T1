@@ -57,7 +57,7 @@ export const SingUp = () => {
   };
 
   return (
-    <div style={{minHeight:"78.9vh"}}>
+    <div style={{minHeight:"78.1vh"}}>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -67,7 +67,7 @@ export const SingUp = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#4b79a1" }}>
+          <Avatar sx={{ m: 1, bgcolor: "rgba(75, 121, 161, 0.9)" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -195,7 +195,7 @@ export const SingUp = () => {
               sx={{
                 mt: 3,
                 mb: 2,
-                backgroundColor: "#4b79a1",
+                backgroundColor: "rgba(75, 121, 161, 0.9)",
                 "&:hover": { backgroundColor: "#2279A1" },
               }}
             >

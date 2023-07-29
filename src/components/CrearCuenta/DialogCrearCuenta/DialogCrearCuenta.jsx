@@ -26,16 +26,17 @@ export const DialogCrearCuenta = ({currency, handleClickConfirmar, handleClickCa
                   </Typography>
                   <Box display={"flex"} justifyContent={"space-around"} mt={2}>
                     <Button
-                      variant="contained"
-                      color="warning"
-                      endIcon={<CancelIcon />}
+                      sx={{borderRadius:"20px", border:"1px solid", px:"1rem",color:"#4b79a1" }}
+                      variant="text"
+                      endIcon={<CancelIcon color="error" sx={{ mb: "0.1rem" }} />}
                       onClick={handleClickCancelar}
                     >
                       CANCELAR
                     </Button>
                     <StyledButton
+                    sx={{borderRadius:"20px"}}
                       variant="contained"
-                      endIcon={<CheckIcon />}
+                      endIcon={<CheckIcon sx={{ mb: "0.2rem" }} />}
                       onClick={handleClickConfirmar}
                     >
                       CONFIRMAR

@@ -1,6 +1,7 @@
 .inHover:hover{
-        color: #0D2F36;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        transform: translateY(-2px);
-        transition: ease-in-out 0.1s ;
-      }
+  color: #0D2F36;
+  padding: .3rem;
+  text-shadow: 0px 0px 0.7px #0D2F36;
+  transition: ease 0.1s ;
+  transform: translateX(-5px);
+  }
