@@ -40,7 +40,7 @@ export const DialogLogout = ({ logout, setLogout}) => {
                   }}
                 >
                   <Typography variant="subtitle1" color={"#585858 "}>
-                    <b>¿DESEA ABANDONAR LA SESIÓN?</b>
+                    <b>¿CERRAR SESIÓN?</b>
                   </Typography>
                   <Box sx={{mt:"1rem"}}>
                     <Button

@@ -186,7 +186,7 @@ export const TransferCheckOut = () => {
   }
 
   return (
-    <div style={{ minHeight: "81vh" }}>
+    <div style={{ minHeight: "80.4vh" }}>
       {isLoading ?
 
       <Loader loader={isLoading}/>

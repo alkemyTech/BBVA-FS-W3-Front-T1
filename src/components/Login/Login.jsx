@@ -3,7 +3,12 @@ import {
   Avatar,
   Box,
   Button,
+  FormControl,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@mui/material";
@@ -13,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserName, addUserId } from "../../redux/userSlice";
 import { Loader } from "../Loader/Loader";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +27,13 @@ export const Login = () => {
   const [validation, setValidation] = useState(false);
   const [msgError, setMsgError] = useState("");
   const [loader, setLoader] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -78,7 +91,7 @@ export const Login = () => {
     if (tokenExpired) {
       setMsgError(tokenExpired);
       setValidation(true);
-    }else{
+    } else {
       localStorage.clear();
       dispatch(addUserId(""));
       dispatch(addUserName(""));
@@ -96,79 +109,96 @@ export const Login = () => {
       >
         {loader && <Loader loader={loader} />}
 
-          <Grid item xs={12}>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              textAlign={"center"}
-              maxWidth={"25rem"}
-            >
-              <Avatar sx={{ bgcolor: "#2279A1", mx:"11rem",mb:".7rem" }}>
-              <Typography sx={{pt:0.5}}>
-              <LockOpenIcon/>
+        <Grid item xs={12}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            textAlign={"center"}
+            maxWidth={"25rem"}
+          >
+            <Avatar sx={{ bgcolor: "#2279A1", mx: "11rem", mb: ".7rem" }}>
+              <Typography sx={{ pt: 0.5 }}>
+                <LockOpenIcon />
               </Typography>
-              </Avatar>
-              <Typography component="h1" variant="h5" pb={3}>
-                INICIO DE SESIÓN
-              </Typography>
-              <TextField
-                label="Correo electrónico"
-                type="email"
-                variant="outlined"
-                value={email}
-                onChange={onChangeEmail}
-                required
-                fullWidth
-                sx={{ mb: "1rem", backgroundColor:"white" }}
-                autoFocus
-              />
-              <TextField
-                label="Contraseña"
-                type="password"
-                variant="outlined"
+            </Avatar>
+            <Typography component="h1" variant="h5" pb={3}>
+              INICIO DE SESIÓN
+            </Typography>
+            <TextField
+              label="Correo electrónico"
+              type="email"
+              variant="outlined"
+              value={email}
+              onChange={onChangeEmail}
+              required
+              fullWidth
+              sx={{ mb: "1rem", backgroundColor: "white" }}
+              autoFocus
+            />
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel htmlFor="outlined-adornment-password">
+                Contraseña
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
                 value={password}
-                required
                 onChange={onChangePassword}
-                fullWidth
-                sx={{ mb: "1rem", backgroundColor:"white" }}
+                sx={{ mb: "1rem", backgroundColor: "white" }}
+                required
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Contraseña"
               />
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  backgroundColor: "#4b79a1",
-                  width:"50%",
-                  minWidth: "10rem",
-                  mb: "0.5rem",
-                  "&:hover": { backgroundColor: "#2279A1" },
-                }}
-              >
-                Iniciar sesión
-              </Button>
-              <Typography variant="subtitle1">¿No tenés una cuenta?</Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#4b79a1",
-                  width: "50%",
-                  minWidth: "10rem",
-                  mt:"0.5rem",
-                  "&:hover": { backgroundColor: "#2279A1" },
-                }}
-                onClick={() => {
-                  navigate("sing-up");
-                }}
-              >
-                Registrarse
-              </Button>
-              {validation && (
-                <Alert sx={{ mt: "1rem" }} severity="error">
-                  {" "}
-                  {msgError}{" "}
-                </Alert>
-              )}
-            </Box>
-          </Grid>
+            </FormControl>
+
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundColor: "#4b79a1",
+                width: "50%",
+                minWidth: "10rem",
+                mb: "0.5rem",
+                "&:hover": { backgroundColor: "#2279A1" },
+              }}
+            >
+              Iniciar sesión
+            </Button>
+            <Typography variant="subtitle1">¿No tenés una cuenta?</Typography>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#4b79a1",
+                width: "50%",
+                minWidth: "10rem",
+                mt: "0.5rem",
+                "&:hover": { backgroundColor: "#2279A1" },
+              }}
+              onClick={() => {
+                navigate("sing-up");
+              }}
+            >
+              Registrarse
+            </Button>
+            {validation && (
+              <Alert sx={{ mt: "1rem" }} severity="error">
+                {" "}
+                {msgError}{" "}
+              </Alert>
+            )}
+          </Box>
+        </Grid>
       </Grid>
     </div>
   );

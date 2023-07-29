@@ -58,7 +58,7 @@ export const CrearDeposito = () => {
   };
 
   return (
-    <div style={{ minHeight: "81vh" }}>
+    <div style={{ minHeight: "80.4vh" }}>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 } }}>
           {!mostrarFormularioDeposito ? (

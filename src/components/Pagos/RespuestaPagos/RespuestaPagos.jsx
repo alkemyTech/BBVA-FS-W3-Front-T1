@@ -11,9 +11,9 @@ export const RespuestaPagos = ({ data, setData}) => {
     }
 
   return (
-    <div style={{minHeight:"85.7vh"}}>
+    <div style={{minHeight:"85.6vh"}}>
       <Grid container justifyContent="center" alignItems="center">
-        <Box width="100%" maxWidth="400px" pt={10}>
+        <Box width="100%" maxWidth="400px" pt={5}>
           <Alert variant="outlined" severity="success">
             <Typography>
               <b>¡Listo! Pago exitoso</b>
@@ -67,7 +67,7 @@ export const RespuestaPagos = ({ data, setData}) => {
             <b>{idTransaction}</b>
           </Typography>
         </Box>
-        <Box sx={{ mt: "1rem" }}>
+        <Box sx={{ mt: "1.5rem" }}>
           <StyledButton
             variant="contained"
             fullWidth
@@ -76,7 +76,7 @@ export const RespuestaPagos = ({ data, setData}) => {
             Pagar otro servicio
           </StyledButton>
         </Box>
-        <Alert severity="info" sx={{mt:"2rem"}}>Se debitará el pago en unos instantes</Alert>
+        <Alert severity="info" sx={{mt:"1.5rem"}}>Se debitará el pago en unos instantes</Alert>
       </Grid>
     </div>
   );

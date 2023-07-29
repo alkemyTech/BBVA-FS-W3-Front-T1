@@ -2,6 +2,7 @@ import {
   Alert,
   Container,
   Grid,
+  InputAdornment,
   MenuItem,
   Paper,
   TextField,
@@ -101,13 +102,13 @@ export const Pagos = () => {
           currency === "ARS"
             ? localStorage.setItem("balanceArs", balanceArs)
             : localStorage.setItem("balanceUsd", balanceUsd);
-            setTimeout(() => {
+          setTimeout(() => {
             setData(response.data.data);
             setOtros("");
             setAmount("");
             setServices("GAS");
             setCurrency("ARS");
-            setLoader(false);            
+            setLoader(false);
           }, 1000);
         })
         .catch((error) => {
@@ -156,14 +157,6 @@ export const Pagos = () => {
                   </Grid>
                   <Grid item xs={12} mt={3}>
                     <TextField
-                      label="Monto"
-                      required
-                      variant="outlined"
-                      onChange={onChangeAmount}
-                      value={amount}
-                      sx={{ mr: "1rem" }}
-                    />
-                    <TextField
                       id="outlined-select-currency"
                       select
                       label="Cuenta"
@@ -177,6 +170,22 @@ export const Pagos = () => {
                         </MenuItem>
                       ))}
                     </TextField>
+                    <TextField
+                      label="Monto"
+                      required
+                      variant="outlined"
+                      onChange={onChangeAmount}
+                      value={amount}
+                      autoComplete="off"
+                      sx={{ ml: "1rem", backgroundColor: "white" }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            {currency === "ARS" ? "$" : "U$S"}{" "}
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
                   </Grid>
                   <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
                     <TextField
@@ -195,7 +204,7 @@ export const Pagos = () => {
                       ))}
                     </TextField>
                     {services === "OTROS" && (
-                      <Grid item xs={12} mt={2} sx={{ minWidth: "22rem" }}>
+                      <Grid item xs={12} mt={2} sx={{ minWidth: "22rem", mb:"1rem" }}>
                         <TextField
                           label="Servicio"
                           required
