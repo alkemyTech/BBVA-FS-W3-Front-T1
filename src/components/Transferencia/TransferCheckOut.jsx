@@ -79,28 +79,30 @@ export const TransferCheckOut = () => {
           lastName: response.data.data.userId.lastName,
           currency: response.data.data.currency,
         });
-        let currency = ""
-        if (response.data.data.currency === "ARS"){
-          currency = localStorage.getItem("idArs");}
-        else{
-          currency = localStorage.getItem("idUsd");}
-        (!currency) && setError("Usted no posee una cuenta en ese tipo de moneda")
+        let currency = "";
+        if (response.data.data.currency === "ARS") {
+          currency = localStorage.getItem("idArs");
+        } else {
+          currency = localStorage.getItem("idUsd");
+        }
+        !currency &&
+          setError("Usted no posee una cuenta en ese tipo de moneda");
       })
       .catch((error) => {
         setIsLoading(false);
-        if(error.response.status === 403){
-          tokenExpired(navigate,dispatch);
+        if (error.response.status === 403) {
+          tokenExpired(navigate, dispatch);
         }
         setError(error.response.data.message);
         setUserCbu(null);
       });
   };
 
-  const SearchCbuHandleNext = () =>{
-    if (userCbu && !error){
+  const SearchCbuHandleNext = () => {
+    if (userCbu && !error) {
       handleNext();
     }
-  }
+  };
 
   const SelectAmountSubmit = (data) => {
     console.log(data);
@@ -136,8 +138,8 @@ export const TransferCheckOut = () => {
         handleNext();
       })
       .catch((error) => {
-        if(error.response.status === 403){
-          tokenExpired(navigate,dispatch);
+        if (error.response.status === 403) {
+          tokenExpired(navigate, dispatch);
         }
         setError(error);
       });
@@ -145,13 +147,13 @@ export const TransferCheckOut = () => {
 
   const newTransfer = () => {
     dataAccount.id = 0;
-    dataAccount.amount= 0;
+    dataAccount.amount = 0;
     dataAccount.firstName = "";
     dataAccount.lastName = "";
     dataAccount.currency = "";
     setUserCbu(null);
     setActiveStep(0);
-  }
+  };
 
   function getStepContent(step) {
     switch (step) {
@@ -187,38 +189,40 @@ export const TransferCheckOut = () => {
 
   return (
     <div style={{ minHeight: "80.4vh" }}>
-      {isLoading ?
-
-      <Loader loader={isLoading}/>
-      :
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
-          <Typography component="h1" variant="h4" align="center">
-            Transferencia
-          </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          {activeStep === steps.length ? (
-            <>
-              <TransferSucces response={response} newTrasfer={newTransfer}/>
-            </>
-          ) : (
-            <>
-              {getStepContent(activeStep)}
-              {error && (
-                <Box marginTop={'10px'}>
-                <Alert severity="error" >{error}</Alert>
-                </Box>
-              )}
-            </>
-          )}
-        </Paper>
-      </Container>}
+      {isLoading ? (
+        <Loader loader={isLoading} />
+      ) : (
+        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+          <Paper
+            sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow: "5" }}
+          >
+            <Typography component="h1" variant="h4" align="center">
+              Transferencia
+            </Typography>
+            <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {activeStep === steps.length ? (
+              <>
+                <TransferSucces response={response} newTrasfer={newTransfer} />
+              </>
+            ) : (
+              <>
+                {getStepContent(activeStep)}
+                {error && (
+                  <Box marginTop={"10px"}>
+                    <Alert severity="error">{error}</Alert>
+                  </Box>
+                )}
+              </>
+            )}
+          </Paper>
+        </Container>
+      )}
     </div>
   );
 };
