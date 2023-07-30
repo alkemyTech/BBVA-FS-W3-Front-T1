@@ -88,7 +88,7 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ minHeight: "85vh", pt:"3rem" }}>
+    <Container maxWidth="md" sx={{ minHeight: "85vh", pt: "3rem" }}>
       <Card sx={{ boxShadow: "5", borderRadius: "20px 20px" }}>
         <Grid
           container
@@ -164,7 +164,7 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                         borderRadius: "20px",
                         border: "1px solid",
                         px: "1rem",
-                        color: "#4b79a1",
+                        color: "rgba(40, 62, 81,0.9 )",
                       }}
                       variant="text"
                       onClick={handleCancelClick}
@@ -178,9 +178,14 @@ export const UserForm = ({ userData, onSave, onCancel }) => {
                   <Grid item>
                     <Button
                       variant="contained"
-                      sx={{ borderRadius: "20px" }}
+                      sx={{
+                        borderRadius: "20px",
+                        backgroundColor: "rgba(40, 62, 81,0.9 )",
+                        "&:hover": {
+                          backgroundColor: "rgba(75, 121, 161, 0.9)",
+                        },
+                      }}
                       onClick={() => handleSave(userId)}
-                      color="primary"
                       endIcon={<SaveIcon sx={{ mb: "0.1rem" }} />}
                     >
                       Guardar

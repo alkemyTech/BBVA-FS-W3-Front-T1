@@ -67,7 +67,7 @@ export const SingUp = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "rgba(75, 121, 161, 0.9)" }}>
+          <Avatar sx={{ m: 1, bgcolor: "rgba(40, 62, 81,0.8)" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -195,8 +195,8 @@ export const SingUp = () => {
               sx={{
                 mt: 3,
                 mb: 2,
-                backgroundColor: "rgba(75, 121, 161, 0.9)",
-                "&:hover": { backgroundColor: "#2279A1" },
+                backgroundColor: "rgba(40, 62, 81,0.8)",
+                "&:hover": { backgroundColor: "rgba(75, 121, 161, 0.9)" },
               }}
             >
               Registrate

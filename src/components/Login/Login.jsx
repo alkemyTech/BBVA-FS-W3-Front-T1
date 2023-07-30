@@ -116,7 +116,7 @@ export const Login = () => {
             textAlign={"center"}
             maxWidth={"25rem"}
           >
-            <Avatar sx={{ bgcolor: "rgba(75, 121, 161, 0.9)", mx: "11rem", mb: ".7rem" }}>
+            <Avatar sx={{ bgcolor: "rgba(40, 62, 81,0.8)", mx: "11rem", mb: ".7rem" }}>
               <Typography sx={{ pt: 0.5 }}>
                 <LockOpenIcon />
               </Typography>
@@ -166,11 +166,11 @@ export const Login = () => {
               type="submit"
               variant="contained"
               sx={{
-                backgroundColor: "rgba(75, 121, 161, 0.9)",
+                backgroundColor: "rgba(40, 62, 81,0.8)",
                 width: "50%",
                 minWidth: "10rem",
                 mb: "0.5rem",
-                "&:hover": { backgroundColor: "#2279A1" },
+                "&:hover": { backgroundColor: "rgba(75, 121, 161, 0.9)" },
               }}
             >
               Iniciar sesión
@@ -179,11 +179,11 @@ export const Login = () => {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: "rgba(75, 121, 161, 0.9)",
+                backgroundColor: "rgba(40, 62, 81,0.8)",
                 width: "50%",
                 minWidth: "10rem",
                 mt: "0.5rem",
-                "&:hover": { backgroundColor: "#2279A1" },
+                "&:hover": { backgroundColor: "rgba(75, 121, 161, 0.9)" },
               }}
               onClick={() => {
                 navigate("sing-up");

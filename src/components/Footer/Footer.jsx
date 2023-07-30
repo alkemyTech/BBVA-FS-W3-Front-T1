@@ -8,7 +8,7 @@ export const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor:"rgba(75, 121, 161, 0.8)",
+        background: "linear-gradient(to left, rgba(75, 121, 161, 0.8), rgba(40, 62, 81,0.8))",
         width: "100%",
         padding: "1rem",
       }}
