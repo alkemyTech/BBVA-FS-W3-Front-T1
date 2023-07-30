@@ -49,7 +49,7 @@ export const DialogLogout = ({ logout, setLogout }) => {
               borderRadius: "20px",
               border: "1px solid",
               px: "1rem",
-              color: "#4b79a1",
+              color: "rgba(40, 62, 81,0.9 )",
               m: "1rem",
             }}
             variant="text"
