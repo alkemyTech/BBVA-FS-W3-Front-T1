@@ -1,8 +1,13 @@
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Alert, Box, CardActionArea, Grid } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Container,
+  Grid,
+  Paper,
+} from "@mui/material";
 import dollarImg from "../../assets/dollar.jpg";
 import pesoImg from "../../assets/pesosArg.jpg";
 import { useState } from "react";
@@ -13,14 +18,15 @@ import axios from "axios";
 import { Loader } from "../Loader/Loader";
 import { DialogCrearCuenta } from "./DialogCrearCuenta/DialogCrearCuenta";
 import { CustomCard } from "./CustomCard/CustomCard";
+import { RespuestaCrearCuenta } from "./RespuestaCrearCuenta/RespuestaCrearCuenta";
 
 export const CrearCuenta = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [validation, setValidation] = useState(false);
   const [confirmar, setConfirmar] = useState(false);
-  const [confirmationMsg, setConfirmationMsg] = useState(false);
   const [currency, setCurrency] = useState("");
   const [loader, setLoader] = useState(false);
+  const [data, setData] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,9 +67,9 @@ export const CrearCuenta = () => {
     axios
       .post(apiUrl, requestBody, config)
       .then((response) => {
+        setData(response.data.data);
         setLoader(false);
         setValidation(true);
-        setConfirmationMsg(`Se creó con éxito la cuenta en ${currency}`);
       })
       .catch((error) => {
         setLoader(false);
@@ -76,74 +82,109 @@ export const CrearCuenta = () => {
   };
 
   return (
-    <div style={{minHeight:"85.7vh"}}>
-      {loader ? (
-        <Loader loader={loader} />
+    <div style={{ minHeight: "85.6vh" }}>
+      {data != "" ? (
+        <RespuestaCrearCuenta data={data} setData={setData} />
       ) : (
         <>
-        {confirmar && <>
-              <DialogCrearCuenta
-                currency={currency}
-                handleClickConfirmar={handleClickConfirmar}
-                handleClickCancelar={handleClickCancelar}
-                confirmar={confirmar}
-              />
-            </>}
+          {loader ? (
+            <Loader loader={loader} />
+          ) : (
             <>
-              <Box display={"flex"} justifyContent={"space-evenly"} pt={"5rem"} textAlign={"center"}>
-                <CustomCard handleClick={handleClickArs}>
-                  <CardMedia
-                    component="img"
-                    sx={{ height: "250px", width: "100%"}}
-                    src={pesoImg}
-                    alt="Peso Argentino"
+              {confirmar && (
+                <>
+                  <DialogCrearCuenta
+                    currency={currency}
+                    handleClickConfirmar={handleClickConfirmar}
+                    handleClickCancelar={handleClickCancelar}
+                    confirmar={confirmar}
                   />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      CUENTA EN ARS
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      <b>Creá tu cuenta en pesos argentinos</b>
-                      <br />
-                      La misma se abrirá con un límite de transaccion de $300000
-                    </Typography>
-                  </CardContent>
-                </CustomCard>
-                <CustomCard handleClick={handleClickUsd}>
-                  <CardMedia
-                    component="img"
-                    sx={{ height: "250px", width: "100%" }}
-                    src={dollarImg}
-                    alt="Dólar estadounidense"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      CUENTA EN USD
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      <b>Creá tu cuenta en dólares</b>
-                      <br />
-                      La misma se abrirá con un límite de transaccion de $1000
-                    </Typography>
-                  </CardContent>
-                </CustomCard>
-              </Box>
-              {validation && (
-                <Grid
-                  container
-                  direction="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  padding={"2.5rem"}
-                >
-                  {errorMsg ? (
-                    <Alert severity="error">{errorMsg}</Alert>
-                  ) : (
-                    <Alert severity="success">{confirmationMsg}</Alert>
-                  )}
-                </Grid>
+                </>
               )}
+              <div>
+                <Container
+                  sx={{ pt: "3rem", display: "flex", justifyContent: "center" }}
+                >
+                  <Paper
+                    sx={{
+                      borderRadius: "20px 20px",
+                      boxShadow:"5",
+                      width: "40vw",
+                    }}
+                  >
+                    <Typography variant="h4" align="center" pt={"1.5rem"}>
+                      Abrí tu cuenta
+                    </Typography>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-evenly"}
+                      pt={"2rem"}
+                      pb={"4rem"}
+                      textAlign={"justify"}
+                    >
+                      <CustomCard handleClick={handleClickArs}>
+                        <CardMedia
+                          component="img"
+                          sx={{ height: "130px", width: "100%", mb: 2 }}
+                          src={pesoImg}
+                          alt="Peso Argentino"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="subtitle2"
+                            component="div"
+                          >
+                            CUENTA EN PESOS
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Creá tu cuenta en pesos</b>
+                            <br />
+                            La misma se abrirá con un límite de transacción de{" "}
+                            <b>AR$ 300000</b>
+                          </Typography>
+                        </CardContent>
+                      </CustomCard>
+                      <CustomCard handleClick={handleClickUsd}>
+                        <CardMedia
+                          component="img"
+                          sx={{ height: "130px", width: "100%", mb: 2 }}
+                          src={dollarImg}
+                          alt="Dólar estadounidense"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="subtitle2"
+                            component="div"
+                          >
+                            CUENTA EN DÓLARES
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Creá tu cuenta en dólares</b>
+                            <br />
+                            La misma se abrirá con un límite de transacción de{" "}
+                            <b>U$S 1000</b>
+                          </Typography>
+                        </CardContent>
+                      </CustomCard>
+                    </Box>
+                    {validation && (
+                      <Grid
+                        container
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        pb="3rem"
+                      >
+                        {errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+                      </Grid>
+                    )}
+                  </Paper>
+                </Container>
+              </div>
             </>
+          )}
         </>
       )}
     </div>

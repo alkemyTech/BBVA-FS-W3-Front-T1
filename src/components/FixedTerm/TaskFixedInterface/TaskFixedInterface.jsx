@@ -54,7 +54,7 @@ export const TaskFixedInterface = ({ onSubmit }) => {
         <TextField
           label="Importe a depositar"
           fullWidth
-          variant="standard"
+          variant="outlined"
           {...register("amount", { validate: validateAmount })}
         />
         {errors.amount && (
@@ -71,7 +71,7 @@ export const TaskFixedInterface = ({ onSubmit }) => {
         <TextField
           label="Cantidad de dias"
           fullWidth
-          variant="standard"
+          variant="outlined"
           {...register("cantDias", { validate: validateDays })}
         />
         {errors.cantDias && <Alert severity="error">{errors.cantDias.message}</Alert>}
