@@ -4,6 +4,7 @@ import { UserDisplay } from "./UserDisplay/UserDisplay";
 import { UserForm } from "./UserForm/UserForm";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Loader } from "../Loader/Loader";
 
 export const UserInfo = () => {
   const [userBalance, setUserBalance] = useState(null);
@@ -25,6 +26,8 @@ export const UserInfo = () => {
     setIsEditing(false);
   };
 
+  const isLoading = !userBalance || !userData;
+  
   useEffect(() => {
     const getUserData = async (id) => {
       try {
@@ -64,10 +67,11 @@ export const UserInfo = () => {
           localStorage.setItem("cbuArs", balance.accountArs.cbu);
         balance.accountUsd &&
           localStorage.setItem("cbuUsd", balance.accountUsd.cbu);
-          balance.accountArs &&
+        balance.accountArs &&
           localStorage.setItem("idArs", balance.accountArs.id);
         balance.accountUsd &&
           localStorage.setItem("idUsd", balance.accountUsd.id);
+        console.log(balance);
       } catch (error) {
         console.error("Error al obtener balance:", error);
       }
@@ -79,18 +83,12 @@ export const UserInfo = () => {
 
   return (
     <div>
-      {isEditing ? (
-        <UserForm
-          userData={userData}
-          onSave={handleSave}
-          onCancel={handleCancel}
-        />
+      {isLoading ? (
+        <Loader loader={true} />
+      ) : isEditing ? (
+        <UserForm userData={userData} onSave={handleSave} onCancel={handleCancel} />
       ) : (
-        <UserDisplay
-          userData={userData}
-          userBalance={userBalance}
-          onEdit={handleEdit}
-        />
+        <UserDisplay userData={userData} userBalance={userBalance} onEdit={handleEdit} />
       )}
     </div>
   );
