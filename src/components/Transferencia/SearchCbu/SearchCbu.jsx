@@ -47,7 +47,7 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
           onSubmit={handleSubmit(SearchCbuSubmit)}
         >
           <Grid item xs={12}>
-            <Typography variant="h5">
+            <Typography variant="h6">
               <b>Ingrese CBU de la cuenta a transferir</b>
             </Typography>
           </Grid>
@@ -58,6 +58,7 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
               inputProps={{ maxLength: 22 }}
               helperText="Ingresar cbu de 22 digitos"
               fullWidth
+              autoFocus
               {...register("cbu", { validate: validateCBU })}
             />
             {errors.cbu && <Alert severity="error">{errors.cbu.message}</Alert>}
@@ -71,9 +72,10 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
             <Grid item xs={12} >
               <Box
                 sx={{
-                  backgroundColor: '#2BA0B540',
+                  backgroundColor: '#6DAFE840',
                   padding: "1.5rem",
-                  borderRadius: 2
+                  boxShadow: "3",
+                  borderRadius: "10px",
                 }}
               >
                 <Typography variant="h6">
