@@ -307,7 +307,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                       <b>Cuenta en dólares</b>
                     </Typography>
                     <Typography variant="subtitle2" gutterbottom>
-                      CBU: {accountArs.cbu}
+                      CBU: {accountUsd.cbu}
                     </Typography>
                     <Typography
                       variant="h4"
@@ -336,7 +336,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                         style={{ paddingTop: 4, paddingLeft: 2 }}
                         gutterBottom
                       >
-                        Límite diario:U$D {accountArs.transactionLimit}
+                        Límite diario:U$D {accountUsd.transactionLimit}
                       </Typography>
                     </Box>
                   </Box>
@@ -344,7 +344,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                 <Movements
                   openDialog={openDialogUsd}
                   handleCloseDialog={handleCloseDialogUsd}
-                  currency={"ARS"}
+                  currency={"USD"}
                 />
               </Card>
             </Grid>

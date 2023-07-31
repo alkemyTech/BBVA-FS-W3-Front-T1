@@ -5,6 +5,7 @@ import { UserForm } from "./UserForm/UserForm";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 export const UserInfo = () => {
   const [userBalance, setUserBalance] = useState(null);
@@ -12,6 +13,7 @@ export const UserInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const userId = useSelector((state) => state.user.userId);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -73,6 +75,10 @@ export const UserInfo = () => {
           localStorage.setItem("idUsd", balance.accountUsd.id);
         console.log(balance);
       } catch (error) {
+        const errorStatus = error.response.status
+        if (errorStatus === 400){
+          navigate("/crearCuenta")
+        }
         console.error("Error al obtener balance:", error);
       }
     };
