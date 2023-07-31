@@ -84,7 +84,9 @@ export const UserInfo = () => {
   return (
     <div>
       {isLoading ? (
+        <div style={{minHeight: "86vh"}}>
         <Loader loader={true} />
+        </div>
       ) : isEditing ? (
         <UserForm userData={userData} onSave={handleSave} onCancel={handleCancel} />
       ) : (

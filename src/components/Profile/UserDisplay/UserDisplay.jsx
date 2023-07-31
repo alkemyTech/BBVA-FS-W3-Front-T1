@@ -12,10 +12,6 @@ import {
 } from "@mui/material";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import EditIcon from "@mui/icons-material/Edit";
-import MultipleStopIcon from "@mui/icons-material/MultipleStop";
-import SavingsIcon from "@mui/icons-material/Savings";
-import PaidIcon from "@mui/icons-material/Paid";
-import WbIncandescentIcon from "@mui/icons-material/WbIncandescent";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +19,7 @@ import { useState } from "react";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import { Movements } from "../Movements/Movements";
 import { FixedTerm } from "../FixedTerm/FixedTerm";
+import { QuickAccess } from "../QuickAccess/QuickAccess";
 import "../UserInfo.css";
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
@@ -32,20 +29,8 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openFixedTerm, setOpenFixedTerm] = useState(false);
 
-  const handleTransferClick = () => {
-    navigate("/transferencias");
-  };
-
-  const handleDepositClick = () => {
-    navigate("/depositos");
-  };
-
   const handleFixedTermClick = () => {
     navigate("/plazo-fijo");
-  };
-
-  const handlePayServicesClick = () => {
-    navigate("/pagos");
   };
 
   const toggleDrawer = () => {
@@ -307,7 +292,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                       <b>Cuenta en dólares</b>
                     </Typography>
                     <Typography variant="subtitle2" gutterbottom>
-                      CBU: {accountArs.cbu}
+                      CBU: {accountUsd.cbu}
                     </Typography>
                     <Typography
                       variant="h4"
@@ -336,7 +321,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                         style={{ paddingTop: 4, paddingLeft: 2 }}
                         gutterBottom
                       >
-                        Límite diario:U$D {accountArs.transactionLimit}
+                        Límite diario:U$D {accountUsd.transactionLimit}
                       </Typography>
                     </Box>
                   </Box>
@@ -356,13 +341,41 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
           direction="row"
           justify="center"
           alignContent="center"
+          marginTop={5}
+          marginBottom={5}
         >
           <Grid item xs={12}>
             <Typography variant="h5" color="initial" gutterBottom>
               Tus Plazos fijos
             </Typography>
           </Grid>
-          {fixedTerms.map((term) => (
+          {fixedTerms.length == 0? (
+            <Grid item xs={12} sm={12} md={6}>
+            <Card className="card-style">
+              <CardActionArea onClick={handleFixedTermClick}>
+                <Box m={1} p={2}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: "10px",
+                    }}
+                  >
+                    <AddCircleIcon
+                      style={{ fontSize: "40px", color: "#4c4f56" }}
+                    />
+                    <Typography variant="subtitle1" color="initial">
+                      Creá tu primer plazo fijo
+                    </Typography>
+                  </div>
+                </Box>
+              </CardActionArea>
+            </Card>
+          </Grid>
+          ):(
+          fixedTerms.map((term) => (
             <Grid item xs={4} key={term.id}>
               <Card className="card-style">
                 <CardActionArea onClick={handleOpenFixedTerm}>
@@ -398,142 +411,17 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
                 />
               </Card>
             </Grid>
-          ))}
-        </Grid>
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
+          )))}
+          <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
             <StyledButton onClick={handleFixedTermClick}>
               SIMULAR Y CONSTITUIR
             </StyledButton>
           </Grid>
         </Grid>
-
-        <Typography variant="h5" color="initial" gutterbottom>
-          Accesos rápidos
-        </Typography>
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-around"
-          alignItems="center"
-        >
-          <Grid item>
-            <Card
-              className="card-style"
-              style={{
-                padding: "20px",
-                width: "150px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-              onClick={handleTransferClick}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                }}
-              >
-                <MultipleStopIcon
-                  style={{ fontSize: "40px", color: "#4c4f56" }}
-                />
-              </div>
-              <Typography variant="subtitle2" color="initial">
-                Transferencias
-              </Typography>
-            </Card>
-          </Grid>
-          <Grid item>
-            <Card
-              className="card-style"
-              style={{
-                padding: "20px",
-                width: "150px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-              onClick={handleDepositClick}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                }}
-              >
-                <PaidIcon style={{ fontSize: "40px", color: "#4c4f56" }} />
-              </div>
-              <Typography variant="subtitle2" color="initial">
-                Depósitos
-              </Typography>
-            </Card>
-          </Grid>
-          <Grid item>
-            <Card
-              className="card-style"
-              style={{
-                padding: "20px",
-                width: "150px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-              onClick={handlePayServicesClick}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                }}
-              >
-                <WbIncandescentIcon
-                  style={{ fontSize: "40px", color: "#4c4f56" }}
-                />
-              </div>
-              <Typography variant="subtitle2" color="initial">
-                Pagar Servicios
-              </Typography>
-            </Card>
-          </Grid>
-          <Grid item>
-            <Card
-              className="card-style"
-              style={{
-                padding: "20px",
-                width: "150px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-              onClick={handleFixedTermClick}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                }}
-              >
-                <SavingsIcon style={{ fontSize: "40px", color: "#4c4f56" }} />
-              </div>
-              <Typography variant="subtitle2" color="initial">
-                Plazos Fijos
-              </Typography>
-            </Card>
-          </Grid>
         </Grid>
+        
+        <QuickAccess/>
       </Container>
     </>
   );
