@@ -76,17 +76,12 @@ export const SelectAmount = ({
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <StyledButton
-            sx={{ backgroundColor: "#2BA0B5" }}
-            type="button"
-            variant="contained"
             onClick={handleBack}
           >
             Anterior
           </StyledButton>
           <StyledButton
-            sx={{ backgroundColor: "#2BA0B5" }}
             type="submit"
-            variant="contained"
           >
             Siguiente
           </StyledButton>
