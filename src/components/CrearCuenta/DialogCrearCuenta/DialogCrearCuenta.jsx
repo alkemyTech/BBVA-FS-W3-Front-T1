@@ -20,7 +20,7 @@ export const DialogCrearCuenta = ({currency, handleClickConfirmar, handleClickCa
                   }}
                 >
                   <Typography variant="subtitle1" color={"#585858 "}>
-                    <b> VA A CREAR UNA CUENTA EN {currency} </b>
+                    <b>¿DESEA CREAR UNA CUENTA EN {currency === "ARS" ? "PESOS" : "DÓLARES"}? </b>
                   </Typography>
                   <Box display={"flex"} justifyContent={"space-between"} mt={4}>
                     <Button

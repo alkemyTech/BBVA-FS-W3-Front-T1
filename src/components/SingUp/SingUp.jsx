@@ -67,7 +67,7 @@ export const SingUp = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#1C6875" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#4b79a1" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -88,6 +88,7 @@ export const SingUp = () => {
                       message: "el nombre no puede incluir numeros ni espacios",
                     },
                   })}
+                  sx={{backgroundColor:"white"}}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -107,6 +108,7 @@ export const SingUp = () => {
                         "el apellido no puede incluir numeros ni espacios",
                     },
                   })}
+                  sx={{backgroundColor:"white"}}
                   required
                   fullWidth
                   id="lastName"
@@ -124,13 +126,13 @@ export const SingUp = () => {
                       message: "la edad solo acepta numeros",
                     },
                   })}
+                  sx={{backgroundColor:"white"}}
                   autoComplete="given-name"
                   name="edad"
                   required
                   fullWidth
                   id="edad"
                   label="edad"
-                  autoFocus
                   inputProps={{ maxLength: 3 }}
                 />
               </Grid>
@@ -158,6 +160,7 @@ export const SingUp = () => {
                       message: "El formato de mail es incorrecto",
                     },
                   })}
+                  sx={{backgroundColor:"white"}}
                   required
                   fullWidth
                   id="email"
@@ -174,6 +177,7 @@ export const SingUp = () => {
                   {...register("password", {
                     required: "la contraseña es requerida",
                   })}
+                  sx={{backgroundColor:"white"}}
                   required
                   fullWidth
                   name="password"
@@ -191,8 +195,8 @@ export const SingUp = () => {
               sx={{
                 mt: 3,
                 mb: 2,
-                backgroundColor: "#2BA0B5",
-                "&:hover": { backgroundColor: "#1C6875" },
+                backgroundColor: "#4b79a1",
+                "&:hover": { backgroundColor: "#2279A1" },
               }}
             >
               Registrate
@@ -203,7 +207,7 @@ export const SingUp = () => {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Ya tiene una cuenta creada ? Inicie sesión
+                ¿Ya tiene una cuenta creada? Inicie sesión
                 </Link>
               </Grid>
             </Grid>
