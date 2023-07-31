@@ -85,6 +85,10 @@ export const TransferCheckOut = () => {
         else{
           currency = localStorage.getItem("idUsd");}
         (!currency) && setError("Usted no posee una cuenta en ese tipo de moneda")
+        console.log(currency);
+        console.log( response.data.data.id);
+        console.log( currency === response.data.data.id);
+        (currency == response.data.data.id) && setError("No puede enviarse dinero a uno mismo")
       })
       .catch((error) => {
         setIsLoading(false);
@@ -192,7 +196,14 @@ export const TransferCheckOut = () => {
       <Loader loader={isLoading}/>
       :
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
+        <Paper
+                sx={{
+                  my: { xs: 3, md: 6 },
+                  p: { xs: 2, md: 5 },
+                  boxShadow: "5",
+                  borderRadius: "20px 20px",
+                }}
+              >
           <Typography component="h1" variant="h4" align="center">
             Transferencia
           </Typography>

@@ -58,6 +58,7 @@ export const SearchCbu = ({ SearchCbuSubmit, handleNext, userCbu }) => {
               inputProps={{ maxLength: 22 }}
               helperText="Ingresar cbu de 22 digitos"
               fullWidth
+              autoFocus
               {...register("cbu", { validate: validateCBU })}
             />
             {errors.cbu && <Alert severity="error">{errors.cbu.message}</Alert>}

@@ -63,6 +63,7 @@ export const SelectAmount = ({
             label="Importe a transferir"
             variant="outlined"
             fullWidth
+            autoFocus
             {...register("amount", { validate: validateAmount })}
           />
           {errors.amount && (
