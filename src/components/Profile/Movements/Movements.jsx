@@ -92,6 +92,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
   useEffect(() => {
     if (!openDialog) {
       setPage(0);
+      setType("");
     }
   }, [openDialog]);
 
@@ -109,7 +110,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
           <>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item xs={12}>
-                <DialogTitle sx={{paddingBottom:0}}>Movimientos</DialogTitle>
+                <DialogTitle sx={{ paddingBottom: 0, fontSize: '24px'}}>Movimientos</DialogTitle>
               </Grid>
               <Grid container justifyContent="flex-end">
                 <Grid item marginRight={"1.8vw"}>

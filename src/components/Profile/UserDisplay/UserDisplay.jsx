@@ -1,25 +1,36 @@
 import React from "react";
 import {
-  Dialog,
+  TextField,
+  Drawer,
   Grid,
   Typography,
   Container,
   Card,
   Box,
   IconButton,
-  CardActionArea
+  CardActionArea,
 } from "@mui/material";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import EditIcon from "@mui/icons-material/Edit";
+import MultipleStopIcon from "@mui/icons-material/MultipleStop";
+import SavingsIcon from "@mui/icons-material/Savings";
+import PaidIcon from "@mui/icons-material/Paid";
+import WbIncandescentIcon from "@mui/icons-material/WbIncandescent";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../UserInfo.css";
 import StyledButton from "../../buttonStyles/buttonStyles";
 import { Movements } from "../Movements/Movements";
+import { FixedTerm } from "../FixedTerm/FixedTerm";
+import "../UserInfo.css";
 
 export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
-  const [openDialogUSD, setOpenDialogUSD] = useState(false);
+  const [openDialogUsd, setOpenDialogUsd] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openFixedTerm, setOpenFixedTerm] = useState(false);
 
   const handleTransferClick = () => {
     navigate("/transferencias");
@@ -33,32 +44,52 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
     navigate("/plazo-fijo");
   };
 
+  const handlePayServicesClick = () => {
+    navigate("/pagos");
+  };
+
+  const toggleDrawer = () => {
+    setDrawerOpen((prevOpen) => !prevOpen);
+  };
+
   const { accountArs, historyArs, accountUsd, historyUsd, fixedTerms } =
     userBalance;
 
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const day = date.getDate().toString().padStart(2, "0");
-      const month = (date.getMonth() + 1).toString().padStart(2, "0");
-      const year = date.getFullYear();
-  
-      return `${day}/${month}/${year}`;
-    };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
 
-  const handleOpenDialogUSD = () => {
-    setOpenDialogUSD(true);
+  const handleOpenDialogUsd = () => {
+    setOpenDialogUsd(true);
   };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
 
-  const handleCloseDialogUSD = () => {
-    setOpenDialogUSD(false);
+  const handleCloseDialogUsd = () => {
+    setOpenDialogUsd(false);
+  };
+
+  const handleOpenFixedTerm = () => {
+    setOpenFixedTerm(true);
+  };
+
+  const handleCloseFixedTerm = () => {
+    setOpenFixedTerm(false);
+  };
+
+  const handleNewAccount = () => {
+    navigate("/crearCuenta");
   };
 
   return (
@@ -67,147 +98,258 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
         <Typography variant="h4" color="initial">
           ¡Hola, {userData.firstName}!
         </Typography>
-        <Box p={2}>
-          <Grid
-            container
-            spacing={2}
-            direction="row"
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-            wrap="nowrap"
-          >
-            <Grid item xs={6}>
-              <Grid container justifyContent="space-between" spacing={2}>
-                <Grid item>
-                  <Typography variant="h5" color="initial" gutterBottom>
-                    Mis datos
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <IconButton aria-label="Edit" onClick={onEdit}>
-                    <EditIcon />
-                  </IconButton>
-                </Grid>
-              </Grid>
-              <Card>
-                <Box m={1} p={2}>
-                  <Typography variant="subtitle1" color="initial">
-                    Nombre: {userData.firstName}
-                  </Typography>
-                  <Typography variant="subtitle1" color="initial">
-                    Apellido: {userData.lastName}
-                  </Typography>
-                  <Typography variant="subtitle1" color="initial">
-                    Email: {userData.email}
-                  </Typography>
-                  <Typography variant="subtitle1" color="initial">
-                    Contraseña: ********
-                  </Typography>
-                </Box>
-              </Card>
-            </Grid>
+
+        <Box display="flex" justifyContent="flex-end" alignItems="center">
+          <Typography variant="h5" color="initial" style={{ marginRight: 8 }}>
+            Tus datos
+          </Typography>
+          <IconButton aria-label="Toggle First Grid" onClick={toggleDrawer}>
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </Box>
+
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={toggleDrawer}
+          PaperProps={{
+            sx: { width: "30%" },
+          }}
+        >
+          <Box p={2}>
             <Grid item xs={6}>
               <img src="src/assets/profile-picture.svg" alt="perfil" />
             </Grid>
-          </Grid>
-        </Box>
-        <Box p={2}>
-          <Typography variant="h5" color="initial" gutterBottom>
-            Mis cuentas
-          </Typography>
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-            spacing={4}
-          >
-            {accountArs == null ? (
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
               <Grid item>
-                <Alert severity="warning">No tenés una cuenta en pesos.</Alert>
+                <Typography variant="h5" color="initial" gutterBottom>
+                  Tus datos
+                </Typography>
               </Grid>
-            ) : (
-              <Grid item xs={12} sm={12} md={6} className="card-style">
-                <Card>
-                  <CardActionArea onClick={handleOpenDialog}>
-                    <Box m={1} p={2}>
-                    <Typography variant="h5" gutterBottom >
-                        Saldo: $ {accountArs.balance}
+              <Grid item>
+                <IconButton aria-label="Edit" onClick={onEdit}>
+                  <EditIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Nombre"
+                  variant="outlined"
+                  value={userData.firstName}
+                  margin="dense"
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Apellido"
+                  variant="outlined"
+                  value={userData.lastName}
+                  margin="dense"
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  value={userData.email}
+                  margin="dense"
+                  disabled
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Contraseña"
+                  variant="outlined"
+                  type={"password"}
+                  value="********"
+                  margin="dense"
+                />
+              </Grid>
+              <StyledButton onClick={toggleDrawer}>Volver</StyledButton>
+            </Grid>
+          </Box>
+        </Drawer>
+
+        <Typography variant="h5" color="initial" gutterBottom>
+          Tus Cuentas
+        </Typography>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          alignContent="center"
+          spacing={2}
+        >
+          {accountArs == null ? (
+            <Grid item xs={12} sm={12} md={6}>
+              <Card className="card-style">
+                <CardActionArea onClick={handleNewAccount}>
+                  <Box m={1} p={2}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "10px",
+                      }}
+                    >
+                      <AddCircleIcon
+                        style={{ fontSize: "40px", color: "#4c4f56" }}
+                      />
+                      <Typography variant="subtitle1" color="initial">
+                        ¿Querés abrir una cuenta en pesos?
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Moneda: Pesos
+                    </div>
+                  </Box>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={12} md={6}>
+              <Card className="card-style">
+                <CardActionArea onClick={handleOpenDialog}>
+                  <Box m={1} p={2}>
+                    <Typography variant="subtitle1" gutterbottom>
+                      <b>Cuenta en pesos</b>
+                    </Typography>
+                    <Typography variant="subtitle2" gutterbottom>
+                      CBU: {accountArs.cbu}
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      gutterBottom
+                      style={{ marginTop: "10px" }}
+                    >
+                      ${" "}
+                      {accountArs.balance.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}
+                    </Typography>
+                    <Box display="flex" alignItems="center">
+                      <CurrencyExchangeIcon fontSize="small" />
+                      <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        style={{ paddingTop: 4, paddingLeft: 2 }}
+                      >
+                        Ver movimientos
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        CBU: {accountArs.cbu}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
+                      <Box component="span" mx={1}>
+                        |
+                      </Box>
+                      <Typography
+                        variant="subtitle2"
+                        style={{ paddingTop: 4, paddingLeft: 2 }}
+                        gutterBottom
+                      >
                         Límite diario: $ {accountArs.transactionLimit}
                       </Typography>
                     </Box>
-                  </CardActionArea>
-                  <Movements  openDialog={openDialog} handleCloseDialog={handleCloseDialog} currency={"ARS"}/>
-                  </Card>
-              </Grid>
-            )}
+                  </Box>
+                </CardActionArea>
+                <Movements
+                  openDialog={openDialog}
+                  handleCloseDialog={handleCloseDialog}
+                  currency={"ARS"}
+                />
+              </Card>
+            </Grid>
+          )}
 
-            {accountUsd == null ? (
-              <Grid item>
-                {/*<Alert severity="warning">No tenés una cuenta en dólares.</Alert>*/}
-              </Grid>
-            ) : (
-              <Grid item xs={12} sm={12} md={6} className="card-style">
-                <Card>
-                  <CardActionArea onClick={handleOpenDialogUSD}>
-                    <Box m={1} p={2}>
-                    <Typography variant="h5" gutterBottom>
-                        Saldo: U$D {accountUsd.balance}
+          {accountUsd == null ? (
+            <Grid item xs={12} sm={12} md={6}>
+              <Card className="card-style">
+                <CardActionArea onClick={handleNewAccount}>
+                  <Box m={1} p={2}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "10px",
+                      }}
+                    >
+                      <AddCircleIcon
+                        style={{ fontSize: "40px", color: "#4c4f56" }}
+                      />
+                      <Typography variant="subtitle1" color="initial">
+                        ¿Querés abrir una cuenta en dólares?
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Moneda: Dólares
+                    </div>
+                  </Box>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={12} md={6}>
+              <Card className="card-style">
+                <CardActionArea onClick={handleOpenDialogUsd}>
+                  <Box m={1} p={2}>
+                    <Typography variant="subtitle1" gutterbottom>
+                      <b>Cuenta en dólares</b>
+                    </Typography>
+                    <Typography variant="subtitle2" gutterbottom>
+                      CBU: {accountArs.cbu}
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      gutterBottom
+                      style={{ marginTop: "10px" }}
+                    >
+                      U$D{" "}
+                      {accountUsd.balance.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}
+                    </Typography>
+                    <Box display="flex" alignItems="center">
+                      <CurrencyExchangeIcon fontSize="small" />
+                      <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        style={{ paddingTop: 4, paddingLeft: 2 }}
+                      >
+                        Ver movimientos
                       </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        CBU: {accountUsd.cbu}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        Límite diario: U$D {accountUsd.transactionLimit}
+                      <Box component="span" mx={1}>
+                        |
+                      </Box>
+                      <Typography
+                        variant="subtitle2"
+                        style={{ paddingTop: 4, paddingLeft: 2 }}
+                        gutterBottom
+                      >
+                        Límite diario:U$D {accountArs.transactionLimit}
                       </Typography>
                     </Box>
-                  </CardActionArea>
-                  <Movements  openDialog={openDialogUSD} handleCloseDialog={handleCloseDialogUSD} currency={"USD"} />
-                </Card>
-              </Grid>
-            )}
-          </Grid>
-
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-          >
-            <Grid item>
-              <StyledButton onClick={handleDepositClick}>
-                DEPÓSITOS
-              </StyledButton>
+                  </Box>
+                </CardActionArea>
+                <Movements
+                  openDialog={openDialogUsd}
+                  handleCloseDialog={handleCloseDialogUsd}
+                  currency={"ARS"}
+                />
+              </Card>
             </Grid>
-            <Grid item>
-              <StyledButton onClick={handleTransferClick}>
-                TRANSFERENCIAS
-              </StyledButton>
-            </Grid>
-            <Grid item>
-              <StyledButton
-                variant="contained"
-                type="button"
-                onClick={() => navigate("/crearCuenta")}
-              >
-                CrearCuenta
-              </StyledButton>
-            </Grid>
-          </Grid>
-        </Box>
-
+          )}
+        </Grid>
         <Grid
           container
           spacing={1}
@@ -217,54 +359,179 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
         >
           <Grid item xs={12}>
             <Typography variant="h5" color="initial" gutterBottom>
-              Mis plazos fijos
+              Tus Plazos fijos
             </Typography>
           </Grid>
-
           {fixedTerms.map((term) => (
-            <Grid item xs={4}>
-              <Card
-                key={term.id}
-                sx={{
-                  margin: "10px",
-                  padding: "1rem",
-                  boxShadow: "-1px 1px 10px 5px rgba(0,0,0,0.71);",
-                }}
-              >
-                <Grid container>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      <b> Capital de origen:</b> $ {term.amount}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      <b>Interés:</b> $ {term.interest}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      <b> Monto total:</b> $ {term.amount + term.interest}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      <b> Creación:</b> {formatDate(term.creationDate)}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1" gutterBottom>
-                      <b> Vencimiento:</b> {formatDate(term.closingDate)}
-                    </Typography>
-                  </Grid>
-                </Grid>
+            <Grid item xs={4} key={term.id}>
+              <Card className="card-style">
+                <CardActionArea onClick={handleOpenFixedTerm}>
+                  <Box m={1} p={2}>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <Typography variant="h4">
+                          ${" "}
+                          {term.amount.toLocaleString("es-AR", {
+                            minimumFractionDigits: 2,
+                          })}
+                        </Typography>
+                        <Typography
+                          variant="overline"
+                          color="initial"
+                          gutterbottom
+                        >
+                          Capital de origen
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="subtitle2" gutterBottom>
+                          Vencimiento {formatDate(term.closingDate)}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </CardActionArea>
+                <FixedTerm
+                  openFixedTerm={openFixedTerm}
+                  handleCloseFixedTerm={handleCloseFixedTerm}
+                  term={term}
+                />
               </Card>
             </Grid>
           ))}
         </Grid>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
-            <StyledButton onClick={handleFixedTermClick}>VER MÁS</StyledButton>
+            <StyledButton onClick={handleFixedTermClick}>
+              SIMULAR Y CONSTITUIR
+            </StyledButton>
+          </Grid>
+        </Grid>
+
+        <Typography variant="h5" color="initial" gutterbottom>
+          Accesos rápidos
+        </Typography>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <Grid item>
+            <Card
+              className="card-style"
+              style={{
+                padding: "20px",
+                width: "150px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={handleTransferClick}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                }}
+              >
+                <MultipleStopIcon
+                  style={{ fontSize: "40px", color: "#4c4f56" }}
+                />
+              </div>
+              <Typography variant="subtitle2" color="initial">
+                Transferencias
+              </Typography>
+            </Card>
+          </Grid>
+          <Grid item>
+            <Card
+              className="card-style"
+              style={{
+                padding: "20px",
+                width: "150px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={handleDepositClick}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                }}
+              >
+                <PaidIcon style={{ fontSize: "40px", color: "#4c4f56" }} />
+              </div>
+              <Typography variant="subtitle2" color="initial">
+                Depósitos
+              </Typography>
+            </Card>
+          </Grid>
+          <Grid item>
+            <Card
+              className="card-style"
+              style={{
+                padding: "20px",
+                width: "150px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={handlePayServicesClick}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                }}
+              >
+                <WbIncandescentIcon
+                  style={{ fontSize: "40px", color: "#4c4f56" }}
+                />
+              </div>
+              <Typography variant="subtitle2" color="initial">
+                Pagar Servicios
+              </Typography>
+            </Card>
+          </Grid>
+          <Grid item>
+            <Card
+              className="card-style"
+              style={{
+                padding: "20px",
+                width: "150px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={handleFixedTermClick}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                }}
+              >
+                <SavingsIcon style={{ fontSize: "40px", color: "#4c4f56" }} />
+              </div>
+              <Typography variant="subtitle2" color="initial">
+                Plazos Fijos
+              </Typography>
+            </Card>
           </Grid>
         </Grid>
       </Container>
