@@ -35,6 +35,7 @@ export const RespuestaPagos = ({ data, setData}) => {
             height: "auto",
             p: 2,
             m: 1,
+            backgroundColor:"white",
             borderRadius: 2,
           }}
         >

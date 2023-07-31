@@ -131,8 +131,6 @@ export const Pagos = () => {
         <RespuestaPagos data={data} setData={setData} />
       ) : (
         <>
-          {loader && <Loader loader={loader} />}
-
           <Container component="main" maxWidth="sm" sx={{ pt: "3rem" }}>
             <Paper
               sx={{
@@ -141,6 +139,8 @@ export const Pagos = () => {
                 borderRadius: "20px 20px",
               }}
             >
+          {loader && <Loader loader={loader} />}
+
               <Grid
                 container
                 direction="column"
