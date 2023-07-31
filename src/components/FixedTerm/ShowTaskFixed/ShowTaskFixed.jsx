@@ -62,7 +62,7 @@ export const ShowTaskFixed = () => {
             </Snackbar>
           </>
         )}
-        <Grid item xs={12} marginTop={'2vh'}>
+        <Grid item xs={12} marginTop={'2vh'} >
           <Grid container justifyContent="space-between" >
             <Grid item xs={12} md={2}>
               <StyledButton

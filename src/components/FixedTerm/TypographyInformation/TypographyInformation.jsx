@@ -5,7 +5,7 @@ const TypographyInfo = ({ children }) => {
     return (
       <Typography
         style={{
-          color: '#0D2F36',
+          color: '#283e51',
           fontWeight: 900,
           fontSize: '1.4em',
         }}
