@@ -43,14 +43,15 @@ export const TaskFixedInterface = ({ onSubmit }) => {
       component="form"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Grid item xs={12}>
-        <TypographyInfo
+      <Grid item xs={12} >
+        <Typography
+          variant="h4" align="center"
         >
-          <b>Ingresar cantidad a depositar:</b>
-        </TypographyInfo>
+          Simular plazo fijo:
+        </Typography>
       </Grid>
 
-      <Grid item xs={12} paddingBottom="5vh">
+      <Grid item xs={7} paddingBottom="5vh">
         <TextField
           label="Importe a depositar"
           fullWidth
@@ -62,12 +63,7 @@ export const TaskFixedInterface = ({ onSubmit }) => {
         )}
       </Grid>
 
-      <Grid item xs={12}>
-        <TypographyInfo>
-          <b>Ingresar cantidad de dias:</b>
-        </TypographyInfo>
-      </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={5}>
         <TextField
           label="Cantidad de dias"
           fullWidth
@@ -77,8 +73,10 @@ export const TaskFixedInterface = ({ onSubmit }) => {
         {errors.cantDias && <Alert severity="error">{errors.cantDias.message}</Alert>}
       </Grid>
 
-      <Grid item xs={12}>
-        <StyledButton type="submit">Siguiente</StyledButton>
+      <Grid container justifyContent={"flex-end"}>
+        <Grid item>
+          <StyledButton type="submit">Simular</StyledButton>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -85,6 +85,10 @@ export const TransferCheckOut = () => {
         else{
           currency = localStorage.getItem("idUsd");}
         (!currency) && setError("Usted no posee una cuenta en ese tipo de moneda")
+        console.log(currency);
+        console.log( response.data.data.id);
+        console.log( currency === response.data.data.id);
+        (currency == response.data.data.id) && setError("No puede enviarse dinero a uno mismo")
       })
       .catch((error) => {
         setIsLoading(false);
@@ -130,12 +134,14 @@ export const TransferCheckOut = () => {
     axios
       .post(apiUrl, requestBody, config)
       .then((response) => {
+        console.log("llegue");
         console.log(response.data);
         setResponse(response.data.data[0]);
         setError(null);
         handleNext();
       })
       .catch((error) => {
+        console.log("entre en error");
         if(error.response.status === 403){
           tokenExpired(navigate,dispatch);
         }
@@ -192,14 +198,31 @@ export const TransferCheckOut = () => {
       <Loader loader={isLoading}/>
       :
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 5 }, boxShadow:"5" }}>
+        <Paper
+                sx={{
+                  my: { xs: 3, md: 6 },
+                  p: { xs: 2, md: 5 },
+                  boxShadow: "5",
+                  borderRadius: "20px 20px",
+                }}
+              >
           <Typography component="h1" variant="h4" align="center">
             Transferencia
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+              <Step key={label} sx={{
+                '& .MuiStepLabel-root .Mui-completed': {
+                  color: '#4B79A1', // circle color (COMPLETED)
+                },
+                '& .MuiStepLabel-root .Mui-active': {
+                  color: '#6DAFE8', // circle color (ACTIVE)
+                },
+                '& .MuiStepLabel-root .Mui-active .MuiStepIcon-text': {
+                  fill: 'white', // circle's number (ACTIVE)
+                },
+              }}>
+                <StepLabel sx={{color: 'red'}}>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
