@@ -53,9 +53,11 @@ export const TaskFixedInterface = ({ onSubmit }) => {
 
       <Grid item xs={7} paddingBottom="5vh">
         <TextField
-          label="Importe a depositar"
+          required
+          label="Importe"
           fullWidth
           variant="outlined"
+          helperText="ingrese importe a depositar"
           {...register("amount", { validate: validateAmount })}
         />
         {errors.amount && (
@@ -65,9 +67,11 @@ export const TaskFixedInterface = ({ onSubmit }) => {
 
       <Grid item xs={5}>
         <TextField
-          label="Cantidad de dias"
+          required
+          label="Dias"
           fullWidth
           variant="outlined"
+          helperText="ingrese cantidad de dias"
           {...register("cantDias", { validate: validateDays })}
         />
         {errors.cantDias && <Alert severity="error">{errors.cantDias.message}</Alert>}
