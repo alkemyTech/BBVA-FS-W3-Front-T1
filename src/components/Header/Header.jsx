@@ -51,7 +51,6 @@ export const Header = () => {
         }}
       >
         <Toolbar>
-          {/* <WalletIcon size="large" sx={{ mr: 2 }} /> */}
           <img src={"../../../public/icon.svg"} style={{maxWidth:"2.5rem", marginRight:"1rem", marginBottom:".7rem"}}/>
           <Typography
             variant="h4"
