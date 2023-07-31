@@ -171,7 +171,7 @@ export const CrearCuenta = () => {
                             color="text.secondary"
                             textAlign={"center"}
                           >
-                            <b>U$S 1000</b>
+                            <b>U$D 1000</b>
                           </Typography>
                         </CardContent>
                       </CustomCard>

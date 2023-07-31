@@ -40,7 +40,7 @@ export const RespuestaPagos = ({ data, setData}) => {
           }}
         >
           <Typography fontSize={20} marginBottom={1}>
-            <b>Se debitó: ${amount}</b>
+            <b>Se debitó: {currency === "ARS" ? "$ " +  amount : "U$D " +  amount}</b>
           </Typography>
           <Divider />
           <Typography marginTop={1} fontSize={15}>

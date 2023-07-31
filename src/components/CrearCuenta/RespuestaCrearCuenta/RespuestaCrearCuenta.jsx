@@ -69,14 +69,14 @@ export const RespuestaCrearCuenta = ({ data, setData }) => {
             <b>
               {currency === "ARS"
                 ? "$ " + transactionLimit
-                : "U$S " + transactionLimit}
+                : "U$D " + transactionLimit}
             </b>
           </Typography>
           <Typography marginTop={1} fontSize={15}>
             Balance:
           </Typography>
           <Typography fontSize={15}>
-            <b>{currency === "ARS" ? "$ " + balance : "U$S " + balance}</b>
+            <b>{currency === "ARS" ? "$ " + balance : "U$D " + balance}</b>
           </Typography>
         </Box>
         <Box sx={{ mt: "1rem" }}>

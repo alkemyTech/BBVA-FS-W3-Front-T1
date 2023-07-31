@@ -180,7 +180,7 @@ export const Pagos = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            {currency === "ARS" ? "$" : "U$S"}
+                            {currency === "ARS" ? "$" : "U$D"}
                           </InputAdornment>
                         ),
                       }}
