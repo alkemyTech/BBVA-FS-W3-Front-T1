@@ -8,7 +8,7 @@ export const Page = (props) => {
       <div
         style={{
           backgroundImage:
-            `url(https://img.freepik.com/vector-gratis/fondo-abstracto-blanco_23-2148833155.jpg?w=1380&t=st=1690825539~exp=1690826139~hmac=442dda33f9425f37c8b52bbb1eef0107de515de4b4e86724ffb31e70bdcd0dd1)`,
+            `url(${backgroundImg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
