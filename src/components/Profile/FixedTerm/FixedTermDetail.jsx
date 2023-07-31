@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog, Typography, Grid } from "@mui/material";
 import "../UserInfo.css";
 
-export const FixedTerm = ({ openFixedTerm, handleCloseFixedTerm, term }) => {
+export const FixedTermDetail = ({ openFixedTerm, handleCloseFixedTerm, term }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, "0");
