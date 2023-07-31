@@ -133,7 +133,7 @@ export const Pagos = () => {
         <>
           {loader && <Loader loader={loader} />}
 
-          <Container component="main" maxWidth="sm" sx={{ pt:"3rem" }}>
+          <Container component="main" maxWidth="sm" sx={{ pt: "3rem" }}>
             <Paper
               sx={{
                 p: { xs: 2, md: 5 },
@@ -180,7 +180,7 @@ export const Pagos = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            {currency === "ARS" ? "$" : "U$S"}{" "}
+                            {currency === "ARS" ? "$" : "U$S"}
                           </InputAdornment>
                         ),
                       }}
@@ -203,7 +203,12 @@ export const Pagos = () => {
                       ))}
                     </TextField>
                     {services === "OTROS" && (
-                      <Grid item xs={12} mt={2} sx={{ minWidth: "22rem", mb:"1rem" }}>
+                      <Grid
+                        item
+                        xs={12}
+                        mt={2}
+                        sx={{ minWidth: "22rem", mb: "1rem" }}
+                      >
                         <TextField
                           label="Servicio"
                           required
