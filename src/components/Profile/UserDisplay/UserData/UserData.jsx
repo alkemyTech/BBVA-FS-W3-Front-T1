@@ -35,12 +35,14 @@ export const UserData = ({ userData }) => {
   const dispatch = useDispatch();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({});
 
   const toggleDrawer = () => {
     setIsEditing(false);
+    reset();
     setDrawerOpen((prevOpen) => !prevOpen);
   };
 
@@ -74,6 +76,7 @@ export const UserData = ({ userData }) => {
       localStorage.setItem("nombre", data.firstName + " " + data.lastName);
       setIsLoading(false);
       setIsEditingSucces(true);
+      reset();
       toggleDrawer();
     } catch (error) {
       if (error.response.status === 403) {
@@ -146,6 +149,7 @@ export const UserData = ({ userData }) => {
                     aria-label="Edit"
                     onClick={() => {
                       setIsEditing(!isEditing);
+                      reset();
                     }}
                   >
                     <EditIcon />
@@ -216,6 +220,7 @@ export const UserData = ({ userData }) => {
                         label="Contraseña"
                         variant="outlined"
                         type={"password"}
+                        defaultValue={""}
                         {...register("contraseña")}
                         margin="dense"
                       />
