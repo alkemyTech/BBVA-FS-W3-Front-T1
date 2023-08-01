@@ -48,7 +48,7 @@ export const SimulatedFixedTerm = () => {
   };
 
   return (
-    <div style={{ minHeight: "79.8vh" }}>
+    <div style={{ minHeight: "80.5vh" }}>
       {isLoading ? (
         <Loader loader={isLoading} />
       ) : (
