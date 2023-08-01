@@ -3,9 +3,10 @@ import React from "react";
 import { UserDisplay } from "./UserDisplay/UserDisplay";
 import { UserForm } from "./UserForm/UserForm";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { tokenExpired } from "../../utils/tokenExpired";
 
 export const UserInfo = () => {
   const [userBalance, setUserBalance] = useState(null);
@@ -14,6 +15,7 @@ export const UserInfo = () => {
   const userId = useSelector((state) => state.user.userId);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -75,11 +77,13 @@ export const UserInfo = () => {
           localStorage.setItem("idUsd", balance.accountUsd.id);
         console.log(balance);
       } catch (error) {
-        const errorStatus = error.response.status
+        const errorStatus = error.response.status;
         if (errorStatus === 400){
-          navigate("/crearCuenta")
+          navigate("/crearCuenta");
         }
-        console.error("Error al obtener balance:", error);
+        if ( errorStatus === 403) {
+          tokenExpired(navigate,dispatch);
+        }
       }
     };
 
@@ -90,7 +94,9 @@ export const UserInfo = () => {
   return (
     <div>
       {isLoading ? (
+        <div style={{minHeight: "86vh"}}>
         <Loader loader={true} />
+        </div>
       ) : isEditing ? (
         <UserForm userData={userData} onSave={handleSave} onCancel={handleCancel} />
       ) : (
