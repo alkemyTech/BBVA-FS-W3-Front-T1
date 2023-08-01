@@ -62,3 +62,11 @@ body {
   .fixed-term {
     padding: 20px;
   }
+
+  .movement:hover {
+    background-color:  rgba(178, 235, 242, 0.9);
+  }
+
+  .table-header {
+    background-color: #f3f6f8;
+  }

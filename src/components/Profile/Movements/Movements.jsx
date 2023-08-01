@@ -129,7 +129,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                         <em>Todos</em>
                       </MenuItem>
                       <MenuItem value={"DEPOSIT"}>Depósito</MenuItem>
-                      <MenuItem value={"PAYMENT"}>Pago</MenuItem>
+                      <MenuItem value={"PAYMENT"}>Pago a terceros</MenuItem>
                       <MenuItem value={"INCOME"}>Ingreso</MenuItem>
                       <MenuItem value={"FIXED_TERM"}>Plazo fijo</MenuItem>
                       <MenuItem value={"SERVICEPAYMENT"}>
@@ -146,7 +146,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                   <Table aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell width="150">
+                        <TableCell className="table-header" width="150">
                           Fecha
                           <Button onClick={toggleOrder}>
                             {order === "ASC" ? (
@@ -162,14 +162,28 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                             )}
                           </Button>
                         </TableCell>
-                        <TableCell align="left" width="150">
+                        <TableCell
+                          className="table-header"
+                          align="left"
+                          width="150"
+                        >
                           Tipo
                         </TableCell>
-                        <TableCell align="left">Descripción</TableCell>
-                        <TableCell align="right" width="150">
+                        <TableCell className="table-header" align="left">
+                          Descripción
+                        </TableCell>
+                        <TableCell
+                          className="table-header"
+                          align="right"
+                          width="150"
+                        >
                           Importe
                         </TableCell>
-                        <TableCell align="right" width="150">
+                        <TableCell
+                          className="table-header"
+                          align="right"
+                          width="150"
+                        >
                           Saldo
                         </TableCell>
                       </TableRow>
@@ -178,6 +192,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                       {movements.map((row) => (
                         <TableRow
                           key={row.id}
+                          className="movement"
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
@@ -193,23 +208,32 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                               : row.type === "FIXED_TERM"
                               ? "Plazo fijo"
                               : row.type === "PAYMENT"
-                              ? "Pago"
+                              ? "Pago a terceros"
                               : row.type === "SERVICEPAYMENT"
                               ? "Pago de servicio"
                               : "Otros"}
                           </TableCell>
                           <TableCell align="left">{row.description}</TableCell>
-                          <TableCell align="right">
+                          <TableCell
+                            sx={{
+                              color:
+                                row.type === "DEPOSIT" || row.type === "INCOME"
+                                  ? "rgb(82, 141, 82)"
+                                  : "rgb(175, 68, 68)",
+                            }}
+                            align="right"
+                          >
                             {row.type === "DEPOSIT" || row.type === "INCOME"
                               ? `$ ${row.amount.toLocaleString("es-AR", {
                                   minimumFractionDigits: 2,
                                 })}`
-                              : `(-$ ${row.amount.toLocaleString("es-AR", {
+                              : `- $ ${row.amount.toLocaleString("es-AR", {
                                   minimumFractionDigits: 2,
-                                })})`}
+                                })}`}
                           </TableCell>
-                          <TableCell align="right">
-                            ${" "} 
+                          <TableCell align="right"
+                          >
+                            ${" "}
                             {row.accountBalance.toLocaleString("es-AR", {
                               minimumFractionDigits: 2,
                             })}
