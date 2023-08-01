@@ -36,7 +36,7 @@ export const UserDisplay = ({ userData, userBalance, onEdit }) => {
   return (
     <>
       <Container maxWidth="md" className="exterior">
-        <Typography variant="h4" color="initial" gutterbottom>
+        <Typography variant="h4" color="initial" gutterBottom>
           ¡Hola, {userData.firstName}!
         </Typography>
 

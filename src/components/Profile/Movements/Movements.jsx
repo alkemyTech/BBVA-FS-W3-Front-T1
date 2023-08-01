@@ -30,7 +30,7 @@ import { Loader } from "../../Loader/Loader";
 export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
   const [movements, setMovements] = useState([]);
   const [page, setPage] = useState(0);
-  const [order, setOrder] = useState("ASC");
+  const [order, setOrder] = useState("DESC");
   const [isLoading, setIsLoading] = useState(true);
   const userId = useSelector((state) => state.user.userId);
   const [totalElements, setTotalElements] = useState(0);
@@ -77,7 +77,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
     const fetchMovements = async () => {
       setIsLoading(true);
       const curr = currency;
-      const filter = type?`&transactionType=${type}`:"";
+      const filter = type ? `&transactionType=${type}` : "";
       const url = `http://localhost:8080/transactions/user/${userId}?page=${page}&sortDirection=${order}&currencies=${curr}${filter}`;
       const data = await getMovements(url);
       console.log(data);
@@ -110,7 +110,9 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
           <>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item xs={12}>
-                <DialogTitle sx={{ paddingBottom: 0, fontSize: '24px'}}>Movimientos</DialogTitle>
+                <DialogTitle sx={{ paddingBottom: 0, fontSize: "24px" }}>
+                  Movimientos
+                </DialogTitle>
               </Grid>
               <Grid container justifyContent="flex-end">
                 <Grid item marginRight={"1.8vw"}>
@@ -199,10 +201,19 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                           <TableCell align="left">{row.description}</TableCell>
                           <TableCell align="right">
                             {row.type === "DEPOSIT" || row.type === "INCOME"
-                              ? `$ ${row.amount}`
-                              : `(-$ ${row.amount})`}
+                              ? `$ ${row.amount.toLocaleString("es-AR", {
+                                  minimumFractionDigits: 2,
+                                })}`
+                              : `(-$ ${row.amount.toLocaleString("es-AR", {
+                                  minimumFractionDigits: 2,
+                                })})`}
                           </TableCell>
-                          <TableCell align="right">$ 1230</TableCell>
+                          <TableCell align="right">
+                            ${" "} 
+                            {row.accountBalance.toLocaleString("es-AR", {
+                              minimumFractionDigits: 2,
+                            })}
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

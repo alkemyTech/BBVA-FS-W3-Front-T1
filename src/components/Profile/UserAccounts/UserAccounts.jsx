@@ -106,7 +106,7 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
                       style={{ paddingTop: 4, paddingLeft: 2 }}
                       gutterBottom
                     >
-                      Límite diario: $ {accountArs.transactionLimit}
+                      Límite: $ {accountArs.transactionLimit}
                     </Typography>
                   </Box>
                 </Box>
@@ -150,10 +150,10 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
             <Card className="card-style">
               <CardActionArea onClick={handleOpenDialogUsd}>
                 <Box m={1} p={2}>
-                  <Typography variant="subtitle1" gutterbottom>
+                  <Typography variant="subtitle1" gutterBottom>
                     <b>Cuenta en dólares</b>
                   </Typography>
-                  <Typography variant="subtitle2" gutterbottom>
+                  <Typography variant="subtitle2" gutterBottom>
                     CBU: {accountUsd.cbu}
                   </Typography>
                   <Typography
@@ -183,7 +183,7 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
                       style={{ paddingTop: 4, paddingLeft: 2 }}
                       gutterBottom
                     >
-                      Límite diario:U$D {accountUsd.transactionLimit}
+                      Límite: U$D {accountUsd.transactionLimit}
                     </Typography>
                   </Box>
                 </Box>
