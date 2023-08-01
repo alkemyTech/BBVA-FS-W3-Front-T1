@@ -24,36 +24,48 @@ export const ShowTaskFixed = () => {
 
   return (
     <>
-      <Grid container spacing={3} textAlign="center" >
+      <Grid container spacing={3} padding={"2rem"} >
       <Grid item xs={12}>
-          <Typography variant="h4" borderBottom={1}><b>Resumen</b> </Typography>
+          <Typography variant="h4" ><i>Resumen:</i> </Typography>
         </Grid>
 
         <Grid item xs={12}>
-          <TypographyInfo>Monto invertido </TypographyInfo>
-          <TypographyData>$ {fixTermData.montoInverito}</TypographyData>
+          <Typography variant="h5" gutterBottom>
+            <b> Capital de origen</b> $ {fixTermData.montoInverito.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <TypographyInfo>Interes obtenido </TypographyInfo>
-          <TypographyData>$ {fixTermData.interes}</TypographyData>
+        <Typography variant="h6" gutterBottom>
+            <b>Interés</b> $ {fixTermData.interes.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <TypographyInfo>Monto total a cobrar</TypographyInfo>
-          <TypographyData>$ {fixTermData.montoTotal}</TypographyData>
+        <Typography variant="h6" gutterBottom>
+            <b> Monto final</b> ${" "}{fixTermData.montoTotal.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <TypographyInfo>Inicio del plazo fijo</TypographyInfo>
-          <TypographyData>{formatDate(fixTermData.fechaCreacion)}</TypographyData>
+        <Typography variant="overline" gutterBottom>
+            <b> Creación:</b> {formatDate(fixTermData.fechaCreacion)}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <TypographyInfo>Finalizacion del plazo fijo</TypographyInfo>
-          <TypographyData>{formatDate(fixTermData.fechaFinalizacion)}</TypographyData>
+        <Typography variant="overline" gutterBottom>
+            <b> Vencimiento:</b> {formatDate(fixTermData.fechaFinalizacion)}
+          </Typography>
         </Grid>
         {isTransferSucced && (
           <>
             <Grid item xs={12}>
-              <TypographyInfo>Balance de tu cuenta</TypographyInfo>
-              <TypographyData>$ {fixTermData.balance}</TypographyData>
+              <Typography variant="h5" gutterBottom><b>Balance de tu cuenta</b> $ {fixTermData.balance.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                      })}</Typography>
             </Grid>
             <Snackbar open={true} autoHideDuration={10}>
               <Alert severity="success" sx={{ width: "100%" }}>
@@ -62,7 +74,7 @@ export const ShowTaskFixed = () => {
             </Snackbar>
           </>
         )}
-        <Grid item xs={12} marginTop={'2vh'} >
+        </Grid>
           <Grid container justifyContent="space-between" >
             <Grid item xs={12} md={2}>
               <StyledButton
@@ -74,7 +86,7 @@ export const ShowTaskFixed = () => {
               </StyledButton>
             </Grid>
 
-            <Grid item xs={12} md={2} marginRight={'2px'}>
+            <Grid item xs={12} md={2}>
               {!isTransferSucced && (
                 <CreatFixedTermDialog
                   setIsTransferSucced={setIsTransferSucced}
@@ -82,8 +94,6 @@ export const ShowTaskFixed = () => {
               )}
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
     </>
   );
 };

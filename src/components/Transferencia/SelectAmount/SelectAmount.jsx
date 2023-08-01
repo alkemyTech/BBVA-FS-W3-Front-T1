@@ -59,6 +59,7 @@ export const SelectAmount = ({
             variant="outlined"
             fullWidth
             autoFocus
+            required
             {...register("amount", { validate: validateAmount })}
           />
           {errors.amount && (
