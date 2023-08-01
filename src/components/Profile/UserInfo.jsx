@@ -31,7 +31,7 @@ export const UserInfo = () => {
   };
 
   const isLoading = !userBalance || !userData;
-  
+
   useEffect(() => {
     const getUserData = async (id) => {
       try {
@@ -97,10 +97,10 @@ export const UserInfo = () => {
         <div style={{minHeight: "86vh"}}>
         <Loader loader={true} />
         </div>
-      ) : isEditing ? (
-        <UserForm userData={userData} onSave={handleSave} onCancel={handleCancel} />
-      ) : (
-        <UserDisplay userData={userData} userBalance={userBalance} onEdit={handleEdit} />
+      )
+      :
+      (
+        <UserDisplay userData={userData} userBalance={userBalance}/>
       )}
     </div>
   );
