@@ -14,8 +14,8 @@ export const RespuestaCrearCuenta = ({ data, setData }) => {
   return (
     <div style={{ minHeight: "85.7vh" }}>
       <Grid container justifyContent="center" alignItems="center">
-        <Box width="100%" maxWidth="400px" pt={10}>
-          <Alert variant="outlined" severity="success">
+        <Box width="100%" maxWidth="400px" pt={10} >
+          <Alert variant="outlined" severity="success" >
             <Typography>
               <b>Creación de su cuenta con éxito</b>
             </Typography>
@@ -37,6 +37,7 @@ export const RespuestaCrearCuenta = ({ data, setData }) => {
             p: 2,
             m: 1,
             borderRadius: 2,
+            backgroundColor:"white"
           }}
         >
           <Typography fontSize={20} marginBottom={1}>
@@ -68,14 +69,14 @@ export const RespuestaCrearCuenta = ({ data, setData }) => {
             <b>
               {currency === "ARS"
                 ? "$ " + transactionLimit
-                : "U$S " + transactionLimit}
+                : "U$D " + transactionLimit}
             </b>
           </Typography>
           <Typography marginTop={1} fontSize={15}>
             Balance:
           </Typography>
           <Typography fontSize={15}>
-            <b>{currency === "ARS" ? "$ " + balance : "U$S " + balance}</b>
+            <b>{currency === "ARS" ? "$ " + balance : "U$D " + balance}</b>
           </Typography>
         </Box>
         <Box sx={{ mt: "1rem" }}>

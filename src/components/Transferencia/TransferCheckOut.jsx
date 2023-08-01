@@ -92,19 +92,19 @@ export const TransferCheckOut = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        if(error.response.status === 403){
-          tokenExpired(navigate,dispatch);
+        if (error.response.status === 403) {
+          tokenExpired(navigate, dispatch);
         }
         setError(error.response.data.message);
         setUserCbu(null);
       });
   };
 
-  const SearchCbuHandleNext = () =>{
-    if (userCbu && !error){
+  const SearchCbuHandleNext = () => {
+    if (userCbu && !error) {
       handleNext();
     }
-  }
+  };
 
   const SelectAmountSubmit = (data) => {
     console.log(data);
@@ -151,13 +151,13 @@ export const TransferCheckOut = () => {
 
   const newTransfer = () => {
     dataAccount.id = 0;
-    dataAccount.amount= 0;
+    dataAccount.amount = 0;
     dataAccount.firstName = "";
     dataAccount.lastName = "";
     dataAccount.currency = "";
     setUserCbu(null);
     setActiveStep(0);
-  }
+  };
 
   function getStepContent(step) {
     switch (step) {
