@@ -50,7 +50,7 @@ export const UserDisplay = ({ userData, userBalance }) => {
   return (
     <>
       <Container maxWidth="md" className="exterior">
-        <Typography variant="h4" color="initial" gutterbottom>
+        <Typography variant="h4" color="initial" gutterBottom>
           ¡Hola, {userName.split(" ")[0]}!
         </Typography>
 

@@ -87,7 +87,7 @@ export const FixedTerms = ({ fixedTerms }) => {
                         <Typography
                           variant="overline"
                           color="initial"
-                          gutterbottom
+                          gutterBottom
                         >
                           Capital de origen
                         </Typography>

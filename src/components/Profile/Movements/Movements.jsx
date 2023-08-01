@@ -80,7 +80,6 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
       const filter = type ? `&transactionType=${type}` : "";
       const url = `http://localhost:8080/transactions/user/${userId}?page=${page}&sortDirection=${order}&currencies=${curr}${filter}`;
       const data = await getMovements(url);
-      console.log(data);
       setIsLoading(false);
       setTotalElements(data.totalElements);
       setMovements(data.collectionModel.content);

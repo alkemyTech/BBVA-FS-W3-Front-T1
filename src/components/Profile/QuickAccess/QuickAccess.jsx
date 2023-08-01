@@ -26,7 +26,7 @@ export const QuickAccess = () => {
 
   return (
     <>
-      <Typography variant="h5" color="initial" gutterbottom>
+      <Typography variant="h5" color="initial" gutterBottom>
         Accesos rápidos
       </Typography>
       <Grid

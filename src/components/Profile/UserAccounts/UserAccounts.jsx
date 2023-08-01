@@ -73,10 +73,10 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
             <Card className="card-style">
               <CardActionArea onClick={handleOpenDialog}>
                 <Box m={1} p={2}>
-                  <Typography variant="subtitle1" gutterbottom>
+                  <Typography variant="subtitle1" gutterBottom>
                     <b>Cuenta en pesos</b>
                   </Typography>
-                  <Typography variant="subtitle2" gutterbottom>
+                  <Typography variant="subtitle2" gutterBottom>
                     CBU: {accountArs.cbu}
                   </Typography>
                   <Typography
@@ -94,19 +94,17 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
                     <Typography
                       variant="subtitle1"
                       gutterBottom
-                      style={{ paddingTop: 4, paddingLeft: 2 }}
+                      style={{ paddingTop: 4, paddingLeft: 2, marginRight:1}}
                     >
                       Ver movimientos
                     </Typography>
-                    <Box component="span" mx={1}>
-                      |
-                    </Box>
+                    
                     <Typography
                       variant="subtitle2"
                       style={{ paddingTop: 4, paddingLeft: 2 }}
                       gutterBottom
                     >
-                      Límite: $ {accountArs.transactionLimit}
+                       | Límite transferencia: $ {accountArs.transactionLimit}
                     </Typography>
                   </Box>
                 </Box>
@@ -171,19 +169,16 @@ export const UserAccounts = ({ accountArs, accountUsd }) => {
                     <Typography
                       variant="subtitle1"
                       gutterBottom
-                      style={{ paddingTop: 4, paddingLeft: 2 }}
+                      style={{ paddingTop: 4, paddingLeft: 2, marginRight:1}}
                     >
                       Ver movimientos
                     </Typography>
-                    <Box component="span" mx={1}>
-                      |
-                    </Box>
                     <Typography
                       variant="subtitle2"
                       style={{ paddingTop: 4, paddingLeft: 2 }}
                       gutterBottom
                     >
-                      Límite: U$D {accountUsd.transactionLimit}
+                    | Límite transferencia: U$D{accountUsd.transactionLimit}
                     </Typography>
                   </Box>
                 </Box>

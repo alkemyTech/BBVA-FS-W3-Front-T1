@@ -75,7 +75,6 @@ export const UserInfo = () => {
           localStorage.setItem("idArs", balance.accountArs.id);
         balance.accountUsd &&
           localStorage.setItem("idUsd", balance.accountUsd.id);
-        console.log(balance);
       } catch (error) {
         const errorStatus = error.response.status;
         if (errorStatus === 400){
