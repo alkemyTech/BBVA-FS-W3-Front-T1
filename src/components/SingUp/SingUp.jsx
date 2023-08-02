@@ -43,6 +43,7 @@ export const SingUp = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("nombre", userName);
       localStorage.setItem("email", mail);
+      localStorage.setItem("singUp", "Su cuenta se creo correctamente");
       console.log("llegue");
       navigate("/inicio");
     } catch (error) {
