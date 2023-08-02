@@ -98,11 +98,10 @@ export const Login = () => {
       setValidation(true);
     } else if(singUp){
       setSingUpMessage(singUp);
-    } else {
+    }
       localStorage.clear();
       dispatch(addUserId(""));
       dispatch(addUserName(""));
-    }
   }, []);
 
   return (
