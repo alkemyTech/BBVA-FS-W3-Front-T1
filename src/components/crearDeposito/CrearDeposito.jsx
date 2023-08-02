@@ -13,6 +13,8 @@ export const CrearDeposito = () => {
     useState(false);
   const [data, setData] = useState("");
   const [date, setDate] = useState("");
+  const [cbu, setCbu] = useState("");
+  const [idTransaction, setIdTransaction] = useState("");
   const [error, setError] = useState("");
   const [msgError, setMsgError] = useState("");
   const [validation, setValidation] = useState(false);
@@ -42,7 +44,9 @@ export const CrearDeposito = () => {
         { headers }
       );
 
-      setDate(new Date(response.data.transactionDate).toLocaleDateString());
+      setDate(response.data.transactionDate);
+      setCbu(response.data.account.cbu);
+      setIdTransaction(response.data.id);
 
       setMostrarFormularioDeposito(true);
     } catch (error) {
@@ -58,9 +62,16 @@ export const CrearDeposito = () => {
   };
 
   return (
-    <div style={{ minHeight: "85vh" }}>
-      <Container component="main" maxWidth="sm" sx={{pt:"3rem"}}>
-        <Paper sx={{ p: { xs: 2, md: 5 } }}>
+    <div style={{ minHeight: "81vh" }}>
+      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Paper
+          sx={{
+            my: { xs: 3, md: 6 },
+            p: { xs: 2, md: 5 },
+            boxShadow: "5",
+            borderRadius: "20px 20px",
+          }}
+        >
           {!mostrarFormularioDeposito ? (
             <FormularioDeposito
               onSubmit={onSubmit}
@@ -71,6 +82,8 @@ export const CrearDeposito = () => {
             <RespuestaDeposito
               data={data}
               date={date}
+              cbu={cbu}
+              idTransaction={idTransaction}
               handleClick={handleClick}
             />
           )}

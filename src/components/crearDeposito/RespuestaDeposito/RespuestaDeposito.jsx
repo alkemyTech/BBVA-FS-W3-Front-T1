@@ -1,11 +1,26 @@
 import { Typography, Grid, Box, Alert, Divider } from "@mui/material";
 import StyledButton from "../../buttonStyles/buttonStyles";
 
-export const RespuestaDeposito = ({ data, date, handleClick }) => {
+export const RespuestaDeposito = ({
+  data,
+  date,
+  cbu,
+  idTransaction,
+  handleClick,
+}) => {
+  const formatDate = (date) => {
+    date = new Date(date);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        <Box width="100%" maxWidth="350px">
+        <Box width="100%" maxWidth="385px">
           <Alert variant="outlined" severity="success">
             <Typography>
               <b>¡Listo! Depósito exitoso</b>
@@ -23,10 +38,11 @@ export const RespuestaDeposito = ({ data, date, handleClick }) => {
         <Box
           sx={{
             boxShadow: 2,
-            width: "22rem",
-            height: "11rem",
-            p: 1,
-            m: 1,
+            width: "24rem",
+            height: "16rem",
+            p: 2,
+
+            marginBottom: 3,
             borderRadius: 2,
           }}
         >
@@ -35,10 +51,16 @@ export const RespuestaDeposito = ({ data, date, handleClick }) => {
           </Typography>
           <Divider />
           <Typography marginTop={3} fontSize={15}>
-            Fecha: <b>{date}</b>
+            Fecha de deposito: <b>{formatDate(date)}</b>
           </Typography>
           <Typography marginTop={3} fontSize={15}>
             Se depositó en: <b>Cuenta en {data.currency}</b>
+          </Typography>
+          <Typography marginTop={3} fontSize={15}>
+            CBU de la cuenta: <b> {cbu}</b>
+          </Typography>
+          <Typography marginTop={3} fontSize={15}>
+            Numero de transaccion: <b>{idTransaction}</b>
           </Typography>
         </Box>
         <Alert severity="info">Se acreditará en unos instantes</Alert>
