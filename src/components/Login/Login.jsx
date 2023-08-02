@@ -19,12 +19,13 @@ import { useDispatch } from "react-redux";
 import { addUserName, addUserId } from "../../redux/userSlice";
 import { Loader } from "../Loader/Loader";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { LocalActivity, Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false);
+  const[singUpMessage,setSingUpMessage] = useState("");
   const [msgError, setMsgError] = useState("");
   const [loader, setLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -88,14 +89,19 @@ export const Login = () => {
 
   useEffect(() => {
     const tokenExpired = localStorage.getItem("tokenExpired");
+    const singUp = localStorage.getItem("singUp");
+    if(singUp){
+      setSingUpMessage(singUp);
+    }
     if (tokenExpired) {
       setMsgError(tokenExpired);
       setValidation(true);
-    } else {
+    } else if(singUp){
+      setSingUpMessage(singUp);
+    }
       localStorage.clear();
       dispatch(addUserId(""));
       dispatch(addUserName(""));
-    }
   }, []);
 
   return (
@@ -195,6 +201,12 @@ export const Login = () => {
               <Alert sx={{ mt: "1rem" }} severity="error">
                 {" "}
                 {msgError}{" "}
+              </Alert>
+            )}
+            {singUpMessage && (
+              <Alert sx={{ mt: "1rem" }} severity="success">
+                {" "}
+                {singUpMessage}{" "}
               </Alert>
             )}
           </Box>
