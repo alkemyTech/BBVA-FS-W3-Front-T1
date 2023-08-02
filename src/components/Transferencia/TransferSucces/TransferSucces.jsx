@@ -26,9 +26,9 @@ export const TransferSucces = ({response, newTrasfer}) => {
                     <Grid item xs={12}>
                     <Typography variant="body1"><b>Moneda:</b> {response.account.currency}</Typography></Grid>
                     <Grid item xs={12}>
-                    <Typography variant="body1"><b>Monto:</b> {response.amount}</Typography></Grid>
+                    <Typography variant="body1"><b>Monto: </b> $ {response.amount}</Typography></Grid>
                     <Grid item xs={12}>
-                    <Typography variant="body1"><b>Saldo de la cuenta:</b> {response.account.balance}</Typography>
+                    <Typography variant="body1"><b>Saldo de la cuenta: </b>$ {response.account.balance}</Typography>
                     </Grid>
                 </Grid>
             </Grid>

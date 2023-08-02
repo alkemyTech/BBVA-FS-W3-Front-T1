@@ -22,6 +22,14 @@ export const CrearCuenta = () => {
   const [loader, setLoader] = useState(false);
   const [data, setData] = useState("");
 
+  const cuentaFaltante = localStorage.getItem("idArs") ? "USD" : "ARS";
+
+  let sinCuentas = null;
+
+  if(!localStorage.getItem("idArs") && !localStorage.getItem("idUsd")){
+    sinCuentas = "both"
+  }
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -114,8 +122,11 @@ export const CrearCuenta = () => {
                       justifyContent={"space-around"}
                       pt={"2rem"}
                       pb={"2rem"}
-                    >
-                      <CustomCard handleClick={handleClickArs}>
+                      >
+                      {sinCuentas == "both" ?
+                       (<>
+                       <>
+                         <CustomCard handleClick={handleClickArs}>
                         <CardMedia
                           component="img"
                           sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
@@ -141,11 +152,13 @@ export const CrearCuenta = () => {
                             color="text.secondary"
                             textAlign={"center"}
                           >
-                            <b>$300000</b>
+                            <b>$ 300000</b>
                           </Typography>
                         </CardContent>
                       </CustomCard>
-                      <CustomCard handleClick={handleClickUsd}>
+                      </>
+                      <>
+                          <CustomCard handleClick={handleClickUsd}>
                         <CardMedia
                           component="img"
                           sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
@@ -175,6 +188,78 @@ export const CrearCuenta = () => {
                           </Typography>
                         </CardContent>
                       </CustomCard>
+                      </> 
+                       </>):(
+                       <>
+                       {cuentaFaltante === "ARS" ? 
+                      (<>
+                         <CustomCard handleClick={handleClickArs}>
+                        <CardMedia
+                          component="img"
+                          sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
+                          src={pesoImg}
+                          alt="Peso Argentino"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="subtitle2"
+                            textAlign={"center"}
+                          >
+                            CUENTA EN PESOS
+                          </Typography>
+                          <Divider sx={{ mb: ".5rem" }} />
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Creá tu cuenta en pesos</b>
+                            <br />
+                            La misma se abrirá con un límite de transacción de:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            textAlign={"center"}
+                          >
+                            <b>$ 300000</b>
+                          </Typography>
+                        </CardContent>
+                      </CustomCard>
+                      </>)
+                      :
+                      (<>
+                          <CustomCard handleClick={handleClickUsd}>
+                        <CardMedia
+                          component="img"
+                          sx={{ height: "130px", width: "100%", p: "1rem 1rem 0.1rem 1rem" }}
+                          src={dollarImg}
+                          alt="Dólar estadounidense"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="subtitle2"
+                            textAlign={"center"}
+                          >
+                            CUENTA EN DÓLARES
+                          </Typography>
+                          <Divider sx={{ mb: ".5rem" }} />
+                          <Typography variant="body2" color="text.secondary">
+                            <b>Creá tu cuenta en dólares</b>
+                            <br />
+                            La misma se abrirá con un límite de transacción de:
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            textAlign={"center"}
+                          >
+                            <b>U$D 1000</b>
+                          </Typography>
+                        </CardContent>
+                      </CustomCard>
+                      </>)}
+                       </>)}
+                      
+
                     </Box>
                     {validation && (
                       <Grid

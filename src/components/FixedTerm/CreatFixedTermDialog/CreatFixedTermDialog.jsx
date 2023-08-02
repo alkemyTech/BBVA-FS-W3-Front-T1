@@ -107,7 +107,7 @@ export const CreatFixedTermDialog = ({ setIsTransferSucced }) => {
             <DialogActions>
               <Button onClick={handleClose}>Cancelar</Button>
               <Button onClick={createFixedTerm} autoFocus>
-                Crear Plazo Fijo
+                Constituir Plazo Fijo
               </Button>
             </DialogActions>
           </>

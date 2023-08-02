@@ -25,9 +25,6 @@ export const SelectAmount = ({
     control,
     formState: { errors },
   } = useForm({
-    // validateCriteriaMode: "all",
-    // reValidateMode: "onChange",
-    // mode: "onChange",
   });
 
   const validateAmount = (value) => {
@@ -40,9 +37,7 @@ export const SelectAmount = ({
     return true;
   };
 
-  //   display:flex;
-  //   padding: 5%;
-  //   justify-content: center;
+
 
   return (
     <Box display={"flex"} padding={"5%"} justifyContent={"center"}>
@@ -64,6 +59,7 @@ export const SelectAmount = ({
             variant="outlined"
             fullWidth
             autoFocus
+            required
             {...register("amount", { validate: validateAmount })}
           />
           {errors.amount && (
