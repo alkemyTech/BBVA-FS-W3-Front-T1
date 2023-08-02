@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import StyledButton from "../../buttonStyles/buttonStyles";
+import { useState } from "react";
 
 export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
   const {
@@ -22,6 +23,8 @@ export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
     mode: "onChange",
   });
 
+  const [mostrarBoton, setMostrarBoton] = useState(false);
+
   const validateAmount = (value) => {
     if (value <= 0) {
       return "Ingresar un monto mayor a cero";
@@ -29,6 +32,8 @@ export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
     if (!/^(?!0\d*$)\d*(\.\d{0,2})?$/.test(value)) {
       return "Ingresar un monto valido";
     }
+
+    setMostrarBoton(true);
     return true;
   };
 
@@ -47,8 +52,8 @@ export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
 
   return (
     <>
-      <Typography variant="h5" align="center">
-        <b>¿CUANTO QUERES DEPOSITAR?</b>
+      <Typography variant="h4" align="center">
+        Depositá en tu cuenta
       </Typography>
       <Grid
         component="form"
@@ -65,6 +70,7 @@ export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
             required
             id="outlined-required"
             label="Monto"
+            autoFocus
             {...register("amount", { validate: validateAmount })}
             sx={{ mr: "1rem" }}
           />
@@ -86,26 +92,28 @@ export const FormularioDeposito = ({ onSubmit, validation, msgError }) => {
           </TextField>
         </Grid>
 
-        <Grid item xs={12} sx={{ minWidth: "22rem" }}>
+        <Grid item xs={12} sx={{ minWidth: "21.2rem" }}>
           <TextField
             id="outlined"
-            label="Concepto"
+            label="Concepto (opcional)"
             defaultValue="Varios"
-            inputProps={{ maxLength: 100 }}
-            helperText="Ingresar hasta 100 caracteres"
+            inputProps={{ maxLength: 15 }}
             fullWidth
+            helperText="Ingresar Máx(15)"
             {...register("description")}
           />
         </Grid>
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <StyledButton
-            variant="contained"
-            type="submit"
-            sx={{ mt: "1rem", mb: "1rem" }}
-          >
-            DEPOSITAR
-          </StyledButton>
-        </Grid>
+        {mostrarBoton && (
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <StyledButton
+              variant="contained"
+              type="submit"
+              sx={{ mt: "1rem", mb: "1rem" }}
+            >
+              DEPOSITAR
+            </StyledButton>
+          </Grid>
+        )}
         {errors.amount && (
           <Alert severity="error">{errors.amount.message}</Alert>
         )}
