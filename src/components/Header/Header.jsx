@@ -13,9 +13,11 @@ import { Grid } from "@mui/material";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { DialogLogout } from "./DialogLogout/DialogLogout";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [logout, setLogout] = useState(false);
+  const navigate = useNavigate();
 
   const pages = [
     "inicio",
@@ -54,7 +56,8 @@ export const Header = () => {
           <Typography
             variant="h4"
             component="div"
-            sx={{ flexGrow: 1, letterSpacing: ".3rem" }}
+            sx={{ flexGrow: 1, letterSpacing: ".3rem", cursor:"pointer" }}
+            onClick={()=>{navigate("/inicio")}}
           >
             AlkyWall
           </Typography>

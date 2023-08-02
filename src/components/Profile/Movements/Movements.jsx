@@ -30,7 +30,7 @@ import { Loader } from "../../Loader/Loader";
 export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
   const [movements, setMovements] = useState([]);
   const [page, setPage] = useState(0);
-  const [order, setOrder] = useState("ASC");
+  const [order, setOrder] = useState("DESC");
   const [isLoading, setIsLoading] = useState(true);
   const userId = useSelector((state) => state.user.userId);
   const [totalElements, setTotalElements] = useState(0);
@@ -77,10 +77,9 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
     const fetchMovements = async () => {
       setIsLoading(true);
       const curr = currency;
-      const filter = type?`&transactionType=${type}`:"";
+      const filter = type ? `&transactionType=${type}` : "";
       const url = `http://localhost:8080/transactions/user/${userId}?page=${page}&sortDirection=${order}&currencies=${curr}${filter}`;
       const data = await getMovements(url);
-      console.log(data);
       setIsLoading(false);
       setTotalElements(data.totalElements);
       setMovements(data.collectionModel.content);
@@ -110,7 +109,9 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
           <>
             <Grid container justifyContent="space-between" alignItems="center">
               <Grid item xs={12}>
-                <DialogTitle sx={{ paddingBottom: 0, fontSize: '24px'}}>Movimientos</DialogTitle>
+                <DialogTitle sx={{ paddingBottom: 0, fontSize: "24px" }}>
+                  Movimientos
+                </DialogTitle>
               </Grid>
               <Grid container justifyContent="flex-end">
                 <Grid item marginRight={"1.8vw"}>
@@ -127,7 +128,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                         <em>Todos</em>
                       </MenuItem>
                       <MenuItem value={"DEPOSIT"}>Depósito</MenuItem>
-                      <MenuItem value={"PAYMENT"}>Pago</MenuItem>
+                      <MenuItem value={"PAYMENT"}>Pago a terceros</MenuItem>
                       <MenuItem value={"INCOME"}>Ingreso</MenuItem>
                       <MenuItem value={"FIXED_TERM"}>Plazo fijo</MenuItem>
                       <MenuItem value={"SERVICEPAYMENT"}>
@@ -144,7 +145,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                   <Table aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell width="150">
+                        <TableCell className="table-header" width="150">
                           Fecha
                           <Button onClick={toggleOrder}>
                             {order === "ASC" ? (
@@ -160,14 +161,28 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                             )}
                           </Button>
                         </TableCell>
-                        <TableCell align="left" width="150">
+                        <TableCell
+                          className="table-header"
+                          align="left"
+                          width="150"
+                        >
                           Tipo
                         </TableCell>
-                        <TableCell align="left">Descripción</TableCell>
-                        <TableCell align="right" width="150">
+                        <TableCell className="table-header" align="left">
+                          Descripción
+                        </TableCell>
+                        <TableCell
+                          className="table-header"
+                          align="right"
+                          width="150"
+                        >
                           Importe
                         </TableCell>
-                        <TableCell align="right" width="150">
+                        <TableCell
+                          className="table-header"
+                          align="right"
+                          width="150"
+                        >
                           Saldo
                         </TableCell>
                       </TableRow>
@@ -176,6 +191,7 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                       {movements.map((row) => (
                         <TableRow
                           key={row.id}
+                          className="movement"
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
@@ -191,18 +207,36 @@ export const Movements = ({ openDialog, handleCloseDialog, currency }) => {
                               : row.type === "FIXED_TERM"
                               ? "Plazo fijo"
                               : row.type === "PAYMENT"
-                              ? "Pago"
+                              ? "Pago a terceros"
                               : row.type === "SERVICEPAYMENT"
                               ? "Pago de servicio"
                               : "Otros"}
                           </TableCell>
                           <TableCell align="left">{row.description}</TableCell>
-                          <TableCell align="right">
+                          <TableCell
+                            sx={{
+                              color:
+                                row.type === "DEPOSIT" || row.type === "INCOME"
+                                  ? "rgb(82, 141, 82)"
+                                  : "rgb(175, 68, 68)",
+                            }}
+                            align="right"
+                          >
                             {row.type === "DEPOSIT" || row.type === "INCOME"
-                              ? `$ ${row.amount}`
-                              : `(-$ ${row.amount})`}
+                              ? `$ ${row.amount.toLocaleString("es-AR", {
+                                  minimumFractionDigits: 2,
+                                })}`
+                              : `- $ ${row.amount.toLocaleString("es-AR", {
+                                  minimumFractionDigits: 2,
+                                })}`}
                           </TableCell>
-                          <TableCell align="right">$ 1230</TableCell>
+                          <TableCell align="right"
+                          >
+                            ${" "}
+                            {row.accountBalance.toLocaleString("es-AR", {
+                              minimumFractionDigits: 2,
+                            })}
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
